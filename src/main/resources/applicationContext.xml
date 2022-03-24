@@ -10,7 +10,7 @@
 ">
 
     <!--组件扫描-->
-    <context:component-scan base-package="com.ruochen">
+    <context:component-scan base-package="com.ruochen" use-default-filters="true">
         <!--排除controller的扫描-->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
@@ -31,11 +31,25 @@
         <property name="dataSource" ref="dataSource"/>
         <!--定义别名-->
         <property name="typeAliasesPackage" value="com.ruochen.domain"/>
+        <!--插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <!--页号调整到合理的值-->
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!--扫描 mapper 所在的包，为 mapper 创建实现类-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.ruochen.mapper"/>
+        <!--如果工厂中只有一个 sqlSessionFactory 的bean，此配置可省略-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
