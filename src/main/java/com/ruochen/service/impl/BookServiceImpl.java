@@ -24,4 +24,9 @@ public class BookServiceImpl implements BookService {
         List<Book> books = bookMapper.selectBooksAll();
         return new PageInfo<>(books);
     }
+
+    @Override
+    public void addBook(Book book) {
+        bookMapper.addBook(book);
+    }
 }

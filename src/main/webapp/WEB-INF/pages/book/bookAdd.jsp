@@ -43,37 +43,42 @@
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label required">教材作者</label>
+                <label class="layui-form-label">教材作者</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bookAuthor" lay-verify="required" class="layui-input" autocomplete="off">
+                    <input type="text" name="bookAuthor" placeholder="请输入教材作者" class="layui-input"
+                           autocomplete="off">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label required">教材出版社</label>
+                <label class="layui-form-label">教材出版社</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bookPress" lay-verify="required" class="layui-input" autocomplete="off">
+                    <input type="text" name="bookPress" placeholder="请输入教材出版社" class="layui-input"
+                           autocomplete="off">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材价格</label>
                 <div class="layui-input-block">
-                    <input type="number" name="bookPrice" autocomplete="off" class="layui-input">
+                    <input type="number" name="bookPrice" lay-verify="required" placeholder="请输入教材价格"
+                           autocomplete="off"
+                           class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材数量</label>
                 <div class="layui-input-block">
-                    <input type="number" name="bookPrice" autocomplete="off" class="layui-input">
+                    <input type="number" name="bookNum" autocomplete="off" class="layui-input" value="0"
+                           readonly="readonly">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">图像上传：</label>
                 <div class="layui-input-block">
-                    <img id="upload_img" src="${pageContext.request.contextPath}/images/bg.jpg" width="100"
+                    <img id="upload_img" src="${pageContext.request.contextPath}/images/default_img.png" width="100"
                          height="100">
                     <button type="button" class="layui-btn" id="uploadImg">
                         <i class="layui-icon">&#xe67c;</i>上传图片
@@ -81,7 +86,7 @@
                 </div>
             </div>
             <%--上传图片将路径防放于此--%>
-            <input type="hidden" id="mainImage" name="mainImage" required value="default_img.png" class="layui-input">
+            <input type="hidden" id="mainImage" name="bookImgUrl" required value="default_img.png" class="layui-input">
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">立即提交</button>
@@ -110,7 +115,7 @@
                         if (res.code == 0) {
                             layer.msg("上传成功", {icon: 1});
                             // do something （比如将res返回的图片链接保存到表单的隐藏域）
-                            $('#upload_img').attr('src', 'https://book-manager-1301954372.cos.ap-nanjing.myqcloud.com/img/' + res.data);
+                            $('#upload_img').attr('src', res.data);
                             $('#mainImage').val(res.data);
                         }
 
@@ -134,6 +139,7 @@
                 form.on('submit(saveBtn)', function (data) {
                     var datas = data.field;//form单中的数据信息
                     //向后台发送数据提交添加
+                    console.log(datas)
                     $.ajax({
                         url: "addBookSubmit",
                         type: "POST",

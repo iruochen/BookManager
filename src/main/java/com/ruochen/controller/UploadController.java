@@ -58,7 +58,8 @@ public class UploadController {
             String key = COSConfig.cosKeyName + newFileName;
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
             PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
-            return DataInfo.ok("上传成功", newFileName);
+            String imgUrl = COSConfig.preUrl + key;
+            return DataInfo.ok("上传成功", imgUrl);
         } catch (IOException e) {
             return DataInfo.fail(-1, e.getMessage());
         } finally {
