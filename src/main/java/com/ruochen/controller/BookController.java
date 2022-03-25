@@ -38,4 +38,14 @@ public class BookController {
         PageInfo<Book> pageInfo = bookService.selectBooksAll(pageNum, pageSize);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
+
+    /**
+     * 教材添加页面跳转
+     *
+     * @return
+     */
+    @GetMapping("bookAdd")
+    public String bookAdd() {
+        return "book/bookAdd";
+    }
 }

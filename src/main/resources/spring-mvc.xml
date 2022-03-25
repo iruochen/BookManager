@@ -20,6 +20,17 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!-- 配置文件上传解析器 -->
+    <!-- id 的值是固定的-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为 5MB -->
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>
+
+
     <!--配置 mvc 注解驱动-->
     <mvc:annotation-driven>
         <!--安装 fastjson 转换器-->
