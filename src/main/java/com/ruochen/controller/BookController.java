@@ -40,8 +40,8 @@ public class BookController {
      */
     @GetMapping("bookAll")
     @ResponseBody
-    public DataInfo bookIndex(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize) {
-        PageInfo<Book> pageInfo = bookService.selectBooksAll(pageNum, pageSize);
+    public DataInfo bookIndex(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, Book book) {
+        PageInfo<Book> pageInfo = bookService.selectBooksAll(pageNum, pageSize, book);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 

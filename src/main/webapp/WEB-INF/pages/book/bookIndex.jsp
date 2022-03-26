@@ -138,10 +138,9 @@
 
                 var $ = layui.$, active = {
                     reload: function () {
-                        var id = $('#bookId').val();
+                        var bookId = $('#bookId').val();
                         var bookName = $('#bookName').val();
                         var bookPress = $('#bookPress').val();
-                        console.log(name)
                         //执行重载
                         table.reload('testReload', {
                             page: {
@@ -188,9 +187,9 @@
                     }
                 });
 
-                //监听表格复选框选择
+                // 监听表格复选框选择
                 table.on('checkbox(currentTableFilter)', function (obj) {
-                    console.log(obj)
+                    // console.log(obj)
                 });
 
                 /**
@@ -203,7 +202,7 @@
                     }
                     //拼接id,变成一个字符串
                     return arr.join(",");
-                };
+                }
 
 
                 /**
@@ -230,7 +229,7 @@
                             }
                         }
                     })
-                };
+                }
 
                 /**
                  * toolbar栏监听事件

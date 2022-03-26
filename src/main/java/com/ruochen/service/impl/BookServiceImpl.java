@@ -19,9 +19,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public PageInfo<Book> selectBooksAll(Integer pageNum, Integer pageSize) {
+    public PageInfo<Book> selectBooksAll(Integer pageNum, Integer pageSize, Book book) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Book> books = bookMapper.selectBooksAll();
+        List<Book> books = bookMapper.selectBooksAll(book);
         return new PageInfo<>(books);
     }
 

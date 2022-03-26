@@ -12,18 +12,16 @@ public interface BookMapper {
      *
      * @return
      */
-    @Select("select * from book")
-    @Results(id = "bookMap", value = {
-            @Result(column = "id", property = "id"),
-            @Result(column = "book_id", property = "bookId"),
-            @Result(column = "book_name", property = "bookName"),
-            @Result(column = "book_author", property = "bookAuthor"),
-            @Result(column = "book_press", property = "bookPress"),
-            @Result(column = "book_price", property = "bookPrice"),
-            @Result(column = "book_num", property = "bookNum"),
-            @Result(column = "book_img_url", property = "bookImgUrl")
-    })
-    List<Book> selectBooksAll();
+    @Select("<script> "
+            + "select id, book_id as bookId, book_name as bookName, book_author as bookAuthor, book_press as bookPress, book_price as bookPrice, book_num as bookNum, book_img_url as bookImgUrl "
+            + "from book "
+            + " <where> "
+            + " <if test='bookId!=null'>and book_id like concat('%',#{bookId},'%')</if> "
+            + " <if test='bookName!=null'>and book_name like concat('%',#{bookName},'%')</if> "
+            + " <if test='bookPress!=null'>and book_press like concat('%',#{bookPress},'%')</if> "
+            + " </where> "
+            + " </script> ")
+    List<Book> selectBooksAll(Book book);
 
     /**
      * 添加教材
@@ -39,7 +37,16 @@ public interface BookMapper {
      * @param id
      */
     @Select("select * from book where id = #{id};")
-    @ResultMap(value = {"bookMap"})
+    @Results(id = "bookMap", value = {
+            @Result(column = "id", property = "id"),
+            @Result(column = "book_id", property = "bookId"),
+            @Result(column = "book_name", property = "bookName"),
+            @Result(column = "book_author", property = "bookAuthor"),
+            @Result(column = "book_press", property = "bookPress"),
+            @Result(column = "book_price", property = "bookPrice"),
+            @Result(column = "book_num", property = "bookNum"),
+            @Result(column = "book_img_url", property = "bookImgUrl")
+    })
     Book selectBookById(Integer id);
 
     /**

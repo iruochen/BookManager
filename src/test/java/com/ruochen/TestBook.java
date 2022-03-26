@@ -25,7 +25,11 @@ public class TestBook {
      */
     @Test
     public void testSelectBooksAll() {
-        PageInfo<Book> pageInfo = bookService.selectBooksAll(1, 3);
+        Book book1 = new Book();
+        // book1.setBookId("1011");
+        // book1.setBookName("线性代数");
+        book1.setBookPress("教社");
+        PageInfo<Book> pageInfo = bookService.selectBooksAll(1, 4, book1);
         List<Book> bookList = pageInfo.getList();
         for (Book book : bookList) {
             System.out.println(book);

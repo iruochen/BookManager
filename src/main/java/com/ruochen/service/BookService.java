@@ -13,7 +13,7 @@ public interface BookService {
      * @param pageSize 页大小
      * @return PageInfo
      */
-    PageInfo<Book> selectBooksAll(Integer pageNum, Integer pageSize);
+    PageInfo<Book> selectBooksAll(Integer pageNum, Integer pageSize, Book book);
 
     /**
      * 添加教材
