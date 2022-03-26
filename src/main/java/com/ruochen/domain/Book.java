@@ -1,7 +1,8 @@
 package com.ruochen.domain;
 
 public class Book {
-    private String id;
+    private Integer id;
+    private String bookId;
     private String bookName;
     private String bookAuthor;
     private String bookPress;
@@ -9,12 +10,20 @@ public class Book {
     private int bookNum;
     private String bookImgUrl;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 
     public String getBookName() {
@@ -68,7 +77,8 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "id='" + id + '\'' +
+                "id=" + id +
+                ", bookId='" + bookId + '\'' +
                 ", bookName='" + bookName + '\'' +
                 ", bookAuthor='" + bookAuthor + '\'' +
                 ", bookPress='" + bookPress + '\'' +

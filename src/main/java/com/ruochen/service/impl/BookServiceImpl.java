@@ -29,4 +29,14 @@ public class BookServiceImpl implements BookService {
     public void addBook(Book book) {
         bookMapper.addBook(book);
     }
+
+    @Override
+    public Book selectBookById(Integer id) {
+        return bookMapper.selectBookById(id);
+    }
+
+    @Override
+    public void updateBook(Book book) {
+        bookMapper.updateBook(book);
+    }
 }

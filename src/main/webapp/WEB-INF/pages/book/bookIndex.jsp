@@ -36,7 +36,7 @@
                     <div class="layui-form-item layui-form ">
                         教材编号：
                         <div class="layui-inline">
-                            <input class="layui-input" name="id" id="id" autocomplete="off">
+                            <input class="layui-input" name="bookId" id="bookId" autocomplete="off">
                         </div>
                         教材名称：
                         <div class="layui-inline">
@@ -101,8 +101,8 @@
                 table.render({
                     elem: '#currentTableId',
                     url: '${pageContext.request.contextPath}/bookAll',
-                    limits: [10, 15, 20, 25, 30, 50],
-                    limit: 10,  // 每页10条
+                    limits: [8, 16, 24, 32, 40, 48],
+                    limit: 8,  // 每页10条
                     page: true,  // 开启分页
                     skin: 'line',  // 行边框风格
                     even: true,  // 开启隔行背景
@@ -115,7 +115,7 @@
                     }],
                     cols: [[
                         {type: "checkbox"},
-                        {field: 'id', title: '教材编号'},
+                        {field: 'bookId', title: '教材编号'},
                         {field: 'bookName', title: '教材名称'},
                         {field: 'bookAuthor', title: '作者'},
                         {field: 'bookPress', title: '出版社'},
@@ -138,7 +138,7 @@
 
                 var $ = layui.$, active = {
                     reload: function () {
-                        var id = $('#id').val();
+                        var id = $('#bookId').val();
                         var bookName = $('#bookName').val();
                         var bookPress = $('#bookPress').val();
                         console.log(name)
@@ -148,7 +148,7 @@
                                 curr: 1 //重新从第 1 页开始
                             }
                             , where: {
-                                id: id,
+                                bookId: bookId,
                                 bookName: bookName,
                                 bookPress: bookPress
                             }
@@ -174,7 +174,7 @@
                             maxmin: true,
                             shadeClose: true,
                             area: ['100%', '100%'],
-                            content: '${pageContext.request.contextPath}/queryBookInfoById?id=' + data.id,
+                            content: '${pageContext.request.contextPath}/selectBookById?id=' + data.id,
                         });
                         $(window).on("resize", function () {
                             layer.full(index);

@@ -3,9 +3,11 @@ package com.ruochen.controller;
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
 import com.ruochen.service.BookService;
+import com.ruochen.utils.COSConfig;
 import com.ruochen.utils.DataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +48,8 @@ public class BookController {
      * @return
      */
     @GetMapping("bookAdd")
-    public String bookAdd() {
+    public String bookAdd(Model model) {
+        model.addAttribute("ImgPreUrl", COSConfig.preUrl + COSConfig.cosKeyName);
         return "book/bookAdd";
     }
 
@@ -60,6 +63,33 @@ public class BookController {
     @ResponseBody
     public DataInfo addBookSubmit(Book book) {
         bookService.addBook(book);
+        return DataInfo.ok();
+    }
+
+    /**
+     * 根据ID查询教材信息
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("selectBookById")
+    public String selectBookById(Integer id, Model model) {
+        Book book = bookService.selectBookById(id);
+        model.addAttribute("book", book);
+        return "book/updateBook";
+    }
+
+    /**
+     * 修改教材提交
+     *
+     * @param book
+     * @return
+     */
+    @RequestMapping("updateBookSubmit")
+    @ResponseBody
+    public DataInfo updateBookSubmit(Book book) {
+        bookService.updateBook(book);
         return DataInfo.ok();
     }
 }

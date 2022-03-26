@@ -19,4 +19,19 @@ public interface BookService {
      * @param book
      */
     void addBook(Book book);
+
+    /**
+     * 根据ID查询教材信息
+     *
+     * @param id
+     * @return
+     */
+    Book selectBookById(Integer id);
+
+    /**
+     * 修改教材信息
+     *
+     * @param book
+     */
+    void updateBook(Book book);
 }

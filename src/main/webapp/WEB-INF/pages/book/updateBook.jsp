@@ -1,18 +1,20 @@
 <%--
   Created by IntelliJ IDEA.
   User: ruochen
-  Date: 2022/3/24
-  Time: 18:27
+  Date: 2022/3/26
+  Time: 10:30
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 
 <html>
     <head>
         <meta charset="utf-8">
-        <title>添加教材</title>
+        <title>修改教材</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,43 +28,38 @@
     </head>
     <body>
         <div class="layui-form layuimini-form">
+            <input type="hidden" name="id" value="${book.id}">
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bookId" lay-verify="required" lay-reqtext="教材编号不能为空" placeholder="请输入教材编号"
-                           autocomplete="off" class="layui-input">
+                    <input type="text" name="bookId" lay-verify="required" value="${book.bookId}" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bookName" lay-verify="required" lay-reqtext="教材名称不能为空"
-                           placeholder="请输入教材名称"
-                           autocomplete="off" class="layui-input">
+                    <input type="text" name="bookName" lay-verify="required" value="${book.bookName}"
+                           class="layui-input">
                 </div>
             </div>
-
             <div class="layui-form-item">
                 <label class="layui-form-label">教材作者</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bookAuthor" placeholder="请输入教材作者" class="layui-input"
-                           autocomplete="off">
+                    <input type="text" name="bookAuthor" value="${book.bookAuthor}" class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">教材出版社</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bookPress" placeholder="请输入教材出版社" class="layui-input"
-                           autocomplete="off">
+                    <input type="text" name="bookPress" value="${book.bookPress}" class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材价格</label>
                 <div class="layui-input-block">
-                    <input type="number" name="bookPrice" lay-verify="required" placeholder="请输入教材价格"
-                           autocomplete="off"
+                    <input type="number" name="bookPrice" lay-verify="required" value="${book.bookPrice}"
                            class="layui-input">
                 </div>
             </div>
@@ -70,15 +67,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材数量</label>
                 <div class="layui-input-block">
-                    <input type="number" name="bookNum" autocomplete="off" class="layui-input" value="0"
-                           readonly="readonly">
+                    <input type="number" name="bookNum" value="${book.bookNum}" class="layui-input" readonly="readonly">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">图像上传：</label>
+                <label class="layui-form-label">教材图片：</label>
                 <div class="layui-input-block">
-                    <img id="upload_img" src="${pageContext.request.contextPath}/images/default_img.png" width="100"
+                    <img id="upload_img" src="${book.bookImgUrl}" width="100"
                          height="100">
                     <button type="button" class="layui-btn" id="uploadImg">
                         <i class="layui-icon">&#xe67c;</i>上传图片
@@ -86,11 +82,12 @@
                 </div>
             </div>
             <%--上传图片将路径防放于此--%>
-            <input type="hidden" id="mainImage" name="bookImgUrl" required value="${ImgPreUrl}default_img.png" class="layui-input">
+            <input type="hidden" id="mainImage" name="bookImgUrl" required value="${book.bookImgUrl}"
+                   class="layui-input">
+
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">立即提交</button>
-                    <button id="reset" type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认修改</button>
                 </div>
             </div>
         </div>
@@ -102,6 +99,7 @@
                     upload = layui.upload,
                     $ = layui.$;
 
+                // 上传图片
                 var uploadInst = upload.render({
                     elem: '#uploadImg'  // 绑定元素
                     , url: 'upload'  // 后台上传接口
@@ -118,10 +116,10 @@
                             $('#mainImage').val(res.data);
                         }
 
-                        //获取当前触发上传的元素，一般用于 elem 绑定 class 的情况，注意：此乃 layui 2.1.0 新增
+                        // 获取当前触发上传的元素，一般用于 elem 绑定 class 的情况，注意：此乃 layui 2.1.0 新增
                         var item = this.item;
-                        //文件保存失败
-                        //do something
+                        // 文件保存失败
+                        // do something
                     }
                     , error: function () {
                         layer.closeAll('loading');
@@ -137,14 +135,16 @@
                 //监听提交
                 form.on('submit(saveBtn)', function (data) {
                     var datas = data.field;//form单中的数据信息
-                    //向后台发送数据提交添加
+                    // 向后台发送数据提交添加
                     $.ajax({
-                        url: "addBookSubmit",
+                        url: "updateBookSubmit",
                         type: "POST",
                         data: datas,
+                        // contentType: 'application/json',
+                        // data: JSON.stringify(datas),
                         success: function (result) {
                             if (result.code == 0) {//如果成功
-                                layer.msg('添加成功', {
+                                layer.msg('修改成功', {
                                     icon: 6,
                                     time: 500
                                 }, function () {
@@ -153,7 +153,7 @@
                                     parent.layer.close(iframeIndex);
                                 })
                             } else {
-                                layer.msg("添加失败");
+                                layer.msg("修改失败");
                             }
                         }
                     })
