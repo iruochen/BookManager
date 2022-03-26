@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class BookController {
     @Autowired
@@ -90,6 +93,18 @@ public class BookController {
     @ResponseBody
     public DataInfo updateBookSubmit(Book book) {
         bookService.updateBook(book);
+        return DataInfo.ok();
+    }
+
+    /**
+     * 根据ID删除教材
+     * @return
+     */
+    @RequestMapping("deleteBook")
+    @ResponseBody
+    public DataInfo deleteBookByIds(String ids) {
+        List<String> list = Arrays.asList(ids.split(","));
+        bookService.deleteBookByIds(list);
         return DataInfo.ok();
     }
 }

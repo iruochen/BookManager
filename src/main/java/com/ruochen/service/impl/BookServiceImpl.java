@@ -39,4 +39,11 @@ public class BookServiceImpl implements BookService {
     public void updateBook(Book book) {
         bookMapper.updateBook(book);
     }
+
+    @Override
+    public void deleteBookByIds(List<String> ids) {
+        for (String id : ids) {
+            bookMapper.deleteBookById(Integer.parseInt(id));
+        }
+    }
 }

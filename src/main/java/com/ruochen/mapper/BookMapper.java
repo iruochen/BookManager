@@ -49,4 +49,11 @@ public interface BookMapper {
      */
     @Update("update book set book_id=#{bookId}, book_name=#{bookName}, book_author=#{bookAuthor}, book_press=#{bookPress}, book_price=#{bookPrice}, book_num=#{bookNum}, book_img_url=#{bookImgUrl} where id=#{id}")
     void updateBook(Book book);
+
+    /**
+     * 根据ID删除教材
+     * @param id
+     */
+    @Delete("delete from book where id = #{id}")
+    void deleteBookById(int id);
 }

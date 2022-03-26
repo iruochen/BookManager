@@ -3,6 +3,8 @@ package com.ruochen.service;
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
 
+import java.util.List;
+
 public interface BookService {
     /**
      * 查询所有教材
@@ -34,4 +36,10 @@ public interface BookService {
      * @param book
      */
     void updateBook(Book book);
+
+    /**
+     * 根据ID删除教材
+     * @param ids
+     */
+    void deleteBookByIds(List<String> ids);
 }

@@ -2,6 +2,7 @@ package com.ruochen;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
+import com.ruochen.mapper.BookMapper;
 import com.ruochen.service.BookService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -68,5 +70,17 @@ public class TestBook {
         book.setBookPrice(11);
         book.setBookImgUrl("url");
         bookService.updateBook(book);
+    }
+
+
+    /**
+     * 测试根据ID删除教材
+     */
+    @Test
+    public void testDeleteBookByIds() {
+        List<String> ids = new ArrayList<>();
+        ids.add("11");
+        ids.add("12");
+        bookService.deleteBookByIds(ids);
     }
 }
