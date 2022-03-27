@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruochen.mapper.StudentMapper">
+
+    <resultMap id="selectStudentAllMap" type="student">
+        <id column="id" property="id"/>
+        <result column="stu_id" property="stuId"/>
+        <result column="stu_name" property="stuName"/>
+        <result column="stu_sex" property="stuSex"/>
+        <result column="major" property="stuMajor"/>
+        <result column="class" property="stuClass"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="user_id" property="userId"/>
+        <association property="department" javaType="department">
+            <id column="id" property="id"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
+        <association property="user" javaType="user">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+        </association>
+    </resultMap>
+
+    <!--查询所有学生信息，三表联查-->
+    <select id="selectStudentAll" resultMap="selectStudentAllMap">
+        select student.*, department.*, user.*
+        from student, department, user
+        where student.dept_id = department.id and student.user_id = user.id
+        <if test="stuId!=null">
+            and student.stu_id like concat('%', #{stuId} ,'%')
+        </if>
+        <if test="stuName!=null">
+            and student.stu_name like concat('%', #{stuName}, '%')
+        </if>
+        <if test="deptId!=null">
+            and student.dept_id = #{deptId}
+        </if>
+    </select>
+</mapper>

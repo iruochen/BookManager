@@ -7,7 +7,7 @@ public interface TeacherService {
     /**
      * 查询所有教师信息
      *
-     * @param pageNum  页大小
+     * @param pageNum  页数
      * @param pageSize 每页条数
      * @param teacher  约束条件
      * @return pageInfo

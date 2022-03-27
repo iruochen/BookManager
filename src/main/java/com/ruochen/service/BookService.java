@@ -10,7 +10,7 @@ public interface BookService {
      * 查询所有教材
      *
      * @param pageNum  页数
-     * @param pageSize 页大小
+     * @param pageSize 每页条数
      * @return PageInfo
      */
     PageInfo<Book> selectBooksAll(Integer pageNum, Integer pageSize, Book book);
@@ -39,6 +39,7 @@ public interface BookService {
 
     /**
      * 根据ID删除教材
+     *
      * @param ids
      */
     void deleteBookByIds(List<String> ids);

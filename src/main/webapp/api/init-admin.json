@@ -35,7 +35,7 @@
         },
         {
           "title": "学生管理",
-          "href": "typeIndex",
+          "href": "studentIndex",
           "icon": "fa fa-window-maximize",
           "target": "_self"
         },

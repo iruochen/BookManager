@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>教师管理</title>
+        <title>学生管理</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,13 +26,13 @@
 
                 <div class="demoTable">
                     <div class="layui-form-item layui-form ">
-                        工号：
+                        学号：
                         <div class="layui-inline">
-                            <input class="layui-input" name="teaId" id="teaId" autocomplete="off">
+                            <input class="layui-input" name="stuId" id="stuId" autocomplete="off">
                         </div>
                         姓名：
                         <div class="layui-inline">
-                            <input class="layui-input" name="teaName" id="teaName" autocomplete="off">
+                            <input class="layui-input" name="stuName" id="stuName" autocomplete="off">
                         </div>
                         院系：
                         <div class="layui-inline">
@@ -87,7 +87,7 @@
 
                 table.render({
                     elem: '#currentTableId',
-                    url: '${pageContext.request.contextPath}/selectTeacherAll',//查询数据
+                    url: '${pageContext.request.contextPath}/selectStudentAll',//查询数据
                     limits: [10, 15, 20, 25, 50, 100],
                     limit: 10,  <!--默认显示10条-->
                     page: true,
@@ -101,10 +101,12 @@
                     }],
                     cols: [[
                         {type: "checkbox"},
-                        {field: 'teaId', title: '工号', align: "center"},
-                        {field: 'teaName', title: '姓名', align: "center"},
-                        {field: 'teaSex', title: '性别', align: "center"},
+                        {field: 'stuId', title: '学号', align: "center"},
+                        {field: 'stuName', title: '姓名', align: "center"},
+                        {field: 'stuSex', title: '性别', align: "center"},
                         {templet: '<div>{{d.department.deptName}}</div>', title: '院系', align: "center"},
+                        {field: 'stuMajor', title: '专业', align: "center"},
+                        {field: 'stuClass', title: '班级', align: "center"},
                         {templet: '<div>{{d.user.username}}</div>', title: '用户名', align: "center"},
                         {templet: '<div>{{d.user.password}}</div>', title: '密码', align: "center"},
                         {title: '操作', toolbar: '#currentTableBar', align: "center"}
@@ -117,8 +119,8 @@
 
                 var $ = layui.$, active = {
                     reload: function () {
-                        var teaId = $('#teaId').val();
-                        var teaName = $('#teaName').val();
+                        var stuId = $('#stuId').val();
+                        var stuName = $('#stuName').val();
                         var deptId = $('#deptId').val();
                         //执行重载
                         table.reload('testReload', {
@@ -126,8 +128,8 @@
                                 curr: 1 //重新从第 1 页开始
                             }
                             , where: {
-                                teaId: teaId,
-                                teaName: teaName,
+                                stuId: stuId,
+                                stuName: stuName,
                                 deptId: deptId
                             }
                         }, 'data');
