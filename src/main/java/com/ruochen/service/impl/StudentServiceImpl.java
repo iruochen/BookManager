@@ -32,4 +32,9 @@ public class StudentServiceImpl implements StudentService {
         student.setUserId(user.getId());
         studentMapper.addStudent(student);
     }
+
+    @Override
+    public Student selectStudentById(Integer id) {
+        return studentMapper.selectStudentById(id);
+    }
 }

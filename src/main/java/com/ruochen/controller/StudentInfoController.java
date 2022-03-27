@@ -8,6 +8,7 @@ import com.ruochen.service.StudentService;
 import com.ruochen.utils.DataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,5 +67,19 @@ public class StudentInfoController {
     public DataInfo addStudentSubmit(Student student, User user) {
         studentService.addStudent(student, user);
         return DataInfo.ok();
+    }
+
+    /**
+     * 根据ID 查询学生信息
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("selectStudentById")
+    public String selectStudentById(Integer id, Model model) {
+        Student student = studentService.selectStudentById(id);
+        model.addAttribute("student", student);
+        return "student/updateStudent";
     }
 }

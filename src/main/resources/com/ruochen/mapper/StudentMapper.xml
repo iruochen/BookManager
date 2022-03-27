@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruochen.mapper.StudentMapper">
 
-    <resultMap id="selectStudentAllMap" type="student">
+    <resultMap id="studentMap" type="student">
         <id column="id" property="id"/>
         <result column="stu_id" property="stuId"/>
         <result column="stu_name" property="stuName"/>
@@ -12,18 +12,18 @@
         <result column="dept_id" property="deptId"/>
         <result column="user_id" property="userId"/>
         <association property="department" javaType="department">
-            <id column="id" property="id"/>
+            <id column="dept_id" property="id"/>
             <result column="dept_name" property="deptName"/>
         </association>
         <association property="user" javaType="user">
-            <id column="id" property="id"/>
+            <id column="user_id" property="id"/>
             <result column="username" property="username"/>
             <result column="password" property="password"/>
         </association>
     </resultMap>
 
     <!--查询所有学生信息，三表联查-->
-    <select id="selectStudentAll" resultMap="selectStudentAllMap">
+    <select id="selectStudentAll" resultMap="studentMap">
         select student.*, department.*, user.*
         from student, department, user
         where student.dept_id = department.id and student.user_id = user.id
@@ -36,5 +36,16 @@
         <if test="deptId!=null">
             and student.dept_id = #{deptId}
         </if>
+    </select>
+
+    <!--根据ID 查询学生信息-->
+    <select id="selectStudentById" resultMap="studentMap">
+        select student.*, department.*, user.*
+        from student,
+             department,
+             user
+        where student.id = #{id}
+          and student.dept_id = department.id
+          and student.user_id = user.id
     </select>
 </mapper>

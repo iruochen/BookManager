@@ -23,9 +23,9 @@ public class TestStudent {
     @Test
     public void testSelectTeacherAll() {
         Student student = new Student();
-        student.setStuName("学");
-        student.setStuId("6");
-        PageInfo<Student> pageInfo = studentService.selectStudentAll(1, 1, student);
+        // student.setStuName("学");
+        // student.setStuId("6");
+        PageInfo<Student> pageInfo = studentService.selectStudentAll(1, 10, student);
         for (Student stu : pageInfo.getList()) {
             System.out.println(stu);
         }
@@ -50,4 +50,12 @@ public class TestStudent {
         studentService.addStudent(student, user);
     }
 
+    /**
+     * 测试根据ID 查询学生信息
+     */
+    @Test
+    public void testSelectStudentById() {
+        Student student = studentService.selectStudentById(2);
+        System.out.println(student);
+    }
 }

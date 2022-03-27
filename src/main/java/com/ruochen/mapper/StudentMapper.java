@@ -21,4 +21,12 @@ public interface StudentMapper {
      */
     @Insert("insert into student (id, user_id, stu_id, stu_name, stu_sex, dept_id, major, class) VALUES (null, #{userId}, #{stuId}, #{stuName}, #{stuSex}, #{deptId}, #{stuMajor}, #{stuClass})")
     void addStudent(Student student);
+
+    /**
+     * 根据ID 查询学生
+     *
+     * @param id
+     * @return
+     */
+    Student selectStudentById(Integer id);
 }

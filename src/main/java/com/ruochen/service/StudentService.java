@@ -22,4 +22,12 @@ public interface StudentService {
      * @param user
      */
     void addStudent(Student student, User user);
+
+    /**
+     * 根据ID 查询学生信息
+     *
+     * @param id
+     * @return
+     */
+    Student selectStudentById(Integer id);
 }
