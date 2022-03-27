@@ -2,6 +2,7 @@ package com.ruochen;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Teacher;
+import com.ruochen.domain.User;
 import com.ruochen.service.TeacherService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,23 @@ public class TestTeacher {
         for (Teacher tea : pageInfo.getList()) {
             System.out.println(tea);
         }
+    }
+
+    /**
+     * 测试添加教师信息
+     */
+    @Test
+    public void testAddTeacher() {
+        User user = new User();
+        user.setUsername("test");
+        user.setPassword("test");
+        user.setRole(2);
+        Teacher teacher = new Teacher();
+        teacher.setTeaId("1111");
+        teacher.setTeaName("测试");
+        teacher.setTeaSex("女");
+        teacher.setDeptId(2);
+        teacherService.addTeacher(teacher, user);
     }
 
 }

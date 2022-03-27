@@ -2,6 +2,7 @@ package com.ruochen.service;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Teacher;
+import com.ruochen.domain.User;
 
 public interface TeacherService {
     /**
@@ -13,4 +14,11 @@ public interface TeacherService {
      * @return pageInfo
      */
     PageInfo<Teacher> selectTeacherAll(Integer pageNum, Integer pageSize, Teacher teacher);
+
+    /**
+     * 添加教师
+     *
+     * @param teacher
+     */
+    void addTeacher(Teacher teacher, User user);
 }

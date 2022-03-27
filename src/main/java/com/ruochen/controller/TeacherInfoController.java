@@ -2,6 +2,7 @@ package com.ruochen.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Teacher;
+import com.ruochen.domain.User;
 import com.ruochen.service.TeacherService;
 import com.ruochen.utils.DataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,30 @@ public class TeacherInfoController {
     public DataInfo teacherAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, Teacher teacher) {
         PageInfo<Teacher> pageInfo = teacherService.selectTeacherAll(pageNum, pageSize, teacher);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
+    }
+
+    /**
+     * 教师添加页面跳转
+     *
+     * @return
+     */
+    @GetMapping("teacherAdd")
+    public String teacherAdd() {
+        return "teacher/teacherAdd";
+    }
+
+
+    /**
+     * 添加教师
+     *
+     * @param teacher
+     * @param user
+     * @return
+     */
+    @RequestMapping("addTeacherSubmit")
+    @ResponseBody
+    public DataInfo addTeacherSubmit(Teacher teacher, User user) {
+        teacherService.addTeacher(teacher, user);
+        return DataInfo.ok();
     }
 }
