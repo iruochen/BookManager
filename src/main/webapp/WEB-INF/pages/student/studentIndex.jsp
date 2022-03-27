@@ -224,7 +224,7 @@
                             maxmin: true,
                             shadeClose: true,
                             area: ['100%', '100%'],
-                            content: '${pageContext.request.contextPath}/readerAdd',
+                            content: '${pageContext.request.contextPath}/studentAdd',
                         });
                         $(window).on("resize", function () {
                             layer.full(index);
