@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruochen.mapper.TeacherMapper">
 
-    <resultMap id="selectTeacherAllMap" type="teacher">
+    <resultMap id="teacherMap" type="teacher">
         <id column="id" property="id"/>
         <result column="tea_id" property="teaId"/>
         <result column="tea_name" property="teaName"/>
@@ -17,11 +17,12 @@
             <id column="id" property="id"/>
             <result column="username" property="username"/>
             <result column="password" property="password"/>
+            <result column="role" property="role"/>
         </association>
     </resultMap>
 
     <!--查询所有教师信息，三表联查-->
-    <select id="selectTeacherAll" resultMap="selectTeacherAllMap">
+    <select id="selectTeacherAll" resultMap="teacherMap">
         select teacher.*, department.*, user.*
         from teacher, department, user
         where teacher.dept_id = department.id and teacher.user_id = user.id
@@ -34,5 +35,15 @@
         <if test="deptId!=null">
             and teacher.dept_id = #{deptId}
         </if>
+    </select>
+
+    <select id="selectTeacherById" resultMap="teacherMap">
+        select teacher.*, department.*, user.*
+        from teacher,
+             department,
+             user
+        where teacher.id = #{id}
+          and teacher.dept_id = department.id
+          and teacher.user_id = user.id
     </select>
 </mapper>

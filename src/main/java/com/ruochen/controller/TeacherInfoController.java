@@ -7,6 +7,7 @@ import com.ruochen.service.TeacherService;
 import com.ruochen.utils.DataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,6 +66,34 @@ public class TeacherInfoController {
     @ResponseBody
     public DataInfo addTeacherSubmit(Teacher teacher, User user) {
         teacherService.addTeacher(teacher, user);
+        return DataInfo.ok();
+    }
+
+    /**
+     * 根据ID查找教师
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("selectTeacherById")
+    public String selectTeacherById(Integer id, Model model) {
+        Teacher teacher = teacherService.selectTeacherById(id);
+        model.addAttribute("teacher", teacher);
+        return "teacher/updateTeacher";
+    }
+
+    /**
+     * 修改教师信息
+     *
+     * @param teacher
+     * @param user
+     * @return
+     */
+    @RequestMapping("updateTeacherSubmit")
+    @ResponseBody
+    public DataInfo updateTeacherSubmit(Teacher teacher, User user) {
+        teacherService.updateTeacher(teacher, user);
         return DataInfo.ok();
     }
 }

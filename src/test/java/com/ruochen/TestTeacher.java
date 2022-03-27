@@ -48,4 +48,31 @@ public class TestTeacher {
         teacherService.addTeacher(teacher, user);
     }
 
+    /**
+     * 测试根据ID查找教师
+     */
+    @Test
+    public void testSelectTeacherById() {
+        Teacher teacher = teacherService.selectTeacherById(2);
+        System.out.println(teacher);
+    }
+
+    /**
+     * 测试修改教师信息
+     */
+    @Test
+    public void testUpdateTeacher() {
+        User user = new User();
+        user.setId(7);
+        user.setUsername("updateTeacher");
+        user.setPassword("updatePwd");
+        Teacher teacher = new Teacher();
+        teacher.setId(2);
+        teacher.setUserId(2);
+        teacher.setTeaId("0000");
+        teacher.setTeaName("更新教师");
+        teacher.setTeaSex("男");
+        teacher.setDeptId(3);
+        teacherService.updateTeacher(teacher, user);
+    }
 }

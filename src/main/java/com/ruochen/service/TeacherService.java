@@ -21,4 +21,20 @@ public interface TeacherService {
      * @param teacher
      */
     void addTeacher(Teacher teacher, User user);
+
+    /**
+     * 根据ID查询教师信息
+     *
+     * @param id
+     * @return
+     */
+    Teacher selectTeacherById(Integer id);
+
+    /**
+     * 修改教师信息
+     *
+     * @param teacher
+     * @param user
+     */
+    void updateTeacher(Teacher teacher, User user);
 }

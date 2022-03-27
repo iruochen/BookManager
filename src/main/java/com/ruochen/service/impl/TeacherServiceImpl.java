@@ -32,4 +32,16 @@ public class TeacherServiceImpl implements TeacherService {
         teacher.setUserId(user.getId());
         teacherMapper.addTeacher(teacher);
     }
+
+    @Override
+    public Teacher selectTeacherById(Integer id) {
+        return teacherMapper.selectTeacherById(id);
+    }
+
+    @Override
+    public void updateTeacher(Teacher teacher, User user) {
+        user.setId(teacher.getUserId());
+        userMapper.updateUser(user);
+        teacherMapper.updateTeacher(teacher);
+    }
 }
