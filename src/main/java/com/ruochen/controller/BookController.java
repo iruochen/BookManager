@@ -40,7 +40,7 @@ public class BookController {
      */
     @GetMapping("bookAll")
     @ResponseBody
-    public DataInfo bookIndex(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, Book book) {
+    public DataInfo bookAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, Book book) {
         PageInfo<Book> pageInfo = bookService.selectBooksAll(pageNum, pageSize, book);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
@@ -98,6 +98,7 @@ public class BookController {
 
     /**
      * 根据ID删除教材
+     *
      * @return
      */
     @RequestMapping("deleteBook")

@@ -1,5 +1,8 @@
 package com.ruochen.domain;
 
+/**
+ * 教材实体
+ */
 public class Book {
     private Integer id;
     private String bookId;

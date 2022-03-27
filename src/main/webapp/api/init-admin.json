@@ -29,7 +29,7 @@
         },
         {
           "title": "教师管理",
-          "href": "readerIndex",
+          "href": "teacherIndex",
           "icon": "fa fa-file-text",
           "target": "_self"
         },

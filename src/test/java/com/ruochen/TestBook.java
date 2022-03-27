@@ -2,7 +2,6 @@ package com.ruochen;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
-import com.ruochen.mapper.BookMapper;
 import com.ruochen.service.BookService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

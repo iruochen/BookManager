@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruochen.mapper.TeacherMapper">
+
+    <resultMap id="selectTeacherAllMap" type="teacher">
+        <id column="id" property="id"/>
+        <result column="tea_id" property="teaId"/>
+        <result column="tea_name" property="teaName"/>
+        <result column="tea_sex" property="teaSex"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="user_id" property="userId"/>
+        <association property="department" javaType="department">
+            <id column="id" property="id"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
+        <association property="user" javaType="user">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+        </association>
+    </resultMap>
+
+    <!--查询所有教师信息，三表联查-->
+    <select id="selectTeacherAll" resultMap="selectTeacherAllMap">
+        select teacher.*, department.*, user.*
+        from teacher, department, user
+        where teacher.dept_id = department.id and teacher.user_id = user.id
+        <if test="teaId!=null">
+            and teacher.tea_id like concat('%', #{teaId} ,'%')
+        </if>
+        <if test="teaName!=null">
+            and teacher.tea_name like concat('%', #{teaName}, '%')
+        </if>
+        <if test="deptId!=null">
+            and teacher.dept_id = #{deptId}
+        </if>
+    </select>
+</mapper>
