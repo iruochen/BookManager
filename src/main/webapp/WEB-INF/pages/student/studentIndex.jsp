@@ -154,7 +154,7 @@
                             maxmin: true,
                             shadeClose: true,
                             area: ['100%', '100%'],
-                            content: '${pageContext.request.contextPath}/queryReaderInfoById?id=' + data.id,
+                            content: '${pageContext.request.contextPath}/selectStudentById?id=' + data.id,
                         });
                         $(window).on("resize", function () {
                             layer.full(index);

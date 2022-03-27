@@ -58,4 +58,24 @@ public class TestStudent {
         Student student = studentService.selectStudentById(2);
         System.out.println(student);
     }
+
+    /**
+     * 测试更新学生信息
+     */
+    @Test
+    public void testUpdateStudent() {
+        User user = new User();
+        user.setUsername("stuUpdate");
+        user.setPassword("111");
+        Student student = new Student();
+        student.setId(3);
+        student.setUserId(10);
+        student.setStuId("333");
+        student.setStuName("更新学生");
+        student.setStuSex("男");
+        student.setDeptId(3);
+        student.setStuMajor("自动化");
+        student.setStuClass("1830333");
+        studentService.updateStudent(student, user);
+    }
 }

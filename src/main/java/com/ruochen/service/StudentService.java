@@ -30,4 +30,12 @@ public interface StudentService {
      * @return
      */
     Student selectStudentById(Integer id);
+
+    /**
+     * 修改学生信息
+     *
+     * @param student
+     * @param user
+     */
+    void updateStudent(Student student, User user);
 }

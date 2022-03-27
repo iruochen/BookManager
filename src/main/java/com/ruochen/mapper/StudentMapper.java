@@ -2,6 +2,7 @@ package com.ruochen.mapper;
 
 import com.ruochen.domain.Student;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -29,4 +30,12 @@ public interface StudentMapper {
      * @return
      */
     Student selectStudentById(Integer id);
+
+    /**
+     * 更新学生信息
+     *
+     * @param student
+     */
+    @Update("update student set stu_id = #{stuId}, stu_name = #{stuName}, stu_sex = #{stuSex}, major = #{stuMajor}, class = #{stuClass}, dept_id = #{deptId} where id = #{id};")
+    void updateStudent(Student student);
 }

@@ -37,4 +37,11 @@ public class StudentServiceImpl implements StudentService {
     public Student selectStudentById(Integer id) {
         return studentMapper.selectStudentById(id);
     }
+
+    @Override
+    public void updateStudent(Student student, User user) {
+        user.setId(student.getUserId());
+        userMapper.updateUser(user);
+        studentMapper.updateStudent(student);
+    }
 }

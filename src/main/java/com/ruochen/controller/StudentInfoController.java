@@ -82,4 +82,18 @@ public class StudentInfoController {
         model.addAttribute("student", student);
         return "student/updateStudent";
     }
+
+    /**
+     * 修改学生信息
+     *
+     * @param student
+     * @param user
+     * @return
+     */
+    @RequestMapping("updateStudentSubmit")
+    @ResponseBody
+    public DataInfo updateStudentSubmit(Student student, User user) {
+        studentService.updateStudent(student, user);
+        return DataInfo.ok();
+    }
 }
