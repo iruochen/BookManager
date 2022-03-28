@@ -57,4 +57,13 @@ public interface TeacherMapper {
      */
     @Delete("delete from teacher where id = #{id}")
     void deleteTeacherById(Integer id);
+
+    /**
+     * 根据工号查询教师
+     *
+     * @param teaId
+     * @return
+     */
+    @Select("select * from teacher where tea_id = #{teaId};")
+    Teacher selectTeacherByTeaId(String teaId);
 }

@@ -22,7 +22,7 @@ public interface TeacherService {
      *
      * @param teacher
      */
-    void addTeacher(Teacher teacher, User user);
+    Integer addTeacher(Teacher teacher, User user);
 
     /**
      * 根据ID查询教师信息
@@ -37,8 +37,10 @@ public interface TeacherService {
      *
      * @param teacher
      * @param user
+     * @param oldTeaId
+     * @param oldUsername
      */
-    void updateTeacher(Teacher teacher, User user);
+    Integer updateTeacher(Teacher teacher, User user, String oldTeaId, String oldUsername);
 
     /**
      * 根据ID 删除教师

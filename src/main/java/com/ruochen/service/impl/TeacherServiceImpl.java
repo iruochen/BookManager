@@ -7,6 +7,7 @@ import com.ruochen.domain.User;
 import com.ruochen.mapper.TeacherMapper;
 import com.ruochen.mapper.UserMapper;
 import com.ruochen.service.TeacherService;
+import com.ruochen.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,19 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void addTeacher(Teacher teacher, User user) {
+    public Integer addTeacher(Teacher teacher, User user) {
+        if (null != userMapper.selectUserByUsername(user.getUsername())) {
+            // 用户名已存在
+            return Constants.USER_EXIST_CODE;
+        }
+        if (null != teacherMapper.selectTeacherByTeaId(teacher.getTeaId())) {
+            // 工号已存在
+            return Constants.TEACHER_EXIST_CODE;
+        }
         userMapper.addUser(user);
         teacher.setUserId(user.getId());
         teacherMapper.addTeacher(teacher);
+        return Constants.OK_CODE;
     }
 
     @Override
@@ -39,10 +49,19 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void updateTeacher(Teacher teacher, User user) {
+    public Integer updateTeacher(Teacher teacher, User user, String oldTeaId, String oldUsername) {
+        if (!user.getUsername().equals(oldUsername) && null != userMapper.selectUserByUsername(user.getUsername())) {
+            // 用户名已存在
+            return Constants.USER_EXIST_CODE;
+        }
+        if (!teacher.getTeaId().equals(oldTeaId) && null != teacherMapper.selectTeacherByTeaId(teacher.getTeaId())) {
+            // 工号已存在
+            return Constants.TEACHER_EXIST_CODE;
+        }
         user.setId(teacher.getUserId());
         userMapper.updateUser(user);
         teacherMapper.updateTeacher(teacher);
+        return Constants.OK_CODE;
     }
 
     @Override

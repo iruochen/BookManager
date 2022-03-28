@@ -90,6 +90,8 @@ public class StudentInfoController {
      *
      * @param student
      * @param user
+     * @param oldStuId
+     * @param oldUsername
      * @return
      */
     @RequestMapping("updateStudentSubmit")

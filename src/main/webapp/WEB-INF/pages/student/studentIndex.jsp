@@ -148,7 +148,7 @@
                     var data = obj.data;
                     if (obj.event === 'update') {  // 监听修改操作
                         var index = layer.open({
-                            title: '修改读者信息',
+                            title: '修改学生信息',
                             type: 2,
                             shade: 0.2,
                             maxmin: true,
@@ -218,7 +218,7 @@
                 table.on('toolbar(currentTableFilter)', function (obj) {
                     if (obj.event === 'add') {  // 监听添加操作
                         var index = layer.open({
-                            title: '添加图书',
+                            title: '添加学生',
                             type: 2,
                             shade: 0.2,
                             maxmin: true,

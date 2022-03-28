@@ -68,8 +68,8 @@ public class TeacherInfoController {
     @RequestMapping("addTeacherSubmit")
     @ResponseBody
     public DataInfo addTeacherSubmit(Teacher teacher, User user) {
-        teacherService.addTeacher(teacher, user);
-        return DataInfo.ok();
+        Integer code = teacherService.addTeacher(teacher, user);
+        return DataInfo.ok(code);
     }
 
     /**
@@ -91,13 +91,15 @@ public class TeacherInfoController {
      *
      * @param teacher
      * @param user
+     * @param oldTeaId
+     * @param oldUsername
      * @return
      */
     @RequestMapping("updateTeacherSubmit")
     @ResponseBody
-    public DataInfo updateTeacherSubmit(Teacher teacher, User user) {
-        teacherService.updateTeacher(teacher, user);
-        return DataInfo.ok();
+    public DataInfo updateTeacherSubmit(Teacher teacher, User user, String oldTeaId, String oldUsername) {
+        Integer code = teacherService.updateTeacher(teacher, user, oldTeaId, oldUsername);
+        return DataInfo.ok(code);
     }
 
     /**
