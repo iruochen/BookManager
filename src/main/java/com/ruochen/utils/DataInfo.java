@@ -32,6 +32,10 @@ public class DataInfo {
         return new DataInfo(Constants.OK_CODE, Constants.OK_MSG, null);
     }
 
+    public static DataInfo ok(Integer code) {
+        return new DataInfo(code, Constants.OK_MSG, null);
+    }
+
     public static DataInfo ok(Object data) {
         return new DataInfo(Constants.OK_CODE, Constants.OK_MSG, data);
     }

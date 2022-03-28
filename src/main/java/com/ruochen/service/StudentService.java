@@ -22,8 +22,9 @@ public interface StudentService {
      *
      * @param student
      * @param user
+     * @return
      */
-    void addStudent(Student student, User user);
+    Integer addStudent(Student student, User user);
 
     /**
      * 根据ID 查询学生信息
@@ -38,8 +39,10 @@ public interface StudentService {
      *
      * @param student
      * @param user
+     * @param oldStuId
+     * @param oldUsername
      */
-    void updateStudent(Student student, User user);
+    Integer updateStudent(Student student, User user, String oldStuId, String oldUsername);
 
 
     /**
@@ -48,4 +51,12 @@ public interface StudentService {
      * @param ids
      */
     void deleteStudentByIds(List<String> ids);
+
+    /**
+     * 根据学号查询学生
+     *
+     * @param stuId
+     * @return
+     */
+    Student selectStudentByStuId(String stuId);
 }

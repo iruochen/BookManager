@@ -2,6 +2,8 @@ package com.ruochen.utils;
 
 public class Constants {
     public final static int OK_CODE = 0;
+    public final static int STUDENT_EXIST_CODE = -1;
+    public final static int USER_EXIST_CODE = -2;
     public final static int FAIL_CODE = 400;
     public final static String OK_MSG = "请求成功";
     public final static String FAIL_MSG = "请求失败";

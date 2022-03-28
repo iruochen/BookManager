@@ -138,6 +138,10 @@
                                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(iframeIndex);
                                 })
+                            } else if (result.code == -1) {
+                                layer.msg("学号已存在");
+                            } else if (result.code == -2) {
+                                layer.msg("用户名已存在");
                             } else {
                                 layer.msg("添加失败");
                             }

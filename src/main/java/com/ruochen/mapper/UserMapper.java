@@ -1,10 +1,7 @@
 package com.ruochen.mapper;
 
 import com.ruochen.domain.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 public interface UserMapper {
     /**
@@ -31,4 +28,12 @@ public interface UserMapper {
      */
     @Delete("delete from user where id = #{id}")
     void deleteUserById(int id);
+
+    /**
+     * 根据用户名查询用户
+     *
+     * @param username
+     */
+    @Select("select * from user where username = #{username};")
+    User selectUserByUsername(String username);
 }

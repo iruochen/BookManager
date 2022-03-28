@@ -58,4 +58,12 @@ public interface StudentMapper {
     @Delete("delete from student where id = #{id}")
     void deleteStudentById(Integer id);
 
+    /**
+     * 根据学号查询学生
+     *
+     * @param stuId
+     * @return
+     */
+    @Select("select * from student where stu_id = #{stuId};")
+    Student selectStudentByStuId(String stuId);
 }

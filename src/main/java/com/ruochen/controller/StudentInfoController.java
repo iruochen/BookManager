@@ -67,8 +67,8 @@ public class StudentInfoController {
     @RequestMapping("addStudentSubmit")
     @ResponseBody
     public DataInfo addStudentSubmit(Student student, User user) {
-        studentService.addStudent(student, user);
-        return DataInfo.ok();
+        Integer code = studentService.addStudent(student, user);
+        return DataInfo.ok(code);
     }
 
     /**
@@ -94,11 +94,17 @@ public class StudentInfoController {
      */
     @RequestMapping("updateStudentSubmit")
     @ResponseBody
-    public DataInfo updateStudentSubmit(Student student, User user) {
-        studentService.updateStudent(student, user);
-        return DataInfo.ok();
+    public DataInfo updateStudentSubmit(Student student, User user, String oldStuId, String oldUsername) {
+        Integer code = studentService.updateStudent(student, user, oldStuId, oldUsername);
+        return DataInfo.ok(code);
     }
 
+    /**
+     * 根据ID 删除学生
+     *
+     * @param ids
+     * @return
+     */
     @RequestMapping("deleteStudent")
     @ResponseBody
     public DataInfo deleteStudentByIds(String ids) {

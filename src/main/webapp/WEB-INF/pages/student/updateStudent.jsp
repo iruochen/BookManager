@@ -30,6 +30,8 @@
         <div class="layui-form layuimini-form">
             <input type="hidden" name="id" value="${student.id}">
             <input type="hidden" name="userId" value="${student.userId}">
+            <input type="hidden" name="oldStuId" value="${student.stuId}">
+            <input type="hidden" name="oldUsername" value="${student.user.username}">
             <div class="layui-form-item">
                 <label class="layui-form-label required">学号</label>
                 <div class="layui-input-block">
@@ -149,6 +151,10 @@
                                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(iframeIndex);
                                 })
+                            } else if (result.code == -2) {
+                                layer.msg("用户名已存在");
+                            } else if (result.code == -1) {
+                                layer.msg("学号已存在");
                             } else {
                                 layer.msg("修改失败");
                             }

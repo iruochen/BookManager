@@ -7,6 +7,7 @@ import com.ruochen.domain.User;
 import com.ruochen.mapper.StudentMapper;
 import com.ruochen.mapper.UserMapper;
 import com.ruochen.service.StudentService;
+import com.ruochen.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,19 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addStudent(Student student, User user) {
+    public Integer addStudent(Student student, User user) {
+        if (null != userMapper.selectUserByUsername(user.getUsername())) {
+            // 用户名已存在
+            return Constants.USER_EXIST_CODE;
+        }
+        if (null != studentMapper.selectStudentByStuId(student.getStuId())) {
+            // 学号已存在
+            return Constants.STUDENT_EXIST_CODE;
+        }
         userMapper.addUser(user);
         student.setUserId(user.getId());
         studentMapper.addStudent(student);
+        return Constants.OK_CODE;
     }
 
     @Override
@@ -39,10 +49,19 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudent(Student student, User user) {
+    public Integer updateStudent(Student student, User user, String oldStuId, String oldUsername) {
+        if (!user.getUsername().equals(oldUsername) && null != userMapper.selectUserByUsername(user.getUsername())) {
+            // 用户名已存在
+            return Constants.USER_EXIST_CODE;
+        }
+        if (!student.getStuId().equals(oldStuId) && null != studentMapper.selectStudentByStuId(student.getStuId())) {
+            // 学号已存在
+            return Constants.STUDENT_EXIST_CODE;
+        }
         user.setId(student.getUserId());
         userMapper.updateUser(user);
         studentMapper.updateStudent(student);
+        return Constants.OK_CODE;
     }
 
     @Override
@@ -54,5 +73,10 @@ public class StudentServiceImpl implements StudentService {
             // 删除关联用户
             userMapper.deleteUserById(Integer.parseInt(userId));
         }
+    }
+
+    @Override
+    public Student selectStudentByStuId(String stuId) {
+        return null;
     }
 }
