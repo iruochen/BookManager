@@ -1,6 +1,7 @@
 package com.ruochen.mapper;
 
 import com.ruochen.domain.Teacher;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -39,4 +40,21 @@ public interface TeacherMapper {
      */
     @Update("update teacher set tea_id = #{teaId}, tea_name = #{teaName}, tea_sex = #{teaSex}, dept_id = #{deptId} where id = #{id}")
     void updateTeacher(Teacher teacher);
+
+    /**
+     * 根据ID 查询 user_id
+     *
+     * @param id
+     * @return
+     */
+    @Select("select user_id from teacher where id = #{id};")
+    String selectTeacherUserIdById(Integer id);
+
+    /**
+     * 根据ID 删除教师
+     *
+     * @param id
+     */
+    @Delete("delete from teacher where id = #{id}")
+    void deleteTeacherById(int id);
 }

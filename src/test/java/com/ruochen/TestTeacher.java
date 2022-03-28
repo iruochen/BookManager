@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class TestTeacher {
@@ -74,5 +77,16 @@ public class TestTeacher {
         teacher.setTeaSex("男");
         teacher.setDeptId(3);
         teacherService.updateTeacher(teacher, user);
+    }
+
+    /**
+     * 测试删除教师
+     */
+    @Test
+    public void testDeleteTeacher() {
+        List<String> ids = new ArrayList<>();
+        ids.add("2");
+        ids.add("3");
+        teacherService.deleteTeacherByIds(ids);
     }
 }

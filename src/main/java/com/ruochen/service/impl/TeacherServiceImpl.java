@@ -44,4 +44,15 @@ public class TeacherServiceImpl implements TeacherService {
         userMapper.updateUser(user);
         teacherMapper.updateTeacher(teacher);
     }
+
+    @Override
+    public void deleteTeacherByIds(List<String> ids) {
+        for (String id : ids) {
+            String userId = teacherMapper.selectTeacherUserIdById(Integer.parseInt(id));
+            // 删除教师信息
+            teacherMapper.deleteTeacherById(Integer.parseInt(id));
+            // 删除关联用户信息
+            userMapper.deleteUserById(Integer.parseInt(userId));
+        }
+    }
 }

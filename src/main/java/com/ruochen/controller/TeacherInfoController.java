@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class TeacherInfoController {
 
@@ -94,6 +97,20 @@ public class TeacherInfoController {
     @ResponseBody
     public DataInfo updateTeacherSubmit(Teacher teacher, User user) {
         teacherService.updateTeacher(teacher, user);
+        return DataInfo.ok();
+    }
+
+    /**
+     * 根据ID 删除教师
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping("deleteTeacher")
+    @ResponseBody
+    public DataInfo deleteTeacherByIds(String ids) {
+        List<String> list = Arrays.asList(ids.split(","));
+        teacherService.deleteTeacherByIds(list);
         return DataInfo.ok();
     }
 }

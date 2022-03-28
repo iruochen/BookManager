@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Teacher;
 import com.ruochen.domain.User;
 
+import java.util.List;
+
 public interface TeacherService {
     /**
      * 查询所有教师信息
@@ -37,4 +39,12 @@ public interface TeacherService {
      * @param user
      */
     void updateTeacher(Teacher teacher, User user);
+
+    /**
+     * 根据ID 删除教师
+     *
+     * @param ids
+     */
+    void deleteTeacherByIds(List<String> ids);
+
 }
