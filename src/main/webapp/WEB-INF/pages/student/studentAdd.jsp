@@ -30,7 +30,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">学号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stuId" lay-verify="required" lay-reqtext="学号不能为空" placeholder="请输入学号"
+                    <input type="text" name="stuId" lay-verify="required|number|stuid" lay-reqtext="学号不能为空" placeholder="请输入学号"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -70,7 +70,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">班级</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stuClass" lay-verify="required" lay-reqtext="班级不能为空" placeholder="请输入班级"
+                    <input type="text" name="stuClass" lay-verify="required|number|stuclass" lay-reqtext="班级不能为空" placeholder="请输入班级"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -78,7 +78,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">用户名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名"
+                    <input type="text" name="username" lay-verify="required|username" lay-reqtext="用户名不能为空" placeholder="请输入用户名"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -86,7 +86,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">密码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="password" lay-verify="required" lay-reqtext="密码不能为空" placeholder="请输入密码"
+                    <input type="text" name="password" lay-verify="required|pwd" lay-reqtext="密码不能为空" placeholder="请输入密码"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -104,6 +104,26 @@
                 var form = layui.form,
                     layer = layui.layer,
                     $ = layui.$;
+
+                // 自定义表单验证
+                form.verify({
+                    username: [
+                        /[A-Za-z0-9_\-\u4e00-\u9fa5]+/,
+                        '用户不符合规范，请重新输入'
+                    ],
+                    pwd: [
+                        /^[\S]{6,12}$/,
+                        '密码必须6到12位，且不能出现空格'
+                    ],
+                    stuid: [
+                        /^\d{9}$/,
+                        '学号输入错误，请重新输入'
+                    ],
+                    stuclass: [
+                        /^\d{7}$/,
+                        '班级输入错误，请重新输入'
+                    ]
+                })
 
                 // 动态获取院系的数据
                 $.get("selectDeptAll", {}, function (data) {

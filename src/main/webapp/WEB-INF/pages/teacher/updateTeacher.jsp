@@ -35,7 +35,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">教工号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="teaId" lay-verify="required" value="${teacher.teaId}" class="layui-input">
+                    <input type="text" name="teaId" lay-verify="required|number|teaid" value="${teacher.teaId}" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -68,7 +68,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">用户名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" lay-verify="required" value="${teacher.user.username}"
+                    <input type="text" name="username" lay-verify="required|username" value="${teacher.user.username}"
                            class="layui-input">
                 </div>
             </div>
@@ -76,7 +76,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">密码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="password" lay-verify="required" value="${teacher.user.password}"
+                    <input type="text" name="password" lay-verify="required|pwd" value="${teacher.user.password}"
                            class="layui-input">
                 </div>
             </div>
@@ -94,6 +94,22 @@
                 var form = layui.form,
                     layer = layui.layer,
                     $ = layui.$;
+
+                // 自定义表单验证
+                form.verify({
+                    username: [
+                        /[A-Za-z0-9_\-\u4e00-\u9fa5]+/,
+                        '用户不符合规范，请重新输入'
+                    ],
+                    pwd: [
+                        /^[\S]{6,12}$/,
+                        '密码必须6到12位，且不能出现空格'
+                    ],
+                    teaid: [
+                        /^\d{1,9}$/,
+                        '教工号输入错误，请重新输入'
+                    ]
+                })
 
                 // 动态获取院系的数据
                 $.get("selectDeptAll", {}, function (data) {

@@ -35,7 +35,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">学号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stuId" lay-verify="required" value="${student.stuId}" class="layui-input">
+                    <input type="text" name="stuId" lay-verify="required|number|stuid" value="${student.stuId}" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -76,7 +76,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">班级</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stuClass" lay-verify="required" value="${student.stuClass}"
+                    <input type="text" name="stuClass" lay-verify="required|number|stuclass" value="${student.stuClass}"
                            class="layui-input">
                 </div>
             </div>
@@ -84,7 +84,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">用户名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" lay-verify="required" value="${student.user.username}"
+                    <input type="text" name="username" lay-verify="required|username" value="${student.user.username}"
                            class="layui-input">
                 </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">密码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="password" lay-verify="required" value="${student.user.password}"
+                    <input type="text" name="password" lay-verify="required|pwd" value="${student.user.password}"
                            class="layui-input">
                 </div>
             </div>
@@ -110,6 +110,26 @@
                 var form = layui.form,
                     layer = layui.layer,
                     $ = layui.$;
+
+                // 自定义表单验证
+                form.verify({
+                    username: [
+                        /[A-Za-z0-9_\-\u4e00-\u9fa5]+/,
+                        '用户不符合规范，请重新输入'
+                    ],
+                    pwd: [
+                        /^[\S]{6,12}$/,
+                        '密码必须6到12位，且不能出现空格'
+                    ],
+                    stuid: [
+                        /^\d{9}$/,
+                        '学号输入错误，请重新输入'
+                    ],
+                    stuclass: [
+                        /^\d{7}$/,
+                        '班级输入错误，请重新输入'
+                    ]
+                })
 
                 // 动态获取院系的数据
                 $.get("selectDeptAll", {}, function (data) {
