@@ -192,7 +192,7 @@
                 function deleteInfoByIds(ids, index) {
                     //向后台发送请求
                     $.ajax({
-                        url: "deleteReader",
+                        url: "deleteStudent",
                         type: "POST",
                         data: {ids: ids},
                         success: function (result) {

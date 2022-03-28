@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Student;
 import com.ruochen.domain.User;
 
+import java.util.List;
+
 public interface StudentService {
     /**
      * 查询所有学生信息
@@ -38,4 +40,12 @@ public interface StudentService {
      * @param user
      */
     void updateStudent(Student student, User user);
+
+
+    /**
+     * 根据ID 删除学生
+     *
+     * @param ids
+     */
+    void deleteStudentByIds(List<String> ids);
 }

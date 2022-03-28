@@ -44,4 +44,15 @@ public class StudentServiceImpl implements StudentService {
         userMapper.updateUser(user);
         studentMapper.updateStudent(student);
     }
+
+    @Override
+    public void deleteStudentByIds(List<String> ids) {
+        for (String id : ids) {
+            String userId = studentMapper.selectStudentUserIdById(Integer.parseInt(id));
+            // 删除学生信息
+            studentMapper.deleteStudentById(Integer.parseInt(id));
+            // 删除关联用户
+            userMapper.deleteUserById(Integer.parseInt(userId));
+        }
+    }
 }

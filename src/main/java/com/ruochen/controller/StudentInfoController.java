@@ -2,7 +2,6 @@ package com.ruochen.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Student;
-import com.ruochen.domain.Teacher;
 import com.ruochen.domain.User;
 import com.ruochen.service.StudentService;
 import com.ruochen.utils.DataInfo;
@@ -13,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class StudentInfoController {
@@ -94,6 +96,14 @@ public class StudentInfoController {
     @ResponseBody
     public DataInfo updateStudentSubmit(Student student, User user) {
         studentService.updateStudent(student, user);
+        return DataInfo.ok();
+    }
+
+    @RequestMapping("deleteStudent")
+    @ResponseBody
+    public DataInfo deleteStudentByIds(String ids) {
+        List<String> list = Arrays.asList(ids.split(","));
+        studentService.deleteStudentByIds(list);
         return DataInfo.ok();
     }
 }

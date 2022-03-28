@@ -1,7 +1,9 @@
 package com.ruochen.mapper;
 
 import com.ruochen.domain.Student;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -38,4 +40,22 @@ public interface StudentMapper {
      */
     @Update("update student set stu_id = #{stuId}, stu_name = #{stuName}, stu_sex = #{stuSex}, major = #{stuMajor}, class = #{stuClass}, dept_id = #{deptId} where id = #{id};")
     void updateStudent(Student student);
+
+    /**
+     * 根据ID 查询 userId
+     *
+     * @param id
+     * @return
+     */
+    @Select("select user_id from student where id = #{id};")
+    String selectStudentUserIdById(Integer id);
+
+    /**
+     * 根据ID 删除学生
+     *
+     * @param id
+     */
+    @Delete("delete from student where id = #{id}")
+    void deleteStudentById(Integer id);
+
 }

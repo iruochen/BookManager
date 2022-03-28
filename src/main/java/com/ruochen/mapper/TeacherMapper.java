@@ -42,7 +42,7 @@ public interface TeacherMapper {
     void updateTeacher(Teacher teacher);
 
     /**
-     * 根据ID 查询 user_id
+     * 根据ID 查询 userId
      *
      * @param id
      * @return
@@ -56,5 +56,5 @@ public interface TeacherMapper {
      * @param id
      */
     @Delete("delete from teacher where id = #{id}")
-    void deleteTeacherById(int id);
+    void deleteTeacherById(Integer id);
 }
