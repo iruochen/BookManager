@@ -151,12 +151,13 @@
     <build>
         <plugins>
             <!--热部署-->
+            <!--存在报错 ssl 问题-->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://106.53.147.28:8080/manager/text</url>
+                    <url>https://book.iruochen.cn/manager/text</url>
                     <path>/bookManager</path>
                     <username>ruochen</username>
                     <password>ruochen@123</password>
