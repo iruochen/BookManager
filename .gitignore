@@ -31,3 +31,4 @@ log/
 hs_err_pid*
 
 src/main/java/com/ruochen/utils/COSConfig.java
+src/main/resources/jdbc.properties

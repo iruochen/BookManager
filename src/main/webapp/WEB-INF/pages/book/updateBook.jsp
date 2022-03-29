@@ -59,7 +59,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材价格</label>
                 <div class="layui-input-block">
-                    <input type="number" name="bookPrice" lay-verify="required" value="${book.bookPrice}"
+                    <input type="number" name="bookPrice" lay-verify="required|number" value="${book.bookPrice}"
                            class="layui-input">
                 </div>
             </div>
