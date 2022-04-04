@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: ruochen
-  Date: 2022/3/24
-  Time: 15:44
+  Date: 2022/3/27
+  Time: 13:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,21 +12,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>教材管理</title>
+        <title>采购管理</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/layui-v2.6.3/css/layui.css" media="all">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/public.css" media="all">
         <script src="${pageContext.request.contextPath}/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
-        <style>
-            /*重写表格高度，图片显示*/
-            .layui-table-cell {
-                text-align: center;
-                height: auto;
-                white-space: normal;
-            }
-        </style>
     </head>
     <body>
         <div class="layuimini-container">
@@ -36,15 +28,17 @@
                     <div class="layui-form-item layui-form ">
                         教材编号：
                         <div class="layui-inline">
-                            <input class="layui-input" name="bookId" id="bookId" autocomplete="off">
+                            <input class="layui-input" name="teaId" id="teaId" autocomplete="off">
                         </div>
                         教材名称：
                         <div class="layui-inline">
-                            <input class="layui-input" name="bookName" id="bookName" autocomplete="off">
+                            <input class="layui-input" name="teaName" id="teaName" autocomplete="off">
                         </div>
-                        出版社：
+                        作者：
                         <div class="layui-inline">
-                            <input class="layui-input" name="bookPress" id="bookPress" autocomplete="off">
+                            <select id="deptId" name="deptId" lay-verify="required">
+                                <option value="">请选择</option>
+                            </select>
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
                     </div>
@@ -70,42 +64,34 @@
             </div>
         </div>
 
-        <%--自定义temlet，表格中显示图片--%>
-        <script type="text/html" id="imgtmp">
-            <img src="{{d.bookImgUrl}}" style="width: 100px;height: 100px"/>
-        </script>
-
         <script>
             layui.use(['form', 'table'], function () {
                 var $ = layui.jquery,
                     form = layui.form,
                     table = layui.table;
 
-                function hoverOpenImg() {
-                    var img_show = null; // tips提示
-                    $('td img').hover(function () {
-                        var kd = $(this).width();
-                        kd1 = kd * 3;          //图片放大倍数
-                        kd2 = kd * 3 + 30;       //图片放大倍数
-                        var img = "<img class='img_msg' src='" + $(this).attr('src') + "' style='width:" + kd1 + "px;' />";
-                        img_show = layer.tips(img, this, {
-                            tips: [2, 'rgba(41,41,41,.5)']
-                            , area: [kd2 + 'px']
-                        });
-                    }, function () {
-                        layer.close(img_show);
-                    });
-                    $('td img').attr('style', 'max-width:70px;display:block!important');
-                }
+                // 动态获取院系类型的数据，即下拉菜单，跳出院系类型
+                $.get("selectDeptAll", {}, function (data) {
+                    var list = data;
+                    var select = document.getElementById("deptId");
+                    if (list != null || list.size() > 0) {
+                        for (var obj in list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", list[obj].id);
+                            option.innerText = list[obj].deptName;
+                            select.appendChild(option);
+                        }
+                    }
+                    form.render('select');
+                }, "json")
 
                 table.render({
                     elem: '#currentTableId',
-                    url: '${pageContext.request.contextPath}/bookAll',
-                    limits: [8, 16, 24, 32, 40, 48],
-                    limit: 8,  // 每页10条
-                    page: true,  // 开启分页
-                    skin: 'line',  // 行边框风格
-                    even: true,  // 开启隔行背景
+                    url: '${pageContext.request.contextPath}/selectTeacherAll',//查询数据
+                    limits: [10, 15, 20, 25, 50, 100],
+                    limit: 10,  <!--默认显示10条-->
+                    page: true,
+                    skin: 'line',
                     id: 'testReload',
                     toolbar: '#toolbarDemo',
                     defaultToolbar: ['filter', 'exports', 'print', {
@@ -115,41 +101,34 @@
                     }],
                     cols: [[
                         {type: "checkbox"},
-                        {field: 'bookId', title: '教材编号'},
-                        {field: 'bookName', title: '教材名称'},
-                        {field: 'bookAuthor', title: '作者'},
-                        {field: 'bookPress', title: '出版社'},
-                        {field: 'bookPrice', title: '价格'},
-                        {field: 'bookNum', title: '数量'},
-                        {field: 'bookImgUrl', title: '图片', templet: '#imgtmp'},
+                        {field: 'teaId', title: '工号', align: "center"},
+                        {field: 'teaName', title: '姓名', align: "center"},
+                        {field: 'teaSex', title: '性别', align: "center"},
+                        {templet: '<div>{{d.department.deptName}}</div>', title: '院系', align: "center"},
+                        {templet: '<div>{{d.user.username}}</div>', title: '用户名', align: "center"},
+                        {templet: '<div>{{d.user.password}}</div>', title: '密码', align: "center"},
                         {title: '操作', toolbar: '#currentTableBar', align: "center"}
                     ]],
                     request: {
                         pageName: "page",
                         limitName: "size"
                     },
-                    done: function (res, curr, count) {
-                        hoverOpenImg();//显示大图
-                        $('table tr').on('click', function () {
-                            $('table tr').css('background', '');
-                        });
-                    }
                 });
 
                 var $ = layui.$, active = {
                     reload: function () {
-                        var bookId = $('#bookId').val();
-                        var bookName = $('#bookName').val();
-                        var bookPress = $('#bookPress').val();
+                        var teaId = $('#teaId').val();
+                        var teaName = $('#teaName').val();
+                        var deptId = $('#deptId').val();
                         //执行重载
                         table.reload('testReload', {
                             page: {
                                 curr: 1 //重新从第 1 页开始
                             }
                             , where: {
-                                bookId: bookId,
-                                bookName: bookName,
-                                bookPress: bookPress
+                                teaId: teaId,
+                                teaName: teaName,
+                                deptId: deptId
                             }
                         }, 'data');
                     }
@@ -167,13 +146,13 @@
                     var data = obj.data;
                     if (obj.event === 'update') {  // 监听修改操作
                         var index = layer.open({
-                            title: '修改教材信息',
+                            title: '修改教师信息',
                             type: 2,
                             shade: 0.2,
                             maxmin: true,
                             shadeClose: true,
                             area: ['100%', '100%'],
-                            content: '${pageContext.request.contextPath}/selectBookById?id=' + data.id,
+                            content: '${pageContext.request.contextPath}/selectTeacherById?id=' + data.id,
                         });
                         $(window).on("resize", function () {
                             layer.full(index);
@@ -187,7 +166,7 @@
                     }
                 });
 
-                // 监听表格复选框选择
+                //监听表格复选框选择
                 table.on('checkbox(currentTableFilter)', function (obj) {
                     // console.log(obj)
                 });
@@ -200,9 +179,9 @@
                     for (var i = 0; i < data.length; i++) {
                         arr.push(data[i].id);
                     }
-                    //拼接id,变成一个字符串
+                    // 拼接id,变成一个字符串
                     return arr.join(",");
-                }
+                };
 
 
                 /**
@@ -211,7 +190,7 @@
                 function deleteInfoByIds(ids, index) {
                     //向后台发送请求
                     $.ajax({
-                        url: "deleteBook",
+                        url: "deleteTeacher",
                         type: "POST",
                         data: {ids: ids},
                         success: function (result) {
@@ -229,7 +208,7 @@
                             }
                         }
                     })
-                }
+                };
 
                 /**
                  * toolbar栏监听事件
@@ -237,13 +216,13 @@
                 table.on('toolbar(currentTableFilter)', function (obj) {
                     if (obj.event === 'add') {  // 监听添加操作
                         var index = layer.open({
-                            title: '添加教材',
+                            title: '添加教师',
                             type: 2,
                             shade: 0.2,
                             maxmin: true,
                             shadeClose: true,
                             area: ['100%', '100%'],
-                            content: '${pageContext.request.contextPath}/bookAdd',
+                            content: '${pageContext.request.contextPath}/teacherAdd',
                         });
                         $(window).on("resize", function () {
                             layer.full(index);

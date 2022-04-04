@@ -36,4 +36,14 @@ public interface UserMapper {
      */
     @Select("select * from user where username = #{username};")
     User selectUserByUsername(String username);
+
+    /**
+     * 根据用户名和密码查询用户
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @Select("select * from user u where u.username = #{username} and u.password = #{password} and u.role = ${type};")
+    User selectUserByUsernameAndPassword(@Param("username") String username, @Param("password") String password, @Param("type") Integer type);
 }
