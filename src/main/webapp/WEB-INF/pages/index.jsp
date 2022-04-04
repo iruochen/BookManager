@@ -1,36 +1,31 @@
 <%--
   Created by IntelliJ IDEA.
   User: ruochen
-  Date: 2022/3/24
-  Time: 14:21
+  Date: 2022/4/4
+  Time: 22:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>教材管理系统</title>
         <meta name="renderer" content="webkit">
-        <%--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>--%>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta http-equiv="Access-Control-Allow-Origin" content="*">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <link rel="icon" href="<%=basePath%>images/favicon.ico">
-        <link rel="stylesheet" href="<%=basePath%>lib/layui-v2.6.3/css/layui.css" media="all">
-        <link rel="stylesheet" href="<%=basePath%>css/layuimini.css?v=2.0.4" media="all">
-        <link rel="stylesheet" href="<%=basePath%>css/themes/default.css" media="all">
-        <link rel="stylesheet" href="<%=basePath%>lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+        <link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/layui-v2.6.3/css/layui.css" media="all">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layuimini.css?v=2.0.4.2" media="all">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/themes/default.css" media="all">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/font-awesome-4.7.0/css/font-awesome.min.css"
+              media="all">
         <!--[if lt IE 9]>
         <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
         <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -62,7 +57,7 @@
                         </li>
                     </ul>
 
-                    <ul class="layui-nav layui-layout-right ">
+                    <ul class="layui-nav layui-layout-right">
 
                         <li class="layui-nav-item" lay-unselect>
                             <a href="javascript:;" data-refresh="刷新"><i class="fa fa-refresh"></i></a>
@@ -73,18 +68,18 @@
                         <li class="layui-nav-item mobile layui-hide-xs" lay-unselect>
                             <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
                         </li>
-                        <%--用户--%>
                         <li class="layui-nav-item layuimini-setting">
                             <a href="javascript:;">admin</a>
                             <dl class="layui-nav-child">
                                 <dd>
-                                    <%--用户个人信息设置--%>
-                                    <a href="javascript:;" layuimini-content-href="page/user-setting.html"
-                                       data-title="基本资料" data-icon="fa fa-gears">基本资料<span
+                                    <a href="javascript:;"
+                                       layuimini-content-href="${pageContext.request.contextPath}/personalInfo"
+                                       data-title="个人资料" data-icon="fa fa-gears">个人资料<span
                                             class="layui-badge-dot"></span></a>
                                 </dd>
                                 <dd>
-                                    <a href="javascript:;" layuimini-content-href="page/user-password.html"
+                                    <a href="javascript:;"
+                                       layuimini-content-href="${pageContext.request.contextPath}/updatePassword"
                                        data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
                                 </dd>
                                 <dd>
@@ -95,12 +90,14 @@
                                 </dd>
                             </dl>
                         </li>
-
+                        <li class="layui-nav-item layuimini-select-bgcolor" lay-unselect>
+                            <a href="javascript:;" data-bgcolor="配色方案"><i class="fa fa-ellipsis-v"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
 
-            <!--无限极左侧菜单(功能管理)-->
+            <!--无限极左侧菜单-->
             <div class="layui-side layui-bg-black layuimini-menu-left">
             </div>
 
@@ -144,8 +141,8 @@
 
             </div>
         </div>
-        <script src="<%=basePath%>lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
-        <script src="<%=basePath%>js/lay-config.js?v=2.0.4" charset="utf-8"></script>
+        <script src="${pageContext.request.contextPath}/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+        <script src="${pageContext.request.contextPath}/js/lay-config.js?v=2.0.0" charset="utf-8"></script>
         <script>
             layui.use(['jquery', 'layer', 'miniAdmin', 'miniTongji'], function () {
                 var $ = layui.jquery,
@@ -154,11 +151,22 @@
                     miniTongji = layui.miniTongji;
 
                 var options = {
-                    iniUrl: "<%=basePath%>api/init-admin.json",    // 初始化接口
-                    // clearUrl: "api/clear.json", // 缓存清理接口
+                    <c:choose>
+                    <c:when test="${sessionScope.user.role == 0}">
+                    iniUrl: "${pageContext.request.contextPath}/api/init-admin.json",    // 初始化接口，管理员
+                    </c:when>
+                    <c:when test="${sessionScope.user.role == 1}">
+                    iniUrl: "${pageContext.request.contextPath}/api/init-student.json",    // 初始化接口，学生
+                    </c:when>
+                    <c:when test="${sessionScope.user.role == 2}">
+                    iniUrl: "${pageContext.request.contextPath}/api/init-teacher.json",    // 初始化接口，教师
+                    </c:when>
+                    </c:choose>
+
+                    clearUrl: "${pageContext.request.contextPath}/api/clear.json", // 缓存清理接口
                     urlHashLocation: true,      // 是否打开hash定位
                     bgColorDefault: false,      // 主题默认配置
-                    menuChildOpen: true,       // 是否默认展开菜单
+                    menuChildOpen: false,       // 是否默认展开菜单
                     loadingTime: 0,             // 初始化加载时间
                     pageAnim: true,             // iframe窗口动画
                     maxTabNum: 20,              // 最大的tab打开数量
@@ -166,14 +174,14 @@
                 miniAdmin.render(options);
 
                 $('.login-out').on("click", function () {
-                    layer.msg('退出登录成功', function () {
-                        window.location = '<%=basePath%>page/login-1.html';
+                    layer.msg('退出登录成功', {
+                        icon: 6,
+                        time: 500
+                    }, function () {
+                        window.location = '${pageContext.request.contextPath}/loginOut';
                     });
                 });
             });
         </script>
     </body>
 </html>
-
-
-

@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -117,19 +119,19 @@
         <div class="layui-container">
             <div class="admin-login-background">
                 <div class="layui-form login-form">
-                    <form class="layui-form" action="${pageContext.request.contextPath}/loginIn" method="post">
+                    <form class="layui-form" action="${pageContext.request.contextPath}/registerSubmit" method="post">
                         <div class="layui-form-item logo-title">
                             <h1>教材管理系统</h1>
                             <div style="color: red;text-align: center;">${msg}</div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-icon layui-icon-username"></label>
-                            <input type="text" name="username" lay-verify="required" placeholder="用户名"
+                            <input type="text" name="username" lay-verify="required|username" placeholder="用户名"
                                    autocomplete="off" class="layui-input" value="${username}">
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-icon layui-icon-password"></label>
-                            <input type="password" name="password" lay-verify="required" placeholder="密码"
+                            <input type="password" name="password" lay-verify="required|pwd" placeholder="密码"
                                    autocomplete="off" class="layui-input" value="${password}">
                         </div>
                         <div class="layui-form-item">
@@ -154,8 +156,11 @@
                         </div>
                         <div class="layui-form-item">
                             <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit=""
-                                    lay-filter="login">登录
+                                    lay-filter="login">注册
                             </button>
+                            <div style="text-align: left;">
+                                <a href="${pageContext.request.contextPath}/login" style="color: #2a9ff6">已有账号? 去登陆</a>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -164,6 +169,22 @@
         <script src="${pageContext.request.contextPath}/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
         <script type="text/javascript">
             getCode();
+
+            layui.use(['form'], function () {
+                var form = layui.form;
+
+                // 自定义表单验证
+                form.verify({
+                    username: [
+                        /[A-Za-z0-9_\-\u4e00-\u9fa5]+/,
+                        '用户不符合规范，请重新输入'
+                    ],
+                    pwd: [
+                        /^[\S]{6,12}$/,
+                        '密码必须6到12位，且不能出现空格'
+                    ]
+                })
+            });
 
             /**
              * 获取验证码

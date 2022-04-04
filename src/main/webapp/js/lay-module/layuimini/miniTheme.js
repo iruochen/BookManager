@@ -307,7 +307,7 @@ layui.define(["jquery", "layer"], function (exports) {
                 '/**头部右侧下拉字体颜色 headerRightChildColor */\n' +
                 '.layui-layout-admin .layui-header .layui-nav .layui-nav-item .layui-nav-child a {\n' +
                 '    color:  ' + bgcolorData.headerRightChildColor + '!important;\n' +
-                '}\n'+
+                '}\n' +
                 '\n' +
                 '/*头部右侧鼠标选中 headerRightColorThis */\n' +
                 '.layui-header .layuimini-menu-header-pc.layui-nav .layui-nav-item a:hover, .layui-header .layuimini-header-menu.layuimini-pc-show.layui-nav .layui-this a {\n' +
@@ -430,9 +430,7 @@ layui.define(["jquery", "layer"], function (exports) {
                     '<ul>\n' + bgColorHtml + '</ul>\n' +
                     '</div>\n' +
                     '<div class="more-menu-list">\n' +
-                    '<a class="more-menu-item" href="http://layuimini.99php.cn/docs/index.html" target="_blank"><i class="layui-icon layui-icon-read" style="font-size: 19px;"></i> 开发文档</a>\n' +
-                    '<a class="more-menu-item" href="https://github.com/zhongshaofa/layuimini" target="_blank"><i class="layui-icon layui-icon-tabs" style="font-size: 16px;"></i> 开源地址</a>\n' +
-                    '<a class="more-menu-item" href="http://layuimini.99php.cn" target="_blank"><i class="layui-icon layui-icon-theme"></i> 官方网站</a>\n' +
+                    '<a class="more-menu-item" href="mailto:wangrui@ruochen.email" target="_blank"><i class="layui-icon layui-icon-at"></i>联系作者</a>\n' +
                     '</div>' +
                     '</div>';
                 layer.open({

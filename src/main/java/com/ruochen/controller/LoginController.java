@@ -87,7 +87,7 @@ public class LoginController {
         // 判断验证码是否正确（验证码已经放入session）
         HttpSession session = request.getSession();
         String realCode = (String) session.getAttribute("VerifyCode");
-        if (!realCode.toLowerCase().equals(code.toLowerCase())) {
+        if (!realCode.equalsIgnoreCase(code)) {
             model.addAttribute("msg", "验证码不正确");
             return "login";
         } else {
@@ -98,15 +98,9 @@ public class LoginController {
                 model.addAttribute("msg", "用户名或密码错误");
                 return "login";
             }
+            // user 放入session
             session.setAttribute("user", user);
-            session.setAttribute("type", type);
-        }
-        if (type.equals("0")) {
-            return "index-admin";
-        } else if (type.equals("1")) {
-            return "index-student";
-        } else {
-            return "index-teacher";
+            return "index";
         }
     }
 
