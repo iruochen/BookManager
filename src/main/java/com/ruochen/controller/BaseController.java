@@ -7,12 +7,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BaseController {
 
     /**
-     * 首页
+     * 首次加载
      *
      * @return
      */
     @RequestMapping("/")
+    public String load() {
+        return "login";
+    }
+
+    /**
+     * 首页
+     *
+     * @return
+     */
+    @RequestMapping("index")
     public String index() {
-        return "register";
+        return "index";
+    }
+
+    /**
+     * 404
+     *
+     * @return
+     */
+    @RequestMapping("error")
+    public String error() {
+        return "404";
     }
 }

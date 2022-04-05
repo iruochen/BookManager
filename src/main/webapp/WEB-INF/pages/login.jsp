@@ -160,7 +160,8 @@
                                     lay-filter="login">登录
                             </button>
                             <div style="text-align: left;">
-                                <a href="${pageContext.request.contextPath}/register" style="color: #2a9ff6">没有账号? 去注册</a>
+                                <a href="${pageContext.request.contextPath}/register" style="color: #2a9ff6">没有账号?
+                                    去注册</a>
                             </div>
                         </div>
                     </form>

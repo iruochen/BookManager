@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -56,7 +58,16 @@
                             <h2>404</h2>
                             <span>Error </span>
                             <h1>Page not found</h1>
-                            <a class="read_more" href="${pageContext.request.contextPath}/index">Back to home</a>
+                            <c:choose>
+                                <c:when test="${sessionScope.user != null}">
+                                    <a class="read_more" href="${pageContext.request.contextPath}/index">Back to
+                                        home</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="read_more" href="${pageContext.request.contextPath}/login">Back to
+                                        home</a>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="col-md-7">
@@ -75,14 +86,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 offset-md-3">
-                                <p>
-                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
+
         <!-- end footer -->
         <!-- Javascript files-->
         <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>

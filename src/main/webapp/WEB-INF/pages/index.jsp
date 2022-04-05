@@ -69,13 +69,12 @@
                             <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
                         </li>
                         <li class="layui-nav-item layuimini-setting">
-                            <a href="javascript:;">admin</a>
+                            <a href="javascript:;">${sessionScope.user.username}</a>
                             <dl class="layui-nav-child">
                                 <dd>
                                     <a href="javascript:;"
                                        layuimini-content-href="${pageContext.request.contextPath}/personalInfo"
-                                       data-title="个人资料" data-icon="fa fa-gears">个人资料<span
-                                            class="layui-badge-dot"></span></a>
+                                       data-title="个人资料" data-icon="fa fa-gears">个人资料</a>
                                 </dd>
                                 <dd>
                                     <a href="javascript:;"
@@ -161,6 +160,9 @@
                     <c:when test="${sessionScope.user.role == 2}">
                     iniUrl: "${pageContext.request.contextPath}/api/init-teacher.json",    // 初始化接口，教师
                     </c:when>
+                    <c:otherwise>
+                    iniUrl: "${pageContext.request.contextPath}/api/init-404.json",    // 初始化接口，404
+                    </c:otherwise>
                     </c:choose>
 
                     clearUrl: "${pageContext.request.contextPath}/api/clear.json", // 缓存清理接口
