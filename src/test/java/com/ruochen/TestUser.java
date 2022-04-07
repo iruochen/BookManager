@@ -2,6 +2,7 @@ package com.ruochen;
 
 import com.ruochen.domain.User;
 import com.ruochen.mapper.UserMapper;
+import com.ruochen.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class TestUser {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 测试根据用户名查询用户
      */
@@ -21,5 +25,18 @@ public class TestUser {
     public void testSelectUserByUsername() {
         User user = userMapper.selectUserByUsername("ad");
         System.out.println(user);
+    }
+
+    /**
+     * 测试查询用户
+     */
+    @Test
+    public void testSelectUserByUser() {
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("123456");
+        user.setRole(1);
+        User u = userMapper.selectUserByUser(user);
+        System.out.println(u);
     }
 }

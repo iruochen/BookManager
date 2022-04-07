@@ -2,14 +2,15 @@ package com.ruochen.controller;
 
 import com.ruochen.domain.User;
 import com.ruochen.service.UserService;
+import com.ruochen.utils.DataInfo;
 import com.ruochen.verifyCodeUtil.IVerifyCodeGen;
 import com.ruochen.verifyCodeUtil.SimpleCharVerifyCodeGenImpl;
 import com.ruochen.verifyCodeUtil.VerifyCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,46 +63,18 @@ public class LoginController {
     }
 
     /**
-     * 登录验证
+     * 登录
      *
+     * @param user
+     * @param captcha
      * @param request
-     * @param model
      * @return
      */
     @RequestMapping("loginIn")
-    public String loginIn(HttpServletRequest request, Model model) {
-        // 获取用户名和密码
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        // 验证码
-        String code = request.getParameter("captcha");
-        // 用户类型
-        String type = request.getParameter("type");
-
-        // 回显
-        model.addAttribute("username", username);
-        model.addAttribute("password", password);
-        model.addAttribute("type", type);
-        model.addAttribute("code", code);
-
-        // 判断验证码是否正确（验证码已经放入session）
-        HttpSession session = request.getSession();
-        String realCode = (String) session.getAttribute("VerifyCode");
-        if (!realCode.equalsIgnoreCase(code)) {
-            model.addAttribute("msg", "验证码不正确");
-            return "login";
-        } else {
-            // 验证码正确则判断用户名和密码
-            User user = userService.selectUserByUsernameAndPasswordAndRole(username, password, Integer.parseInt(type));
-            if (user == null) {
-                // 用户不存在
-                model.addAttribute("msg", "用户名或密码错误");
-                return "login";
-            }
-            // user 放入session
-            session.setAttribute("user", user);
-            return "index";
-        }
+    @ResponseBody
+    public DataInfo loginIn(User user, String captcha, HttpServletRequest request) {
+        Integer code = userService.login(user, captcha, request);
+        return DataInfo.ok(code);
     }
 
     /**

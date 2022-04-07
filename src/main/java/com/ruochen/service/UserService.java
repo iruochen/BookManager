@@ -2,16 +2,9 @@ package com.ruochen.service;
 
 import com.ruochen.domain.User;
 
-public interface UserService {
-    /**
-     * 根据用户名和密码查询用户
-     *
-     * @param username
-     * @param password
-     * @return
-     */
-    User selectUserByUsernameAndPasswordAndRole(String username, String password, Integer type);
+import javax.servlet.http.HttpServletRequest;
 
+public interface UserService {
     /**
      * 添加用户
      *
@@ -28,4 +21,12 @@ public interface UserService {
      * @return
      */
     User selectUserByUsername(String username);
+
+    /**
+     * 登录
+     *
+     * @param user
+     * @return
+     */
+    Integer login(User user, String captcha, HttpServletRequest request);
 }

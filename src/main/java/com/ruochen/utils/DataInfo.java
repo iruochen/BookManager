@@ -48,11 +48,15 @@ public class DataInfo {
         return new DataInfo(Constants.OK_CODE, msg, data, count);
     }
 
+    public static DataInfo fail(Integer code) {
+        return new DataInfo(code, Constants.FAIL_MSG, null);
+    }
+
     public static DataInfo fail(String msg) {
         return new DataInfo(Constants.FAIL_CODE, msg, null);
     }
 
-    public static DataInfo fail(int errorCode, String msg) {
+    public static DataInfo fail(Integer errorCode, String msg) {
         return new DataInfo(errorCode, msg, null);
     }
 

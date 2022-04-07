@@ -20,152 +20,339 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <script type="text/javascript"
-                src="${pageContext.request.contextPath}/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/layui-v2.6.3/css/layui.css" media="all">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/public.css" media="all">
+        <!--[if lt IE 9]>
+        <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+        <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
         <style>
-            html, body {
-                width: 100%;
-                height: 100%;
-                overflow: hidden
-            }
-
-            body {
-                background: url("${pageContext.request.contextPath}/images/loginbg.png") no-repeat center;
-            }
-
-            body:after {
-                content: '';
-                background-repeat: no-repeat;
-                background-size: cover;
-                -webkit-filter: blur(3px);
-                -moz-filter: blur(3px);
-                -o-filter: blur(3px);
-                -ms-filter: blur(3px);
-                filter: blur(3px);
+            .main-body {
+                top: 50%;
+                left: 50%;
                 position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: -1;
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                -o-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                overflow: hidden;
             }
 
-            .layui-container {
-                width: 100%;
-                height: 100%;
-                overflow: hidden
-            }
-
-            .admin-login-background {
-                width: 450px;
-                height: 300px;
+            .login-main .login-bottom .center .item input {
+                display: inline-block;
+                width: 227px;
+                height: 22px;
+                padding: 0;
                 position: absolute;
-                left: 65%;
-                top: 45%;
-                margin-top: -120px;
-                margin-left: -50px;
-                opacity: 0.9;
+                border: 0;
+                outline: 0;
+                font-size: 14px;
+                letter-spacing: 0;
             }
 
-            .logo-title {
+            .login-main .login-bottom .center .item .icon-1 {
+                background: url(${pageContext.request.contextPath}/images/icon-login.png) no-repeat 1px 0;
+            }
+
+            .login-main .login-bottom .center .item .icon-2 {
+                background: url(${pageContext.request.contextPath}/images/icon-login.png) no-repeat -54px 0;
+            }
+
+            .login-main .login-bottom .center .item .icon-3 {
+                background: url(${pageContext.request.contextPath}/images/icon-login.png) no-repeat -106px 0;
+            }
+
+            .login-main .login-bottom .center .item .icon-4 {
+                background: url(${pageContext.request.contextPath}/images/icon-login.png) no-repeat 0 -43px;
+                position: absolute;
+                right: -10px;
+                cursor: pointer;
+            }
+
+            .login-main .login-bottom .center .item .icon-5 {
+                background: url(${pageContext.request.contextPath}/images/icon-login.png) no-repeat -55px -43px;
+            }
+
+            .login-main .login-bottom .center .item .icon-6 {
+                background: url(${pageContext.request.contextPath}/images/icon-login.png) no-repeat 0 -93px;
+                position: absolute;
+                right: -10px;
+                margin-top: 8px;
+                cursor: pointer;
+            }
+
+            .login-main .login-bottom .tip .icon-nocheck {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 2px;
+                border: solid 1px #9abcda;
+                position: relative;
+                top: 2px;
+                margin: 1px 8px 1px 1px;
+                cursor: pointer;
+            }
+
+            .login-main .login-bottom .tip .icon-check {
+                margin: 0 7px 0 0;
+                width: 14px;
+                height: 14px;
+                border: none;
+                background: url(${pageContext.request.contextPath}/images/icon-login.png) no-repeat -111px -48px;
+            }
+
+            .login-main .login-bottom .center .item .icon {
+                display: inline-block;
+                width: 33px;
+                height: 22px;
+            }
+
+            .login-main .login-bottom .center .item {
+                width: 288px;
+                height: 35px;
+                border-bottom: 1px solid #dae1e6;
+                margin-bottom: 35px;
+            }
+
+            .login-main {
+                width: 428px;
+                position: relative;
+                float: left;
+            }
+
+            .login-main .login-top {
+                height: 117px;
+                background-color: #148be4;
+                border-radius: 12px 12px 0 0;
+                font-family: SourceHanSansCN-Regular;
+                font-size: 30px;
+                font-weight: 400;
+                font-stretch: normal;
+                letter-spacing: 0;
+                color: #fff;
+                line-height: 117px;
                 text-align: center;
-                letter-spacing: 2px;
-                padding: 14px 0;
+                overflow: hidden;
+                -webkit-transform: rotate(0);
+                -moz-transform: rotate(0);
+                -ms-transform: rotate(0);
+                -o-transform: rotate(0);
+                transform: rotate(0);
             }
 
-            .logo-title h1 {
-                color: #1E9FFF;
-                font-size: 25px;
-                font-weight: bold;
+            .login-main .login-top .bg1 {
+                display: inline-block;
+                width: 74px;
+                height: 74px;
+                background: #fff;
+                opacity: .1;
+                border-radius: 0 74px 0 0;
+                position: absolute;
+                left: 0;
+                top: 43px;
             }
 
-            .login-form {
-                background-color: #fff;
-                border: 1px solid #fff;
-                border-radius: 3px;
-                padding: 14px 20px;
-                box-shadow: 0 0 8px #eeeeee;
+            .login-main .login-top .bg2 {
+                display: inline-block;
+                width: 94px;
+                height: 94px;
+                background: #fff;
+                opacity: .1;
+                border-radius: 50%;
+                position: absolute;
+                right: -16px;
+                top: -16px;
             }
 
-            .login-form .layui-form-item {
+            .login-main .login-bottom {
+                width: 428px;
+                background: #fff;
+                border-radius: 0 0 12px 12px;
+                padding-bottom: 53px;
+            }
+
+            .login-main .login-bottom .center {
+                width: 288px;
+                margin: 0 auto;
+                padding-top: 40px;
+                padding-bottom: 15px;
                 position: relative;
             }
 
-            .login-form .layui-form-item label {
+            .login-main .login-bottom .tip {
+                clear: both;
+                height: 16px;
+                line-height: 16px;
+                width: 288px;
+                margin: 0 auto;
+            }
+
+            body {
+                background: url(${pageContext.request.contextPath}/images/loginbg.png) 0% 0% / cover no-repeat;
+                position: static;
+                font-size: 12px;
+            }
+
+            input::-webkit-input-placeholder {
+                color: #a6aebf;
+            }
+
+            input::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color: #a6aebf;
+            }
+
+            input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color: #a6aebf;
+            }
+
+            input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color: #a6aebf;
+            }
+
+            input:-webkit-autofill { /* 取消Chrome记住密码的背景颜色 */
+                -webkit-box-shadow: 0 0 0 1000px white inset !important;
+            }
+
+            html {
+                height: 100%;
+            }
+
+            .login-main .login-bottom .tip {
+                clear: both;
+                height: 16px;
+                line-height: 16px;
+                width: 288px;
+                margin: 0 auto;
+            }
+
+            .login-main .login-bottom .tip .login-tip {
+                font-family: MicrosoftYaHei;
+                font-size: 12px;
+                font-weight: 400;
+                font-stretch: normal;
+                letter-spacing: 0;
+                color: #9abcda;
+                cursor: pointer;
+            }
+
+            .login-main .login-bottom .tip .forget-password {
+                font-stretch: normal;
+                letter-spacing: 0;
+                color: #1391ff;
+                text-decoration: none;
                 position: absolute;
-                left: 1px;
-                top: 1px;
-                width: 38px;
-                line-height: 36px;
+                right: 62px;
+            }
+
+            .login-main .login-bottom .login-btn {
+                width: 288px;
+                height: 40px;
+                background-color: #1E9FFF;
+                border-radius: 16px;
+                margin: 24px auto 0;
                 text-align: center;
-                color: #d2d2d2;
+                line-height: 40px;
+                color: #fff;
+                font-size: 14px;
+                letter-spacing: 0;
+                cursor: pointer;
+                border: none;
             }
 
-            .login-form .layui-form-item input {
-                padding-left: 36px;
-            }
-
-            .captcha-img img {
-                height: 34px;
-                border: 1px solid #e6e6e6;
+            .login-main .login-bottom .center .item .validateImg {
+                position: absolute;
+                right: 1px;
+                cursor: pointer;
                 height: 36px;
+                border: 1px solid #e6e6e6;
+            }
+
+            .footer {
+                left: 0;
+                bottom: 0;
+                color: #fff;
                 width: 100%;
+                position: absolute;
+                text-align: center;
+                line-height: 30px;
+                padding-bottom: 10px;
+                text-shadow: #000 0.1em 0.1em 0.1em;
+                font-size: 14px;
+            }
+
+            .padding-5 {
+                padding: 5px !important;
+            }
+
+            .footer a, .footer span {
+                color: #fff;
+            }
+
+            @media screen and (max-width: 428px) {
+                .login-main {
+                    width: 360px !important;
+                }
+
+                .login-main .login-top {
+                    width: 360px !important;
+                }
+
+                .login-main .login-bottom {
+                    width: 360px !important;
+                }
             }
         </style>
+
     </head>
     <body>
-        <div class="layui-container">
-            <div class="admin-login-background">
-                <div class="layui-form login-form">
-                    <form class="layui-form" action="${pageContext.request.contextPath}/loginIn" method="post">
-                        <div class="layui-form-item logo-title">
-                            <h1>教材管理系统</h1>
-                            <div style="color: red;text-align: center;">${msg}</div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-icon layui-icon-username"></label>
-                            <input type="text" name="username" lay-verify="required" placeholder="用户名"
-                                   autocomplete="off" class="layui-input" value="${username}">
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-icon layui-icon-password"></label>
-                            <input type="password" name="password" lay-verify="required" placeholder="密码"
-                                   autocomplete="off" class="layui-input" value="${password}">
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-icon layui-icon-username"></label>
-                            <select name="type" lay-verify="required">
-                                <option value="">请选择用户类型</option>
-                                <option value="0" <c:if test="${'0' eq type}">selected</c:if>>管理员</option>
-                                <option value="1" <c:if test="${'1' eq type}">selected</c:if>>学生</option>
-                                <option value="2" <c:if test="${'2' eq type}">selected</c:if>>教师</option>
-                            </select>
-                        </div>
-                        <div class="layui-form-item">
-                            <div class="layui-input-inline">
-                                <input type="text" name="captcha" style="width: 200px;" lay-verify="required"
-                                       placeholder="验证码" autocomplete="off" class="layui-input" value="${code}">
-                            </div>
-                            <div class="layui-input-inline">
-                                <div class="field">
-                                    <a href="javascript:void(0)" onclick="getCode()"><img id="code"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit=""
-                                    lay-filter="login">登录
-                            </button>
-                            <div style="text-align: left;">
-                                <a href="${pageContext.request.contextPath}/register" style="color: #2a9ff6">没有账号?
-                                    去注册</a>
-                            </div>
-                        </div>
-                    </form>
+        <div class="main-body">
+            <div class="login-main">
+                <div class="login-top">
+                    <span>用户登录</span>
+                    <span class="bg1"></span>
+                    <span class="bg2"></span>
                 </div>
+                <form class="layui-form login-bottom">
+                    <div class="center">
+                        <div class="item">
+                            <span class="icon icon-2"></span>
+                            <input type="text" name="username" lay-reqtext="用户名不能为空"
+                                   lay-verify="required"
+                                   placeholder="请输入用户名"
+                                   maxlength="24"/>
+                        </div>
+                        <div class="item">
+                            <span class="icon icon-3"></span>
+                            <input type="password" name="password" lay-reqtext="密码不能为空"
+                                   lay-verify="required"
+                                   placeholder="请输入密码"
+                                   maxlength="20">
+                            <span class="bind-password icon icon-4"></span>
+                        </div>
+                        <div class="item">
+                            <label class="layui-icon"></label>
+                            <label>
+                                <select name="role" lay-verify="required" lay-reqtext="请选择角色">
+                                    <option value="">请选择用户类型</option>
+                                    <option value="0">管理员</option>
+                                    <option value="1">学生</option>
+                                    <option value="2">教师</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div id="validatePanel" class="item" style="width: 137px;">
+                            <input type="text" name="captcha" lay-reqtext="验证码不能为空" lay-verify="required" placeholder="请输入验证码" maxlength="4">
+                            <a href="javascript:void(0)" onclick="getCode()"><img id="code" class="validateImg"></a>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <a href="${pageContext.request.contextPath}/register" class="forget-password">没有账号？去注册</a>
+                    </div>
+                    <div class="layui-form-item" style="text-align:center; width:100%;height:100%;margin:0px;">
+                        <button class="login-btn" lay-submit="" lay-filter="login">立即登录</button>
+                    </div>
+                </form>
             </div>
         </div>
         <script src="${pageContext.request.contextPath}/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
@@ -194,25 +381,53 @@
 
             layui.use(['form'], function () {
                 var form = layui.form,
-                    layer = layui.layer;
+                    layer = layui.layer,
+                    $ = layui.$;
+
+                // 自定义表单验证
+                form.verify({
+                    username: [
+                        /[A-Za-z0-9_\-\u4e00-\u9fa5]+/,
+                        '用户名不符合规范，请重新输入'
+                    ]
+                })
+
+                // 密码点击隐藏/显示
+                $('.bind-password').on('click', function () {
+                    if ($(this).hasClass('icon-5')) {
+                        $(this).removeClass('icon-5');
+                        $("input[name='password']").attr('type', 'password');
+                    } else {
+                        $(this).addClass('icon-5');
+                        $("input[name='password']").attr('type', 'text');
+                    }
+                });
+
+                // 监听提交
                 form.on('submit(login)', function (data) {
-                    data = data.field;
-                    if (data.username == '') {
-                        layer.msg('用户名不能为空');
-                        return false;
-                    }
-                    if (data.password == '') {
-                        layer.msg('密码不能为空');
-                        return false;
-                    }
-                    if (data.captcha == '') {
-                        layer.msg('验证码不能为空');
-                        return false;
-                    }
-                    if (data.type == '') {
-                        layer.msg('类型不能为空');
-                        return false;
-                    }
+                    var datas = data.field;  // form表单中的数据信息
+                    // 向后台发送数据
+                    $.ajax({
+                        url: "loginIn",
+                        type: "POST",
+                        data: datas,
+                        success: function (result) {
+                            if (result.code == 0) {  // 成功
+                                layer.msg('登录成功', {
+                                    icon: 6,
+                                    time: 500
+                                }, function () {
+                                    // 跳转到index页面
+                                    window.location.href = "index";
+                                })
+                            } else if (result.code == -2) {
+                                layer.msg('验证码错误');
+                            } else if (result.code == -1) {
+                                layer.msg('用户名或密码错误');
+                            }
+                        }
+                    })
+                    return false;
                 });
             });
         </script>
