@@ -44,6 +44,26 @@ public class UserServiceImpl implements UserService {
             return Constants.LOGIN_ERROR;
         }
         session.setAttribute("user", u);
+        // 登录成功
+        return Constants.OK_CODE;
+    }
+
+    @Override
+    public Integer register(User user, String captcha, HttpServletRequest request) {
+        // 判断验证码是否正确（验证码已经放入session）
+        HttpSession session = request.getSession();
+        String realCode = (String) session.getAttribute("VerifyCode");
+        if (!realCode.equalsIgnoreCase(captcha)) {
+            // 验证码错误
+            return Constants.CAPTCHA_ERROR;
+        }
+        User u = userMapper.selectUserByUsername(user.getUsername());
+        if (u != null) {
+            // 用户已存在
+            return Constants.REGISTER_ERROR;
+        }
+        userMapper.addUser(user);
+        // 注册成功
         return Constants.OK_CODE;
     }
 }

@@ -29,4 +29,14 @@ public interface UserService {
      * @return
      */
     Integer login(User user, String captcha, HttpServletRequest request);
+
+    /**
+     * 注册
+     *
+     * @param user
+     * @param captcha
+     * @param request
+     * @return
+     */
+    Integer register(User user, String captcha, HttpServletRequest request);
 }

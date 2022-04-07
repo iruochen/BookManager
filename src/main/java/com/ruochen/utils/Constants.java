@@ -7,6 +7,7 @@ public class Constants {
     public final static int USER_EXIST_CODE = -2;
     public final static int CAPTCHA_ERROR = -2;
     public final static int LOGIN_ERROR = -1;
+    public final static int REGISTER_ERROR = -1;
     public final static int FAIL_CODE = 400;
     public final static String OK_MSG = "请求成功";
     public final static String FAIL_MSG = "请求失败";
