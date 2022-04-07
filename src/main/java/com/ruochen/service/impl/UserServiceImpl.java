@@ -16,20 +16,6 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public void addUser(String username, String password, Integer type) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setRole(type);
-        userMapper.addUser(user);
-    }
-
-    @Override
-    public User selectUserByUsername(String username) {
-        return userMapper.selectUserByUsername(username);
-    }
-
-    @Override
     public Integer login(User user, String captcha, HttpServletRequest request) {
         // 判断验证码是否正确（验证码已经放入session）
         HttpSession session = request.getSession();

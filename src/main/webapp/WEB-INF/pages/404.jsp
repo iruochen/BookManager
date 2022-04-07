@@ -1,102 +1,122 @@
 <%--
   Created by IntelliJ IDEA.
   User: ruochen
-  Date: 2022/4/4
-  Time: 22:41
+  Date: 2022/4/7
+  Time: 18:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <!-- basic -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- mobile metas -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-        <!-- site metas -->
-        <title>error</title>
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <!-- bootstrap css -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-        <!-- style css -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-        <!-- Responsive-->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
-        <!-- Tweaks for older IEs-->
-        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+        <meta charset="UTF-8">
+        <title>404</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="Access-Control-Allow-Origin" content="*">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../lib/layui-v2.6.3/css/layui.css" media="all">
+        <style>
+            .error .clip .shadow {height:180px;}
+            .error .clip:nth-of-type(2) .shadow {width:130px;}
+            .error .clip:nth-of-type(1) .shadow,.error .clip:nth-of-type(3) .shadow {width:250px;}
+            .error .digit {width:150px;height:150px;line-height:150px;font-size:120px;font-weight:bold;}
+            .error h2 {font-size:32px;}
+            .error .msg {top:-190px;left:30%;width:80px;height:80px;line-height:80px;font-size:32px;}
+            .error span.triangle {top:70%;right:0%;border-left:20px solid #535353;border-top:15px solid transparent;border-bottom:15px solid transparent;}
+            .error .container-error-404 {top: 50%;margin-top: 250px;position:relative;height:250px;padding-top:40px;}
+            .error .container-error-404 .clip {display:inline-block;transform:skew(-45deg);}
+            .error .clip .shadow {overflow:hidden;}
+            .error .clip:nth-of-type(2) .shadow {overflow:hidden;position:relative;box-shadow:inset 20px 0px 20px -15px rgba(150,150,150,0.8),20px 0px 20px -15px rgba(150,150,150,0.8);}
+            .error .clip:nth-of-type(3) .shadow:after,.error .clip:nth-of-type(1) .shadow:after {content:"";position:absolute;right:-8px;bottom:0px;z-index:9999;height:100%;width:10px;background:linear-gradient(90deg,transparent,rgba(173,173,173,0.8),transparent);border-radius:50%;}
+            .error .clip:nth-of-type(3) .shadow:after {left:-8px;}
+            .error .digit {position:relative;top:8%;color:white;background:#1E9FFF;border-radius:50%;display:inline-block;transform:skew(45deg);}
+            .error .clip:nth-of-type(2) .digit {left:-10%;}
+            .error .clip:nth-of-type(1) .digit {right:-20%;}
+            .error .clip:nth-of-type(3) .digit {left:-20%;}
+            .error h2 {font-size:24px;color:#A2A2A2;font-weight:bold;padding-bottom:20px;}
+            .error .tohome {font-size:16px;color:#07B3F9;}
+            .error .msg {position:relative;z-index:9999;display:block;background:#535353;color:#A2A2A2;border-radius:50%;font-style:italic;}
+            .error .triangle {position:absolute;z-index:999;transform:rotate(45deg);content:"";width:0;height:0;}
+            @media(max-width:767px) {.error .clip .shadow {height:100px;}
+                .error .clip:nth-of-type(2) .shadow {width:80px;}
+                .error .clip:nth-of-type(1) .shadow,.error .clip:nth-of-type(3) .shadow {width:100px;}
+                .error .digit {width:80px;height:80px;line-height:80px;font-size:52px;}
+                .error h2 {font-size:18px;}
+                .error .msg {top:-110px;left:15%;width:40px;height:40px;line-height:40px;font-size:18px;}
+                .error span.triangle {top:70%;right:-3%;border-left:10px solid #535353;border-top:8px solid transparent;border-bottom:8px solid transparent;}
+                .error .container-error-404 {height:150px;}
+            }
+        </style>
     </head>
-    <!-- body -->
-    <body class="main-layout template4">
-
-        <!-- header -->
-        <div class="header">
-            <div class=" container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <a class="logo"><img src="${pageContext.request.contextPath}/images/404-logo.png" alt="#"/></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end header -->
-        <!-- mobile_section -->
-        <div class="mobile_section">
-            <div class="container">
-                <div class="row d_flex">
-                    <div class="col-md-5">
-                        <div class="demo_box text_align_left margino">
-                            <strong>Oops</strong>
-                            <h2>404</h2>
-                            <span>Error </span>
-                            <h1>Page not found</h1>
-                            <c:choose>
-                                <c:when test="${sessionScope.user != null}">
-                                    <a class="read_more" href="${pageContext.request.contextPath}/index">Back to
-                                        home</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="read_more" href="${pageContext.request.contextPath}/login">Back to
-                                        home</a>
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="demo_box text_align_center margino">
-                            <figure><img src="${pageContext.request.contextPath}/images/404.png" alt="#"/></figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end mobile_section -->
-        <!--  footer -->
-        <footer>
-            <div class="footer">
-                <div class="copyright yellowbg">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 offset-md-3">
+    <body>
+        <div class="error">
+            <div class="container-floud">
+                <div style="text-align: center">
+                    <div class="container-error-404">
+                        <div class="clip">
+                            <div class="shadow">
+                                <span class="digit thirdDigit"></span>
                             </div>
                         </div>
+                        <div class="clip">
+                            <div class="shadow">
+                                <span class="digit secondDigit"></span>
+                            </div>
+                        </div>
+                        <div class="clip">
+                            <div class="shadow">
+                                <span class="digit firstDigit"></span>
+                            </div>
+                        </div>
+                        <div class="msg">OH!
+                            <span class="triangle"></span>
+                        </div>
                     </div>
+                    <h2 class="h1">
+                        很抱歉，你访问的页面找不到了，
+                        <a href="#" style="color: #1e9fff" onclick="javascript:history.back(-1);">返回</a>
+                    </h2>
                 </div>
             </div>
-        </footer>
+        </div>
+        <script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+        <script>
+            function randomNum() {
+                return Math.floor(Math.random() * 9) + 1;
+            }
 
-        <!-- end footer -->
-        <!-- Javascript files-->
-        <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/custom.js"></script>
+            var loop1, loop2, loop3, time = 30, i = 0, number;
+            loop3 = setInterval(function () {
+                if (i > 40) {
+                    clearInterval(loop3);
+                    document.querySelector('.thirdDigit').textContent = 4;
+                } else {
+                    document.querySelector('.thirdDigit').textContent = randomNum();
+                    i++;
+                }
+            }, time);
+            loop2 = setInterval(function () {
+                if (i > 80) {
+                    clearInterval(loop2);
+                    document.querySelector('.secondDigit').textContent = 0;
+                } else {
+                    document.querySelector('.secondDigit').textContent = randomNum();
+                    i++;
+                }
+            }, time);
+            loop1 = setInterval(function () {
+                if (i > 100) {
+                    clearInterval(loop1);
+                    document.querySelector('.firstDigit').textContent = 4;
+                } else {
+                    document.querySelector('.firstDigit').textContent = randomNum();
+                    i++;
+                }
+            }, time);
+        </script>
     </body>
 </html>
