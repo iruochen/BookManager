@@ -331,6 +331,14 @@
                             <span class="bind-password icon icon-4"></span>
                         </div>
                         <div class="item">
+                            <span class="icon icon-3"></span>
+                            <input type="password" name="pwdConfirm" lay-reqtext="确认密码不能为空"
+                                   lay-verify="required"
+                                   placeholder="请再次输入密码"
+                                   maxlength="20">
+                            <span class="bind-password icon icon-4"></span>
+                        </div>
+                        <div class="item">
                             <label class="layui-icon"></label>
                             <label>
                                 <select name="role" lay-verify="required" lay-reqtext="请选择角色">
@@ -342,7 +350,8 @@
                             </label>
                         </div>
                         <div id="validatePanel" class="item" style="width: 137px;">
-                            <input type="text" name="captcha" lay-reqtext="验证码不能为空" lay-verify="required" placeholder="请输入验证码" maxlength="4">
+                            <input type="text" name="captcha" lay-reqtext="验证码不能为空" lay-verify="required"
+                                   placeholder="请输入验证码" maxlength="4">
                             <a href="javascript:void(0)" onclick="getCode()"><img id="code" class="validateImg"></a>
                         </div>
                     </div>
@@ -410,27 +419,31 @@
                 // 监听提交
                 form.on('submit(register)', function (data) {
                     var datas = data.field;  // form表单中的数据信息
-                    // 向后台发送数据
-                    $.ajax({
-                        url: "registerSubmit",
-                        type: "POST",
-                        data: datas,
-                        success: function (result) {
-                            if (result.code == 0) {  // 成功
-                                layer.msg('注册成功', {
-                                    icon: 6,
-                                    time: 500
-                                }, function () {
-                                    // 跳转到index页面
-                                    window.location.href = "login";
-                                })
-                            } else if (result.code == -2) {
-                                layer.msg('验证码错误');
-                            } else if (result.code == -1) {
-                                layer.msg('用户名已存在');
+                    if (datas.password !== datas.pwdConfirm) {
+                        layer.msg("两次输入密码不一致，请重新输入")
+                    } else {
+                        // 向后台发送数据
+                        $.ajax({
+                            url: "registerSubmit",
+                            type: "POST",
+                            data: datas,
+                            success: function (result) {
+                                if (result.code == 0) {  // 成功
+                                    layer.msg('注册成功', {
+                                        icon: 6,
+                                        time: 500
+                                    }, function () {
+                                        // 跳转到index页面
+                                        window.location.href = "login";
+                                    })
+                                } else if (result.code == -2) {
+                                    layer.msg('验证码错误');
+                                } else if (result.code == -1) {
+                                    layer.msg('用户名已存在');
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                     return false;
                 });
             });
