@@ -45,4 +45,22 @@ public interface UserMapper {
      */
     @Select("select * from user where username = #{username} and password=#{password} and role = #{role};")
     User selectUserByUser(User user);
+
+    /**
+     * 根据用户名获取密码
+     *
+     * @param username
+     * @return
+     */
+    @Select("select password from user where username = #{username};")
+    String selectPasswordByUsername(String username);
+
+    /**
+     * 更新密码
+     *
+     * @param username
+     */
+    @Update("update user set password = #{password} where username = #{username}")
+    void updatePassword(@Param("username") String username, @Param("password") String password);
+
 }

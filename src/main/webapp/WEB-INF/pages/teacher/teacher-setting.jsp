@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/layui-v2.6.3/css/layui.css" media="all">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/public.css" media="all">
         <style>
-            .layui-form-item .layui-input-company {
+            .layui-form-item {
                 width: auto;
                 padding-right: 10px;
                 line-height: 38px;

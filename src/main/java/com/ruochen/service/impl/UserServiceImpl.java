@@ -52,4 +52,15 @@ public class UserServiceImpl implements UserService {
         // 注册成功
         return Constants.OK_CODE;
     }
+
+    @Override
+    public Integer updatePassword(User user, String oldPassword) {
+        String _oldPassword = userMapper.selectPasswordByUsername(user.getUsername());
+        if (!_oldPassword.equals(oldPassword)) {
+            return Constants.PASSWORD_ERROR;
+        } else {
+            userMapper.updatePassword(user.getUsername(), user.getPassword());
+            return Constants.OK_CODE;
+        }
+    }
 }

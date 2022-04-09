@@ -7,6 +7,7 @@ import com.ruochen.domain.User;
 import com.ruochen.service.AdminService;
 import com.ruochen.service.StudentService;
 import com.ruochen.service.TeacherService;
+import com.ruochen.service.UserService;
 import com.ruochen.utils.DataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,10 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private UserService userService;
+
     @Autowired
     private StudentService studentService;
 
@@ -104,6 +109,32 @@ public class UserController {
     public DataInfo adminSettingSubmit(Admin admin, String oldAdminId, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         Integer code = adminService.adminSetting(admin, oldAdminId, user.getId());
+        return DataInfo.ok(code);
+    }
+
+    /**
+     * 修改密码页面跳转
+     *
+     * @return
+     */
+    @RequestMapping("updatePassword")
+    public String updatePassword(HttpServletRequest request, Model model) {
+        User user = (User) request.getSession().getAttribute("user");
+        model.addAttribute("user", user);
+        return "update-password";
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param user
+     * @param oldPassword
+     * @return
+     */
+    @RequestMapping("updatePasswordSubmit")
+    @ResponseBody
+    public DataInfo updatePasswordSubmit(User user, String oldPassword) {
+        Integer code = userService.updatePassword(user, oldPassword);
         return DataInfo.ok(code);
     }
 }

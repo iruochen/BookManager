@@ -22,4 +22,13 @@ public interface UserService {
      * @return
      */
     Integer register(User user, String captcha, HttpServletRequest request);
+
+    /**
+     * 修改密码
+     *
+     * @param user
+     * @param oldPassword
+     * @return
+     */
+    Integer updatePassword(User user, String oldPassword);
 }
