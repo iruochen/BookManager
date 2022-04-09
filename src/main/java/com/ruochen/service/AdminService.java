@@ -1,6 +1,8 @@
 package com.ruochen.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Admin;
+import com.ruochen.domain.Student;
 
 public interface AdminService {
     /**
@@ -20,4 +22,14 @@ public interface AdminService {
      * @return
      */
     Admin selectAdminByUserId(Integer userId);
+
+    /**
+     * 查询所有管理员信息
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param admin
+     * @return
+     */
+    PageInfo<Admin> selectAdminAll(Integer pageNum, Integer pageSize, Admin admin);
 }
