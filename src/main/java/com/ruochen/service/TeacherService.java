@@ -49,4 +49,11 @@ public interface TeacherService {
      */
     void deleteTeacherByIds(List<String> ids);
 
+    /**
+     * 根据用户ID 查询教师
+     *
+     * @param id
+     * @return
+     */
+    Teacher selectTeacherByUserId(Integer id);
 }

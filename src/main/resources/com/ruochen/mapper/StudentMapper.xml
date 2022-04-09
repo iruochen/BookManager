@@ -49,4 +49,26 @@
           and student.dept_id = department.id
           and student.user_id = user.id
     </select>
+
+    <!--根据学号查询学生信息-->
+    <select id="selectStudentByStuId" resultMap="studentMap">
+        select student.*, department.*, user.*
+        from student,
+             department,
+             user
+        where student.stu_id = #{stuId}
+          and student.dept_id = department.id
+          and student.user_id = user.id
+    </select>
+
+    <!--根据用户ID查询学生信息-->
+    <select id="selectStudentByUserId" resultMap="studentMap">
+        select student.*, department.*, user.*
+        from student,
+             department,
+             user
+        where student.user_id = #{userId}
+          and student.dept_id = department.id
+          and student.user_id = user.id
+    </select>
 </mapper>

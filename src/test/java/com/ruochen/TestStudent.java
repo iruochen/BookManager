@@ -108,4 +108,13 @@ public class TestStudent {
         Student student = studentMapper.selectStudentByStuId("666");
         System.out.println(student);
     }
+
+    /**
+     * 测试根据用户ID查询学生
+     */
+    @Test
+    public void testSelectStudentByUserId() {
+        Student student = studentMapper.selectStudentByUserId(23);
+        System.out.println(student);
+    }
 }

@@ -74,4 +74,9 @@ public class TeacherServiceImpl implements TeacherService {
             userMapper.deleteUserById(Integer.parseInt(userId));
         }
     }
+
+    @Override
+    public Teacher selectTeacherByUserId(Integer id) {
+        return teacherMapper.selectTeacherByUserId(id);
+    }
 }

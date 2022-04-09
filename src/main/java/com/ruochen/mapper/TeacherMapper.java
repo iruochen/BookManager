@@ -64,6 +64,12 @@ public interface TeacherMapper {
      * @param teaId
      * @return
      */
-    @Select("select * from teacher where tea_id = #{teaId};")
     Teacher selectTeacherByTeaId(String teaId);
+
+    /**
+     * 根据用户ID查询教师
+     * @param userId
+     * @return
+     */
+    Teacher selectTeacherByUserId(Integer userId);
 }

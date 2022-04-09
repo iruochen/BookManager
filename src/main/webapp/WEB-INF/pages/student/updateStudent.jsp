@@ -35,7 +35,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">学号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stuId" lay-verify="required|number|stuid" value="${student.stuId}" class="layui-input">
+                    <input type="text" name="stuId" lay-verify="required|number|stuid" value="${student.stuId}"
+                           class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -133,7 +134,7 @@
 
                 // 动态获取院系的数据
                 $.get("selectDeptAll", {}, function (data) {
-                    //获取图书类型的值
+                    //获取院系类型的值
                     var deptId = $('#deptId')[0].value;
                     var list = data;
                     var select = document.getElementById("deptId");

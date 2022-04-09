@@ -59,4 +59,22 @@ public interface StudentService {
      * @return
      */
     Student selectStudentByStuId(String stuId);
+
+    /**
+     * 根据用户ID查询学生
+     *
+     * @param userId
+     * @return
+     */
+    Student selectStudentByUserId(Integer userId);
+
+    /**
+     * 学生个人信息设置
+     *
+     * @param student
+     * @param oldStuId
+     * @param userId
+     * @return
+     */
+    Integer studentSetting(Student student, String oldStuId, Integer userId);
 }

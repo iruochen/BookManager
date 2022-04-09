@@ -73,7 +73,7 @@
                             <dl class="layui-nav-child">
                                 <dd>
                                     <a href="javascript:;"
-                                       layuimini-content-href="${pageContext.request.contextPath}/personalInfo"
+                                       layuimini-content-href="${pageContext.request.contextPath}/userSetting"
                                        data-title="个人资料" data-icon="fa fa-gears">个人资料</a>
                                 </dd>
                                 <dd>

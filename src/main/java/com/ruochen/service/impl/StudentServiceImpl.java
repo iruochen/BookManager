@@ -79,4 +79,26 @@ public class StudentServiceImpl implements StudentService {
     public Student selectStudentByStuId(String stuId) {
         return null;
     }
+
+    @Override
+    public Student selectStudentByUserId(Integer userId) {
+        return studentMapper.selectStudentByUserId(userId);
+    }
+
+    @Override
+    public Integer studentSetting(Student student, String oldStuId, Integer userId) {
+        if (student.getId() == null) {
+            // 添加
+            student.setUserId(userId);
+            studentMapper.addStudent(student);
+            return Constants.OK_CODE;
+        }
+        // 更新
+        if (!student.getStuId().equals(oldStuId) && null != studentMapper.selectStudentByStuId(student.getStuId())) {
+            // 学号已存在
+            return Constants.STUDENT_EXIST_CODE;
+        }
+        studentMapper.updateStudent(student);
+        return Constants.OK_CODE;
+    }
 }

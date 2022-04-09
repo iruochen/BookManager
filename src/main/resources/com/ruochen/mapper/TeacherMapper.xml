@@ -47,4 +47,26 @@
           and teacher.dept_id = department.id
           and teacher.user_id = user.id
     </select>
+
+    <!--根据教师ID查询教师-->
+    <select id="selectTeacherByTeaId" resultMap="teacherMap">
+        select teacher.*, department.*, user.*
+        from teacher,
+             department,
+             user
+        where teacher.tea_id = #{teaId}
+          and teacher.dept_id = department.id
+          and teacher.user_id = user.id
+    </select>
+
+    <!--根据用户ID 查询教师-->
+    <select id="selectTeacherByUserId" resultMap="teacherMap">
+        select teacher.*, department.*, user.*
+        from teacher,
+             department,
+             user
+        where teacher.user_id = #{userId}
+          and teacher.dept_id = department.id
+          and teacher.user_id = user.id
+    </select>
 </mapper>

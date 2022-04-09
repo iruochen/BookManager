@@ -3,6 +3,7 @@ package com.ruochen;
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Teacher;
 import com.ruochen.domain.User;
+import com.ruochen.mapper.TeacherMapper;
 import com.ruochen.service.TeacherService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,8 @@ public class TestTeacher {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     /**
      * 测试查询所有教师信息
@@ -91,5 +94,14 @@ public class TestTeacher {
         ids.add("2");
         ids.add("3");
         teacherService.deleteTeacherByIds(ids);
+    }
+
+    /**
+     * 测试根据用户ID查询教师
+     */
+    @Test
+    public void testSelectTeacherByUserId() {
+        Teacher teacher = teacherMapper.selectTeacherByUserId(11);
+        System.out.println(teacher);
     }
 }

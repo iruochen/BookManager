@@ -1,10 +1,7 @@
 package com.ruochen.mapper;
 
 import com.ruochen.domain.Student;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -64,6 +61,13 @@ public interface StudentMapper {
      * @param stuId
      * @return
      */
-    @Select("select * from student where stu_id = #{stuId};")
     Student selectStudentByStuId(String stuId);
+
+    /**
+     * 根据用户ID查询学生
+     *
+     * @param userId
+     * @return
+     */
+    Student selectStudentByUserId(Integer userId);
 }
