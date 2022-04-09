@@ -3,7 +3,6 @@ package com.ruochen.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Admin;
-import com.ruochen.domain.Student;
 import com.ruochen.mapper.AdminMapper;
 import com.ruochen.service.AdminService;
 import com.ruochen.utils.Constants;
@@ -47,9 +46,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public PageInfo<Admin> selectAdminAll(Integer pageNum, Integer pageSize, Admin admin) {
+    public PageInfo<Admin> selectAdminAllExcludeCurrent(Integer pageNum, Integer pageSize, Admin admin, Integer userId) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Admin> admins = adminMapper.selectAdminAll(admin);
+        // 当前管理员ID
+        admin.setId(adminMapper.selectAdminByUserId(userId).getId());
+        List<Admin> admins = adminMapper.selectAdminAllExcludeCurrent(admin);
         return new PageInfo<>(admins);
     }
 }

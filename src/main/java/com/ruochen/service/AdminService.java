@@ -2,7 +2,6 @@ package com.ruochen.service;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Admin;
-import com.ruochen.domain.Student;
 
 public interface AdminService {
     /**
@@ -29,7 +28,8 @@ public interface AdminService {
      * @param pageNum
      * @param pageSize
      * @param admin
+     * @param userId
      * @return
      */
-    PageInfo<Admin> selectAdminAll(Integer pageNum, Integer pageSize, Admin admin);
+    PageInfo<Admin> selectAdminAllExcludeCurrent(Integer pageNum, Integer pageSize, Admin admin, Integer userId);
 }
