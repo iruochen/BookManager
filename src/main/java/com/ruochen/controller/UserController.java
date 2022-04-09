@@ -1,11 +1,12 @@
 package com.ruochen.controller;
 
+import com.ruochen.domain.Admin;
 import com.ruochen.domain.Student;
 import com.ruochen.domain.Teacher;
 import com.ruochen.domain.User;
+import com.ruochen.service.AdminService;
 import com.ruochen.service.StudentService;
 import com.ruochen.service.TeacherService;
-import com.ruochen.service.UserService;
 import com.ruochen.utils.DataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,15 +20,14 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
-
-    @Autowired
-    private UserService userService;
-
     @Autowired
     private StudentService studentService;
 
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private AdminService adminService;
 
     /**
      * 用户个人信息页面跳转
@@ -40,7 +40,9 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         if (user.getRole() == 0) {
             // 管理员
-            return "404";
+            Admin admin =  adminService.selectAdminByUserId(user.getId());
+            model.addAttribute("admin", admin);
+            return "admin/admin-setting";
         } else if (user.getRole() == 1) {
             // 学生
             Student student = studentService.selectStudentByUserId(user.getId());
@@ -86,6 +88,22 @@ public class UserController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         Integer code = teacherService.teacherSetting(teacher, oldTeaId, user.getId());
+        return DataInfo.ok(code);
+    }
+
+    /**
+     * 管理员个人信息修改
+     *
+     * @param admin
+     * @param oldAdminId
+     * @param request
+     * @return
+     */
+    @RequestMapping("adminSettingSubmit")
+    @ResponseBody
+    public DataInfo adminSettingSubmit(Admin admin, String oldAdminId, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        Integer code = adminService.adminSetting(admin, oldAdminId, user.getId());
         return DataInfo.ok(code);
     }
 }

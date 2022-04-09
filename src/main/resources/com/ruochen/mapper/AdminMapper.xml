@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruochen.mapper.AdminMapper">
+
+    <resultMap id="adminMap" type="admin">
+        <id column="id" property="id"/>
+        <result column="admin_id" property="adminId"/>
+        <result column="admin_name" property="adminName"/>
+        <result column="sex" property="sex"/>
+        <result column="user_id" property="userId"/>
+        <association property="user" javaType="user">
+            <id column="user_id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+            <result column="role" property="role"/>
+        </association>
+    </resultMap>
+
+    <!--查询所有管理员信息-->
+    <select id="selectAdminAll" resultMap="adminMap">
+        select admin.*, user.*
+        from admin, user
+        where admin.user_id = user.id
+        <if test="adminId!=null">
+            and admin.admin_id like concat('%', #{adminId} ,'%')
+        </if>
+        <if test="adminName!=null">
+            and admin.admin_name like concat('%', #{adminName}, '%')
+        </if>
+    </select>
+
+    <!--根据ID 查询管理员信息-->
+    <select id="selectAdminById" resultMap="adminMap">
+        select admin.*, user.*
+        from admin,
+             user
+        where admin.id = #{id}
+          and admin.user_id = user.id
+    </select>
+
+    <!--根据工号查询管理员信息-->
+    <select id="selectAdminByAdminId" resultMap="adminMap">
+        select admin.*, user.*
+        from admin,
+             user
+        where admin.admin_id = #{adminId}
+          and admin.user_id = user.id
+    </select>
+
+    <!--根据用户ID查询管理员信息-->
+    <select id="selectAdminByUserId" resultMap="adminMap">
+        select admin.*, user.*
+        from admin,
+             user
+        where admin.user_id = #{userId}
+          and admin.user_id = user.id
+    </select>
+</mapper>
