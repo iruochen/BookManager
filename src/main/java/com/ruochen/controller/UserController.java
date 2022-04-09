@@ -60,6 +60,7 @@ public class UserController {
      *
      * @param student
      * @param oldStuId
+     * @param request
      * @return
      */
     @RequestMapping("studentSettingSubmit")
@@ -68,6 +69,23 @@ public class UserController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         Integer code = studentService.studentSetting(student, oldStuId, user.getId());
+        return DataInfo.ok(code);
+    }
+
+    /**
+     * 教师个人信息修改
+     *
+     * @param teacher
+     * @param oldTeaId
+     * @param request
+     * @return
+     */
+    @RequestMapping("teacherSettingSubmit")
+    @ResponseBody
+    public DataInfo teacherSettingSubmit(Teacher teacher, String oldTeaId, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        Integer code = teacherService.teacherSetting(teacher, oldTeaId, user.getId());
         return DataInfo.ok(code);
     }
 }

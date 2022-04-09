@@ -140,6 +140,8 @@
                                 layer.msg('保存成功', {
                                     icon: 6,
                                     time: 500
+                                }, function () {
+                                    window.location.reload();
                                 })
                             } else if (result.code == -1) {
                                 layer.msg("学号已存在");

@@ -56,4 +56,14 @@ public interface TeacherService {
      * @return
      */
     Teacher selectTeacherByUserId(Integer id);
+
+    /**
+     * 教师个人信息设置
+     *
+     * @param teacher
+     * @param oldTeaId
+     * @param userId
+     * @return
+     */
+    Integer teacherSetting(Teacher teacher, String oldTeaId, Integer userId);
 }

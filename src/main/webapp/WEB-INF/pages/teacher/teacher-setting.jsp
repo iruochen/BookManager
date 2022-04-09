@@ -28,52 +28,39 @@
     <body>
         <div class="layuimini-container">
             <div class="layuimini-main">
-
                 <div class="layui-form layuimini-form">
+                    <%--用来判断进行添加还是更新操作--%>
+                    <input type="hidden" name="id" value="${teacher.id}">
+                    <input type="hidden" name="oldTeaId" value="${teacher.teaId}">
                     <div class="layui-form-item">
-                        <label class="layui-form-label required">学号</label>
+                        <label class="layui-form-label required">教工号</label>
                         <div class="layui-input-block">
-                            <input type="text" name="stuId" lay-verify="required|number|stuid" lay-reqtext="学号不能为空"
-                                   placeholder="请输入学号" value="${student.stuId}" class="layui-input">
+                            <input type="text" name="teaId" lay-verify="required|number|teaid" lay-reqtext="教工号不能为空"
+                                   placeholder="请输入教工号" value="${teacher.teaId}" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label required">姓名</label>
                         <div class="layui-input-block">
-                            <input type="number" name="stuName" lay-verify="required" lay-reqtext="性能不能为空"
-                                   placeholder="请输入姓名" value="" class="layui-input">
+                            <input type="text" name="teaName" lay-verify="required" lay-reqtext="姓名不能为空"
+                                   placeholder="请输入姓名" value="${teacher.teaName}" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label required">性别</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="stuSex" value="男"
-                                   title="男"  ${"男" eq student.stuSex?"checked='checked'":''} />
-                            <input type="radio" name="stuSex" value="女"
-                                   title="女"  ${"女" eq student.stuSex?"checked='checked'":''} />
+                            <input type="radio" name="teaSex" value="男"
+                                   title="男"  ${"男" eq teacher.teaSex?"checked='checked'":''} />
+                            <input type="radio" name="teaSex" value="女"
+                                   title="女"  ${"女" eq teacher.teaSex?"checked='checked'":''} />
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label required">院系</label>
                         <div class="layui-input-block">
                             <select name="deptId" id="deptId" lay-verify="required">
-                                <option value="${student.deptId}">请选择</option>
+                                <option value="${teacher.deptId}">请选择</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label required">专业</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="stuMajor" lay-verify="required" value="${student.stuMajor}"
-                                   placeholder="请输入专业" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label required">班级</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="stuClass" lay-verify="required|number|stuclass"
-                                   value="${student.stuClass}"
-                                   placeholder="请输入班级" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -93,13 +80,9 @@
 
                 // 自定义表单验证
                 form.verify({
-                    stuid: [
-                        /^\d{9}$/,
-                        '学号格式错误，请重新输入'
-                    ],
-                    stuclass: [
-                        /^\d{7}$/,
-                        '班级格式错误，请重新输入'
+                    teaid: [
+                        /^\d{1,9}$/,
+                        '教工号输入错误，请重新输入'
                     ]
                 })
 
@@ -115,7 +98,7 @@
                             option.setAttribute("value", list[c].id);
                             option.innerText = list[c].deptName;
                             select.appendChild(option);
-                            //如果类型和循环到的类型iD一致，选中
+                            // 如果类型和循环到的类型iD一致，选中
                             if (list[c].id == deptId) {
                                 option.setAttribute("selected", "selected");
                                 layui.form.render('select');
@@ -130,7 +113,7 @@
                     var datas = data.field;//form单中的数据信息
                     //向后台发送数据提交添加
                     $.ajax({
-                        url: "userSettingSubmit",
+                        url: "teacherSettingSubmit",
                         type: "POST",
                         data: datas,
                         success: function (result) {
@@ -138,11 +121,12 @@
                                 layer.msg('保存成功', {
                                     icon: 6,
                                     time: 500
+                                }, function () {
+                                    // 防止第一次添加错误
+                                    window.location.reload();
                                 })
-                            } else if (result.code == -2) {
-                                layer.msg("用户名已存在");
                             } else if (result.code == -1) {
-                                layer.msg("学号已存在");
+                                layer.msg("教工号已存在");
                             } else {
                                 layer.msg("保存失败");
                             }

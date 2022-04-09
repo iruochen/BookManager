@@ -1,7 +1,11 @@
 package com.ruochen.controller;
 
+import com.ruochen.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class BaseController {
@@ -12,8 +16,16 @@ public class BaseController {
      * @return
      */
     @RequestMapping("/")
-    public String load() {
-        return "login";
+    public String load(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (null != user) {
+            // 已登录
+            return "index";
+        } else {
+            // 未登录
+            return "login";
+        }
     }
 
     /**

@@ -79,4 +79,26 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher selectTeacherByUserId(Integer id) {
         return teacherMapper.selectTeacherByUserId(id);
     }
+
+    @Override
+    public Integer teacherSetting(Teacher teacher, String oldTeaId, Integer userId) {
+        Teacher tea = teacherMapper.selectTeacherByTeaId(teacher.getTeaId());
+        if (teacher.getId() == null) {
+            // 添加
+            if (null != tea) {
+                return Constants.STUDENT_EXIST_CODE;
+            } else {
+                teacher.setUserId(userId);
+                teacherMapper.addTeacher(teacher);
+                return Constants.OK_CODE;
+            }
+        }
+        // 更新
+        if (!teacher.getTeaId().equals(oldTeaId) && null != tea) {
+            // 工号已存在
+            return Constants.STUDENT_EXIST_CODE;
+        }
+        teacherMapper.updateTeacher(teacher);
+        return Constants.OK_CODE;
+    }
 }

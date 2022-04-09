@@ -28,8 +28,15 @@ public class LoginController {
      * @return
      */
     @GetMapping("login")
-    public String login() {
-        return "login";
+    public String login(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (null != user) {
+            // 已登录
+            return "index";
+        } else {
+            // 未登录
+            return "login";
+        }
     }
 
     /**

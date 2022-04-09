@@ -87,14 +87,20 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Integer studentSetting(Student student, String oldStuId, Integer userId) {
+        Student stu = studentMapper.selectStudentByStuId(student.getStuId());
         if (student.getId() == null) {
             // 添加
-            student.setUserId(userId);
-            studentMapper.addStudent(student);
-            return Constants.OK_CODE;
+            if (null != stu) {
+                // 学号已存在
+                return Constants.STUDENT_EXIST_CODE;
+            } else {
+                student.setUserId(userId);
+                studentMapper.addStudent(student);
+                return Constants.OK_CODE;
+            }
         }
         // 更新
-        if (!student.getStuId().equals(oldStuId) && null != studentMapper.selectStudentByStuId(student.getStuId())) {
+        if (!student.getStuId().equals(oldStuId) && null != stu) {
             // 学号已存在
             return Constants.STUDENT_EXIST_CODE;
         }
