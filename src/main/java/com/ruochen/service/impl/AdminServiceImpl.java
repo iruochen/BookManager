@@ -49,7 +49,13 @@ public class AdminServiceImpl implements AdminService {
     public PageInfo<Admin> selectAdminAllExcludeCurrent(Integer pageNum, Integer pageSize, Admin admin, Integer userId) {
         PageHelper.startPage(pageNum, pageSize);
         // 当前管理员ID
-        admin.setId(adminMapper.selectAdminByUserId(userId).getId());
+        Admin adminCurrent = adminMapper.selectAdminByUserId(userId);
+        if (adminCurrent == null) {
+            // 当前user未与admin关联
+            admin.setId(0);
+        } else {
+            admin.setId(adminCurrent.getId());
+        }
         List<Admin> admins = adminMapper.selectAdminAllExcludeCurrent(admin);
         return new PageInfo<>(admins);
     }
