@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Admin;
 import com.ruochen.domain.User;
 
+import java.util.List;
+
 public interface AdminService {
     /**
      * 管理员个人信息修改
@@ -52,4 +54,11 @@ public interface AdminService {
      * @return
      */
     Integer updateAdmin(Admin admin, User user, String oldAdminId, String oldUsername);
+
+    /**
+     * 根据ID 删除管理员
+     *
+     * @param ids
+     */
+    void deleteAdminByIds(List<String> ids);
 }

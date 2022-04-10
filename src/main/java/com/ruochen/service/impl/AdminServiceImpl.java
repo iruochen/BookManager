@@ -85,4 +85,15 @@ public class AdminServiceImpl implements AdminService {
         adminMapper.updateAdmin(admin);
         return Constants.OK_CODE;
     }
+
+    @Override
+    public void deleteAdminByIds(List<String> ids) {
+        for (String id : ids) {
+            String userId = adminMapper.selectAdminUserIdById(Integer.parseInt(id));
+            // 删除学生信息
+            adminMapper.deleteAdminById(Integer.parseInt(id));
+            // 删除关联用户
+            userMapper.deleteUserById(Integer.parseInt(userId));
+        }
+    }
 }

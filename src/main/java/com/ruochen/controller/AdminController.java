@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -76,5 +78,19 @@ public class AdminController {
     public DataInfo updateAdminSubmit(Admin admin, User user, String oldAdminId, String oldUsername) {
         Integer code = adminService.updateAdmin(admin, user, oldAdminId, oldUsername);
         return DataInfo.ok(code);
+    }
+
+    /**
+     * 根据ID 删除管理员
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping("deleteAdmin")
+    @ResponseBody
+    public DataInfo deleteAdmin(String ids) {
+        List<String> list = Arrays.asList(ids.split(","));
+        adminService.deleteAdminByIds(list);
+        return DataInfo.ok();
     }
 }

@@ -1,7 +1,9 @@
 package com.ruochen.mapper;
 
 import com.ruochen.domain.Admin;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -54,4 +56,21 @@ public interface AdminMapper {
      */
     @Update("update admin set admin_id = #{adminId}, admin_name = #{adminName}, sex = #{sex} where id = #{id};")
     void updateAdmin(Admin admin);
+
+    /**
+     * 根据ID 查询userId
+     *
+     * @param id
+     * @return
+     */
+    @Select("select user_id from admin where id = #{id}")
+    String selectAdminUserIdById(int id);
+
+    /**
+     * 根据ID 删除管理员
+     *
+     * @param id
+     */
+    @Delete("delete from admin where id = #{id}")
+    void deleteAdminById(int id);
 }
