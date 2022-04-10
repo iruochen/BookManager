@@ -7,6 +7,7 @@ import com.ruochen.service.AdminService;
 import com.ruochen.utils.DataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,5 +46,35 @@ public class AdminController {
         User user = (User) request.getSession().getAttribute("user");
         PageInfo<Admin> pageInfo = adminService.selectAdminAllExcludeCurrent(pageNum, pageSize, admin, user.getId());
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
+    }
+
+    /**
+     * 根据ID 查询管理员信息
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("selectAdminById")
+    public String selectAdminById(Integer id, Model model) {
+        Admin admin = adminService.selectAdminById(id);
+        model.addAttribute("admin", admin);
+        return "admin/updateAdmin";
+    }
+
+    /**
+     * 修改管理员信息
+     *
+     * @param admin
+     * @param user
+     * @param oldAdminId
+     * @param oldUsername
+     * @return
+     */
+    @RequestMapping("updateAdminSubmit")
+    @ResponseBody
+    public DataInfo updateAdminSubmit(Admin admin, User user, String oldAdminId, String oldUsername) {
+        Integer code = adminService.updateAdmin(admin, user, oldAdminId, oldUsername);
+        return DataInfo.ok(code);
     }
 }

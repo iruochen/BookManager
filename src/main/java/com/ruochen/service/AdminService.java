@@ -2,6 +2,7 @@ package com.ruochen.service;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Admin;
+import com.ruochen.domain.User;
 
 public interface AdminService {
     /**
@@ -32,4 +33,23 @@ public interface AdminService {
      * @return
      */
     PageInfo<Admin> selectAdminAllExcludeCurrent(Integer pageNum, Integer pageSize, Admin admin, Integer userId);
+
+    /**
+     * 根据ID 查询管理员信息
+     *
+     * @param id
+     * @return
+     */
+    Admin selectAdminById(Integer id);
+
+    /**
+     * 更新管理员信息
+     *
+     * @param admin
+     * @param user
+     * @param oldAdminId
+     * @param oldUsername
+     * @return
+     */
+    Integer updateAdmin(Admin admin, User user, String oldAdminId, String oldUsername);
 }
