@@ -93,4 +93,21 @@ public class AdminController {
         adminService.deleteAdminByIds(list);
         return DataInfo.ok();
     }
+
+    /**
+     * 管理员添加页面跳转
+     *
+     * @return
+     */
+    @GetMapping("adminAdd")
+    public String adminAdd() {
+        return "admin/adminAdd";
+    }
+
+    @RequestMapping("addAdminSubmit")
+    @ResponseBody
+    public DataInfo addAdminSubmit(Admin admin, User user) {
+        Integer code = adminService.addAdmin(admin, user);
+        return DataInfo.ok(code);
+    }
 }

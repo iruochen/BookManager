@@ -96,4 +96,20 @@ public class AdminServiceImpl implements AdminService {
             userMapper.deleteUserById(Integer.parseInt(userId));
         }
     }
+
+    @Override
+    public Integer addAdmin(Admin admin, User user) {
+        if (null != userMapper.selectUserByUsername(user.getUsername())) {
+            // 用户名已存在
+            return Constants.USER_EXIST_CODE;
+        }
+        if (null != adminMapper.selectAdminByAdminId(admin.getAdminId())) {
+            // 工号已存在
+            return Constants.ADMIN_EXIST_CODE;
+        }
+        userMapper.addUser(user);
+        admin.setUserId(user.getId());
+        adminMapper.addAdmin(admin);
+        return Constants.OK_CODE;
+    }
 }

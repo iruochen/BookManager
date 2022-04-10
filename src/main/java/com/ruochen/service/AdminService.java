@@ -61,4 +61,13 @@ public interface AdminService {
      * @param ids
      */
     void deleteAdminByIds(List<String> ids);
+
+    /**
+     * 添加管理员
+     *
+     * @param admin
+     * @param user
+     * @return
+     */
+    Integer addAdmin(Admin admin, User user);
 }
