@@ -343,7 +343,7 @@
                             <label>
                                 <select name="role" lay-verify="required" lay-reqtext="请选择角色">
                                     <option value="">请选择用户类型</option>
-                                    <option value="0">管理员</option>
+                                    <%--<option value="0">管理员</option>--%>
                                     <option value="1">学生</option>
                                     <option value="2">教师</option>
                                 </select>
