@@ -19,6 +19,8 @@ public class BookApply {
     @JSONField(format = "yyyy-MM-dd")
     private Date time;
     private Integer count;
+    private Integer status;
+
     /**
      * 申请教材
      */
@@ -68,6 +70,14 @@ public class BookApply {
         this.count = count;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public Book getBook() {
         return book;
     }
@@ -92,6 +102,7 @@ public class BookApply {
                 ", tId=" + tId +
                 ", time=" + time +
                 ", count=" + count +
+                ", status=" + status +
                 ", book=" + book +
                 ", teacher=" + teacher +
                 '}';

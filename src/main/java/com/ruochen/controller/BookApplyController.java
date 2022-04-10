@@ -59,4 +59,20 @@ public class BookApplyController {
         bookApplyService.addBookApply(book, bookApply, request);
         return DataInfo.ok();
     }
+
+    /**
+     * 教材申请记录页面跳转
+     *
+     * @return
+     */
+    @GetMapping("bookApplyRecordIndex")
+    public String bookApplyRecordIndex() {
+        return "bookApply/bookApplyRecordIndex";
+    }
+
+    @RequestMapping("selectBookApplyAllByTea")
+    @ResponseBody
+    public DataInfo selectBookApplyAllByTea() {
+        return DataInfo.ok();
+    }
 }

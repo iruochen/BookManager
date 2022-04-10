@@ -23,7 +23,7 @@
         },
         {
           "title": "申请记录",
-          "href": "",
+          "href": "bookApplyRecordIndex",
           "icon": "fa fa-gears",
           "target": "_self"
         }
