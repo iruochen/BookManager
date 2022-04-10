@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruochen.mapper.BookApplyMapper">
+
+    <resultMap id="bookApplyMapper" type="bookApply">
+        <id column="id" property="id"/>
+        <result column="bid" property="bId"/>
+        <result column="tid" property="tId"/>
+        <result column="time" property="time"/>
+        <result column="count" property="count"/>
+        <association property="teacher" javaType="teacher">
+            <id column="tid" property="id"/>
+            <result column="user_id" property="userId"/>
+            <result column="tea_id" property="teaId"/>
+            <result column="tea_name" property="teaName"/>
+            <result column="tea_sex" property="teaSex"/>
+            <result column="dept_id" property="deptId"/>
+        </association>
+        <association property="book" javaType="book">
+            <id column="bid" property="id"/>
+            <result column="book_id" property="bookId"/>
+            <result column="book_name" property="bookName"/>
+            <result column="book_author" property="bookAuthor"/>
+            <result column="book_press" property="bookPress"/>
+            <result column="book_num" property="bookNum"/>
+            <result column="book_img_url" property="bookImgUrl"/>
+        </association>
+    </resultMap>
+</mapper>

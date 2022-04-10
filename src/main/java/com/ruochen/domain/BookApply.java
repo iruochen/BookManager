@@ -1,5 +1,9 @@
 package com.ruochen.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -7,8 +11,12 @@ import java.util.Date;
  */
 public class BookApply {
     private Integer id;
-    private Integer bookId;
-    private Integer teaId;
+    private Integer bId;
+    private Integer tId;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
     private Date time;
     private Integer count;
     /**
@@ -28,20 +36,20 @@ public class BookApply {
         this.id = id;
     }
 
-    public Integer getBookId() {
-        return bookId;
+    public Integer getbId() {
+        return bId;
     }
 
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
+    public void setbId(Integer bId) {
+        this.bId = bId;
     }
 
-    public Integer getTeaId() {
-        return teaId;
+    public Integer gettId() {
+        return tId;
     }
 
-    public void setTeaId(Integer teaId) {
-        this.teaId = teaId;
+    public void settId(Integer tId) {
+        this.tId = tId;
     }
 
     public Date getTime() {
@@ -80,8 +88,8 @@ public class BookApply {
     public String toString() {
         return "BookApply{" +
                 "id=" + id +
-                ", bookId=" + bookId +
-                ", teaId=" + teaId +
+                ", bId=" + bId +
+                ", tId=" + tId +
                 ", time=" + time +
                 ", count=" + count +
                 ", book=" + book +
