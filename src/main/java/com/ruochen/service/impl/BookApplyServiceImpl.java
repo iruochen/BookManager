@@ -51,4 +51,11 @@ public class BookApplyServiceImpl implements BookApplyService {
             bookApplyMapper.updateBookApplyStatusById(Integer.parseInt(id), status);
         }
     }
+
+    @Override
+    public PageInfo<BookApply> selectBookApplyAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyAll(bookApplySearch);
+        return new PageInfo<>(bookApplies);
+    }
 }

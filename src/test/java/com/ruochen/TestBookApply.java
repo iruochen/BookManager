@@ -37,4 +37,14 @@ public class TestBookApply {
     public void testUpdateBookApplyById() {
         bookApplyMapper.updateBookApplyStatusById(1, 0);
     }
+
+    /**
+     * 测试查询所有教材申请记录
+     */
+    @Test
+    public void testSelectBookApplyAll() {
+        BookApplySearch bookApplySearch = new BookApplySearch();
+        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyAll(bookApplySearch);
+        System.out.println(bookApplies);
+    }
 }

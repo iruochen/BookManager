@@ -16,6 +16,10 @@
             <result column="tea_name" property="teaName"/>
             <result column="tea_sex" property="teaSex"/>
             <result column="dept_id" property="deptId"/>
+            <association property="department" javaType="department">
+                <id column="dept_id" property="id"/>
+                <result column="dept_name" property="deptName"/>
+            </association>
         </association>
         <association property="book" javaType="book">
             <id column="bid" property="id"/>
@@ -38,6 +42,35 @@
         </if>
         <if test="bookName != null">
             and book.book_name like concat('%', #{bookName}, '%')
+        </if>
+        <if test="time != null">
+            and book_apply.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')
+        </if>
+        <if test="status != null">
+            and book_apply.status like concat('%', #{status}, '%')
+        </if>
+    </select>
+
+    <!--查询所有教材申请记录-->
+    <select id="selectBookApplyAll" resultMap="bookApplyMapper">
+        select book_apply.*, book.*, teacher.*, department.*
+        from book_apply, book, teacher, department
+        where book_apply.bid = book.id and book_apply.tid = teacher.id and teacher.dept_id = department.id
+        and book_apply.status &lt;&gt; -1
+        <if test="bookId != null">
+            and book.book_id like concat('%', #{bookId}, '%')
+        </if>
+        <if test="bookName != null">
+            and book.book_name like concat('%', #{bookName}, '%')
+        </if>
+        <if test="teaId != null">
+            and teacher.tea_id like concat('%', #{teaId}, '%')
+        </if>
+        <if test="teaName != null">
+            and teacher.tea_name like concat('%', #{teaName}, '%')
+        </if>
+        <if test="deptId != null">
+            and teacher.dept_id like concat('%', #{deptId}, '%')
         </if>
         <if test="time != null">
             and book_apply.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')

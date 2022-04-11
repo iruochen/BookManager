@@ -76,6 +76,16 @@ public class BookApplyController {
     }
 
     /**
+     * 教材全部申请记录（采购需求）
+     *
+     * @return
+     */
+    @GetMapping("bookApplyRecordAll")
+    public String bookApplyRecordAllIndex() {
+        return "bookApply/bookApplyRecordAll";
+    }
+
+    /**
      * 查询登录教师的教材申请记录
      *
      * @param pageNum
@@ -87,6 +97,21 @@ public class BookApplyController {
     @ResponseBody
     public DataInfo selectBookApplyAllByTea(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request) {
         PageInfo<BookApply> pageInfo = bookApplyService.selectBookApplyByTea(pageNum, pageSize, bookApplySearch, request);
+        return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
+    }
+
+    /**
+     * 查询所有教材申请记录
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param bookApplySearch
+     * @return
+     */
+    @RequestMapping("selectBookApplyAll")
+    @ResponseBody
+    public DataInfo selectBookApplyAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookApplySearch bookApplySearch) {
+        PageInfo<BookApply> pageInfo = bookApplyService.selectBookApplyAll(pageNum, pageSize, bookApplySearch);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 

@@ -12,6 +12,9 @@ import java.util.Date;
 public class BookApplySearch {
     private String bookId;
     private String bookName;
+    private String teaId;
+    private String teaName;
+    private Integer deptId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -34,6 +37,30 @@ public class BookApplySearch {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
+    }
+
+    public String getTeaId() {
+        return teaId;
+    }
+
+    public void setTeaId(String teaId) {
+        this.teaId = teaId;
+    }
+
+    public String getTeaName() {
+        return teaName;
+    }
+
+    public void setTeaName(String teaName) {
+        this.teaName = teaName;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 
     public Date getTime() {
@@ -65,6 +92,9 @@ public class BookApplySearch {
         return "BookApplySearch{" +
                 "bookId='" + bookId + '\'' +
                 ", bookName='" + bookName + '\'' +
+                ", teaId='" + teaId + '\'' +
+                ", teaName='" + teaName + '\'' +
+                ", deptId=" + deptId +
                 ", time=" + time +
                 ", status=" + status +
                 ", currentTeacherId=" + currentTeacherId +

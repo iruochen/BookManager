@@ -22,13 +22,19 @@
           "target": "_self"
         },
         {
-          "title": "采购记录",
-          "href": "",
+          "title": "申请记录",
+          "href": "bookApplyRecordAll",
           "icon": "fa fa-gears",
           "target": "_self"
         },
         {
           "title": "采购需求",
+          "href": "",
+          "icon": "fa fa-gears",
+          "target": "_self"
+        },
+        {
+          "title": "采购记录",
           "href": "",
           "icon": "fa fa-gears",
           "target": "_self"

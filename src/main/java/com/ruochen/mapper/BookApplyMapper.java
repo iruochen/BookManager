@@ -33,4 +33,12 @@ public interface BookApplyMapper {
      */
     @Update("update book_apply set status = #{status} where id = #{id}")
     void updateBookApplyStatusById(@Param("id") int id, @Param("status") Integer status);
+
+    /**
+     * 查询所有教材申请记录
+     *
+     * @param bookApplySearch
+     * @return
+     */
+    List<BookApply> selectBookApplyAll(BookApplySearch bookApplySearch);
 }

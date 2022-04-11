@@ -31,8 +31,19 @@ public interface BookApplyService {
 
     /**
      * 根据ID 更新教材申请状态
+     *
      * @param ids
      * @param status
      */
     void updateBookApplyStatusByIds(List<String> ids, Integer status);
+
+    /**
+     * 查询所有教材申请记录
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param bookApplySearch
+     * @return
+     */
+    PageInfo<BookApply> selectBookApplyAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch);
 }
