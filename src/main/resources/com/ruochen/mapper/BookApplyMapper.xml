@@ -8,6 +8,7 @@
         <result column="tid" property="tId"/>
         <result column="time" property="time"/>
         <result column="count" property="count"/>
+        <result column="status" property="status"/>
         <association property="teacher" javaType="teacher">
             <id column="tid" property="id"/>
             <result column="user_id" property="userId"/>
@@ -26,4 +27,23 @@
             <result column="book_img_url" property="bookImgUrl"/>
         </association>
     </resultMap>
+
+    <!--查询当前教师的教材申请记录-->
+    <select id="selectBookApplyByTea" resultMap="bookApplyMapper">
+        select book_apply.*, book.*, teacher.*
+        from book_apply, book, teacher
+        where book_apply.bid = book.id and book_apply.tid = teacher.id and teacher.id = #{currentTeacherId}
+        <if test="bookId != null">
+            and book.book_id like concat('%', #{bookId}, '%')
+        </if>
+        <if test="bookName != null">
+            and book.book_name like concat('%', #{bookName}, '%')
+        </if>
+        <if test="time != null">
+            and book_apply.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')
+        </if>
+        <if test="status != null">
+            and book_apply.status like concat('%', #{status}, '%')
+        </if>
+    </select>
 </mapper>

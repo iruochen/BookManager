@@ -1,7 +1,9 @@
 package com.ruochen.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
 import com.ruochen.domain.BookApply;
+import com.ruochen.domain.BookApplySearch;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,4 +16,15 @@ public interface BookApplyService {
      * @param request
      */
     void addBookApply(Book book, BookApply bookApply, HttpServletRequest request);
+
+    /**
+     * 查询当前教师的教材申请记录
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param bookApplySearch
+     * @param request
+     * @return
+     */
+    PageInfo<BookApply> selectBookApplyByTea(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request);
 }
