@@ -195,16 +195,14 @@
                  */
                 table.on('tool(currentTableFilter)', function (obj) {
                     var data = obj.data;
-                    if (obj.event === 'submit') {  // 监听提交操作
-                        layer.confirm('确定是否提交', function (index) {
-                            // 调用提交功能
-                            updateBookApplyStatusByIds(data.id, 0, index);
+                    if (obj.event === 'access') {  // 监听提交操作
+                        layer.confirm('确定是否通过', function (index) {
+                            updateBookApplyStatusByIds(data.id, 1, index);
                             layer.close(index);
                         })
-                    } else if (obj.event === 'revoke') {  // 监听撤销操作
-                        layer.confirm('确定是否撤销', function (index) {
-                            // 调用撤销功能
-                            updateBookApplyStatusByIds(data.id, -1, index);
+                    } else if (obj.event === 'reject') {  // 监听撤销操作
+                        layer.confirm('确定是否拒绝', function (index) {
+                            updateBookApplyStatusByIds(data.id, 2, index);
                             layer.close(index);
                         });
                     }
@@ -241,8 +239,8 @@
                             status: status
                         },
                         success: function (result) {
-                            if (result.code == 0) {
-                                layer.msg('提交成功', {
+                            if (result.code == 1) {
+                                layer.msg('通过成功', {
                                     icon: 6,
                                     time: 500
                                 }, function () {
@@ -250,8 +248,8 @@
                                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(iframeIndex);
                                 });
-                            } else if (result.code == -1) {
-                                layer.msg('撤销成功', {
+                            } else if (result.code == 2) {
+                                layer.msg('拒绝成功', {
                                     icon: 6,
                                     time: 500
                                 }, function () {
