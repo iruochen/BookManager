@@ -64,7 +64,7 @@
                 <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
                 <script type="text/html" id="currentTableBar">
-                    {{#  if(d.status == 1){ }}
+                    {{#  if(d.status == -1){ }}
                     <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="submit">提交</a>
                     {{#  } }}
 
@@ -210,7 +210,7 @@
                                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(iframeIndex);
                                 });
-                            } else if (result.code == 1) {
+                            } else if (result.code == -1) {
                                 layer.msg('撤销成功', {
                                     icon: 6,
                                     time: 500

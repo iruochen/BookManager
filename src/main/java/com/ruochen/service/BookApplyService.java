@@ -6,6 +6,7 @@ import com.ruochen.domain.BookApply;
 import com.ruochen.domain.BookApplySearch;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface BookApplyService {
     /**
@@ -27,4 +28,11 @@ public interface BookApplyService {
      * @return
      */
     PageInfo<BookApply> selectBookApplyByTea(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request);
+
+    /**
+     * 根据ID 更新教材申请状态
+     * @param ids
+     * @param status
+     */
+    void updateBookApplyStatusByIds(List<String> ids, Integer status);
 }

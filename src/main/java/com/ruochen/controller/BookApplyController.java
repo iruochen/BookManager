@@ -88,12 +88,11 @@ public class BookApplyController {
     @ResponseBody
     public DataInfo selectBookApplyAllByTea(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request) {
         PageInfo<BookApply> pageInfo = bookApplyService.selectBookApplyByTea(pageNum, pageSize, bookApplySearch, request);
-        System.out.println(pageInfo.getList());
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 
     /**
-     * 根据ID 提交教材申请
+     * 根据ID 更改教材申请记录状态
      *
      * @param ids
      * @param status
@@ -103,6 +102,7 @@ public class BookApplyController {
     @ResponseBody
     public DataInfo bookApplyRecordSubmit(String ids, Integer status) {
         List<String> list = Arrays.asList(ids.split(","));
-        return DataInfo.ok();
+        bookApplyService.updateBookApplyStatusByIds(list, status);
+        return DataInfo.ok(status);
     }
 }

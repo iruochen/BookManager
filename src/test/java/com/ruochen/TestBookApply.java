@@ -28,4 +28,13 @@ public class TestBookApply {
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyByTea(bookApplySearch);
         System.out.println(bookApplies);
     }
+
+
+    /**
+     * 测试根据ID 更新教材申请状态
+     */
+    @Test
+    public void testUpdateBookApplyById() {
+        bookApplyMapper.updateBookApplyStatusById(1, 0);
+    }
 }

@@ -44,4 +44,11 @@ public class BookApplyServiceImpl implements BookApplyService {
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyByTea(bookApplySearch);
         return new PageInfo<>(bookApplies);
     }
+
+    @Override
+    public void updateBookApplyStatusByIds(List<String> ids, Integer status) {
+        for (String id : ids) {
+            bookApplyMapper.updateBookApplyStatusById(Integer.parseInt(id), status);
+        }
+    }
 }
