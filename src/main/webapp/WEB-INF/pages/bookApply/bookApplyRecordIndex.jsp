@@ -76,6 +76,25 @@
             </div>
         </div>
 
+        <%--自定义状态显示模板--%>
+        <script type="text/html" id="statusTmp">
+            {{#  if(d.status == 0){ }}
+            <span class="layui-badge layui-bg-blue">已提交</span>
+            {{#  } }}
+
+            {{#  if(d.status == -1){ }}
+            <span class="layui-badge layui-bg-gray">已撤销</span>
+            {{#  } }}
+
+            {{#  if(d.status == 1){ }}
+            <span class="layui-badge layui-bg-green">已通过</span>
+            {{#  } }}
+
+            {{#  if(d.status == 2){ }}
+            <span class="layui-badge">已拒绝</span>
+            {{#  } }}
+        </script>
+
         <script>
             layui.use(['form', 'table', 'laydate'], function () {
                 var $ = layui.jquery,
@@ -115,7 +134,7 @@
                             align: "center"
                         },
                         {field: 'count', title: '申请数量', align: "center"},
-                        {field: 'status', title: '申请状态', align: "center"},
+                        {field: 'status', title: '申请状态', templet: '#statusTmp', align: "center"},
                         {title: '操作', toolbar: '#currentTableBar', align: "center"}
                     ]],
                     request: {
