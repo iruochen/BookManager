@@ -47,4 +47,16 @@ public class TestBookApply {
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyAll(bookApplySearch);
         System.out.println(bookApplies);
     }
+
+    /**
+     * 测试分组查询教材申请记录
+     */
+    @Test
+    public void testSelectBookApplyGroupByBookId() {
+        BookApplySearch bookApplySearch = new BookApplySearch();
+        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyGroupByBookId(bookApplySearch);
+        for (BookApply bookApply : bookApplies) {
+            System.out.println(bookApply);
+        }
+    }
 }

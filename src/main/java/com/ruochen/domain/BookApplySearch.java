@@ -12,6 +12,7 @@ import java.util.Date;
 public class BookApplySearch {
     private String bookId;
     private String bookName;
+    private String bookPress;
     private String teaId;
     private String teaName;
     private Integer deptId;
@@ -37,6 +38,14 @@ public class BookApplySearch {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
+    }
+
+    public String getBookPress() {
+        return bookPress;
+    }
+
+    public void setBookPress(String bookPress) {
+        this.bookPress = bookPress;
     }
 
     public String getTeaId() {
@@ -92,6 +101,7 @@ public class BookApplySearch {
         return "BookApplySearch{" +
                 "bookId='" + bookId + '\'' +
                 ", bookName='" + bookName + '\'' +
+                ", bookPress='" + bookPress + '\'' +
                 ", teaId='" + teaId + '\'' +
                 ", teaName='" + teaName + '\'' +
                 ", deptId=" + deptId +

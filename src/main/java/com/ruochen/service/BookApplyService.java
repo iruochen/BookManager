@@ -46,4 +46,14 @@ public interface BookApplyService {
      * @return
      */
     PageInfo<BookApply> selectBookApplyAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch);
+
+    /**
+     * 查询所有已通过的申请记录，通过教材ID分组，并计算教材价格总和
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param bookApplySearch
+     * @return
+     */
+    PageInfo<BookApply> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch);
 }

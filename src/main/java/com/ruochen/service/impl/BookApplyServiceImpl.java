@@ -58,4 +58,24 @@ public class BookApplyServiceImpl implements BookApplyService {
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyAll(bookApplySearch);
         return new PageInfo<>(bookApplies);
     }
+
+    @Override
+    public PageInfo<BookApply> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyGroupByBookId(bookApplySearch);
+        for (BookApply bookApply : bookApplies) {
+            // 教材价格
+            double bookPrice = bookApply.getBook().getBookPrice();
+            // 教材库存数量
+            Integer bookNum = bookApply.getBook().getBookNum();
+            // 申请总数
+            Integer applyCount = bookApply.getApplyCount();
+            // 需要采购的数量
+            int needCount = applyCount - bookNum;
+            bookApply.setNeedPurchaseCount(needCount);
+            // 采购总值
+            bookApply.setPriceCount(needCount * bookPrice);
+        }
+        return new PageInfo<>(bookApplies);
+    }
 }

@@ -41,4 +41,12 @@ public interface BookApplyMapper {
      * @return
      */
     List<BookApply> selectBookApplyAll(BookApplySearch bookApplySearch);
+
+    /**
+     * 查询所有已通过的申请记录，通过教材ID分组，并计算教材价格总和
+     *
+     * @param bookApplySearch
+     * @return
+     */
+    List<BookApply> selectBookApplyGroupByBookId(BookApplySearch bookApplySearch);
 }

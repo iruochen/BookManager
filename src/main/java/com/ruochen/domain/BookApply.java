@@ -30,6 +30,19 @@ public class BookApply {
      */
     private Teacher teacher;
 
+    /**
+     * 某教材申请总数，数据表中无此字段
+     */
+    private Integer applyCount;
+    /**
+     * 需要采购的数量，数据表中无此字段
+     */
+    private Integer needPurchaseCount;
+    /**
+     * 需要采购的总金额，数据表中无此字段
+     */
+    private Double priceCount;
+
     public Integer getId() {
         return id;
     }
@@ -94,6 +107,30 @@ public class BookApply {
         this.teacher = teacher;
     }
 
+    public Integer getApplyCount() {
+        return applyCount;
+    }
+
+    public void setApplyCount(Integer applyCount) {
+        this.applyCount = applyCount;
+    }
+
+    public Integer getNeedPurchaseCount() {
+        return needPurchaseCount;
+    }
+
+    public void setNeedPurchaseCount(Integer needPurchaseCount) {
+        this.needPurchaseCount = needPurchaseCount;
+    }
+
+    public Double getPriceCount() {
+        return priceCount;
+    }
+
+    public void setPriceCount(Double priceCount) {
+        this.priceCount = priceCount;
+    }
+
     @Override
     public String toString() {
         return "BookApply{" +
@@ -105,6 +142,10 @@ public class BookApply {
                 ", status=" + status +
                 ", book=" + book +
                 ", teacher=" + teacher +
+                ", applyCount=" + applyCount +
+                ", needPurchaseCount=" + needPurchaseCount +
+                ", priceCount=" + priceCount +
                 '}';
     }
 }
+

@@ -29,7 +29,7 @@
         },
         {
           "title": "采购需求",
-          "href": "",
+          "href": "bookPurchaseDemand",
           "icon": "fa fa-gears",
           "target": "_self"
         },
