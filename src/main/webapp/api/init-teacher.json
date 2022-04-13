@@ -11,20 +11,20 @@
   "menuInfo": [
     {
       "title": "功能管理",
-      "icon": "fa fa-address-book",
+      "icon": "fa fa-align-justify",
       "href": "",
       "target": "_self",
       "child": [
         {
           "title": "教材申请",
           "href": "applyIndex",
-          "icon": "fa fa-window-maximize",
+          "icon": "fa fa-book",
           "target": "_self"
         },
         {
           "title": "申请记录",
           "href": "bookApplyRecordIndex",
-          "icon": "fa fa-gears",
+          "icon": "fa fa-list-alt",
           "target": "_self"
         }
       ]

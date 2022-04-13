@@ -11,20 +11,20 @@
   "menuInfo": [
     {
       "title": "功能管理",
-      "icon": "fa fa-address-book",
+      "icon": "fa fa-align-justify",
       "href": "",
       "target": "_self",
       "child": [
         {
           "title": "教材领取",
           "href": "",
-          "icon": "fa fa-window-maximize",
+          "icon": "fa fa-book",
           "target": "_self"
         },
         {
           "title": "领取记录",
           "href": "",
-          "icon": "fa fa-gears",
+          "icon": "fa fa-list-alt",
           "target": "_self"
         }
       ]

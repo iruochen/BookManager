@@ -11,7 +11,7 @@
   "menuInfo": [
     {
       "title": "功能管理",
-      "icon": "fa fa-address-book",
+      "icon": "fa fa-align-justify",
       "href": "",
       "target": "_self",
       "child": [
@@ -24,37 +24,37 @@
         {
           "title": "申请记录",
           "href": "bookApplyRecordAll",
-          "icon": "fa fa-gears",
+          "icon": "fa fa-list-alt",
           "target": "_self"
         },
         {
           "title": "采购需求",
           "href": "bookPurchaseDemand",
-          "icon": "fa fa-gears",
+          "icon": "fa fa-question-circle",
           "target": "_self"
         },
         {
           "title": "采购记录",
           "href": "",
-          "icon": "fa fa-gears",
+          "icon": "fa fa-list-alt",
           "target": "_self"
         },
         {
           "title": "教师管理",
           "href": "teacherIndex",
-          "icon": "fa fa-file-text",
+          "icon": "fa fa-users",
           "target": "_self"
         },
         {
           "title": "学生管理",
           "href": "studentIndex",
-          "icon": "fa fa-window-maximize",
+          "icon": "fa fa-users",
           "target": "_self"
         },
         {
           "title": "管理员管理",
           "href": "adminIndex",
-          "icon": "fa fa-window-maximize",
+          "icon": "fa fa-users",
           "target": "_self"
         }
       ]
