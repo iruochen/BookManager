@@ -128,11 +128,32 @@
                     }],
                     cols: [[
                         // {type: "checkbox"},
-                        {templet: '<div>{{d.book.bookId}}</div>', title: '教材编号', align: "center"},
-                        {templet: '<div>{{d.book.bookName}}</div>', title: '教材名称', align: "center"},
-                        {templet: '<div>{{d.teacher.teaId}}</div>', title: '教工号', align: "center"},
-                        {templet: '<div>{{d.teacher.teaName}}</div>', title: '申请人', align: "center"},
                         {
+                            field: 'bookId',
+                            templet: '<div>{{d.book.bookId}}</div>',
+                            title: '教材编号',
+                            align: 'center'
+                        },
+                        {
+                            field: 'bookName',
+                            templet: '<div>{{d.book.bookName}}</div>',
+                            title: '教材名称',
+                            align: 'center'
+                        },
+                        {
+                            field: 'teaId',
+                            templet: '<div>{{d.teacher.teaId}}</div>',
+                            title: '教工号',
+                            align: 'center'
+                        },
+                        {
+                            field: 'teaName',
+                            templet: '<div>{{d.teacher.teaName}}</div>',
+                            title: '申请人',
+                            align: 'center'
+                        },
+                        {
+                            field: 'time',
                             templet: '<div>{{layui.util.toDateString(d.time, "yyyy年MM月dd日")}}</div>',
                             title: '申请时间',
                             align: "center"

@@ -90,12 +90,42 @@
                     }],
                     cols: [[
                         // {type: "checkbox"},
-                        {templet: '<div>{{d.book.bookId}}</div>', title: '教材编号', align: "center"},
-                        {templet: '<div>{{d.book.bookName}}</div>', title: '教材名称', align: "center"},
-                        {templet: '<div>{{d.book.bookAuthor}}</div>', title: '作者', align: "center"},
-                        {templet: '<div>{{d.book.bookPress}}</div>', title: '出版社', align: "center"},
-                        {templet: '<div>{{d.book.bookPrice}}</div>', title: '价格', align: "center"},
-                        {templet: '<div>{{d.book.bookNum}}</div>', title: '库存', align: "center"},
+                        {
+                            field: 'bookId',
+                            templet: '<div>{{d.book.bookId}}</div>',
+                            title: '教材编号',
+                            align: 'center'
+                        },
+                        {
+                            field: 'bookName',
+                            templet: '<div>{{d.book.bookName}}</div>',
+                            title: '教材名称',
+                            align: 'center'
+                        },
+                        {
+                            field: 'bookAuthor',
+                            templet: '<div>{{d.book.bookAuthor}}</div>',
+                            title: '作者',
+                            align: 'center'
+                        },
+                        {
+                            field: 'bookPress',
+                            templet: '<div>{{d.book.bookPress}}</div>',
+                            title: '出版社',
+                            align: 'center'
+                        },
+                        {
+                            field: 'bookPrice',
+                            templet: '<div>{{d.book.bookPrice}}</div>',
+                            title: '价格',
+                            align: 'center'
+                        },
+                        {
+                            field: 'bookNum',
+                            templet: '<div>{{d.book.bookNum}}</div>',
+                            title: '库存',
+                            align: 'center'
+                        },
                         {field: 'needPurchaseCount', title: '采购数量', align: "center"},
                         {field: 'priceCount', title: '采购总值', align: "center"},
                         {title: '操作', toolbar: '#currentTableBar', align: "center"}

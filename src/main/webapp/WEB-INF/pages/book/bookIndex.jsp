@@ -228,6 +228,11 @@
                                 layer.msg("删除失败");
                             }
                         }
+                    }).fail(function () {
+                        layer.msg("删除失败", {
+                            icon: 6,
+                            time: 500
+                        });
                     })
                 }
 

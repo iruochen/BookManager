@@ -104,11 +104,26 @@
                         {field: 'stuId', title: '学号', align: "center"},
                         {field: 'stuName', title: '姓名', align: "center"},
                         {field: 'stuSex', title: '性别', align: "center"},
-                        {templet: '<div>{{d.department.deptName}}</div>', title: '院系', align: "center"},
+                        {
+                            field: 'deptName',
+                            templet: '<div>{{d.department.deptName}}</div>',
+                            title: '院系',
+                            align: 'center'
+                        },
                         {field: 'stuMajor', title: '专业', align: "center"},
                         {field: 'stuClass', title: '班级', align: "center"},
-                        {templet: '<div>{{d.user.username}}</div>', title: '用户名', align: "center"},
-                        {templet: '<div>{{d.user.password}}</div>', title: '密码', align: "center"},
+                        {
+                            field: 'username',
+                            templet: '<div>{{d.user.username}}</div>',
+                            title: '用户名',
+                            align: 'center'
+                        },
+                        {
+                            field: 'password',
+                            templet: '<div>{{d.user.password}}</div>',
+                            title: '密码',
+                            align: 'center'
+                        },
                         {title: '操作', toolbar: '#currentTableBar', align: "center"}
                     ]],
                     request: {

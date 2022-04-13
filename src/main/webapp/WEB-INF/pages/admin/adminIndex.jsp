@@ -83,8 +83,18 @@
                         {field: 'adminId', title: '工号', align: "center"},
                         {field: 'adminName', title: '姓名', align: "center"},
                         {field: 'sex', title: '性别', align: "center"},
-                        {templet: '<div>{{d.user.username}}</div>', title: '用户名', align: "center"},
-                        {templet: '<div>{{d.user.password}}</div>', title: '密码', align: "center"},
+                        {
+                            field: 'username',
+                            templet: '<div>{{d.user.username}}</div>',
+                            title: '用户名',
+                            align: 'center'
+                        },
+                        {
+                            field: 'password',
+                            templet: '<div>{{d.user.password}}</div>',
+                            title: '密码',
+                            align: 'center'
+                        },
                         {title: '操作', toolbar: '#currentTableBar', align: "center"}
                     ]],
                     request: {
