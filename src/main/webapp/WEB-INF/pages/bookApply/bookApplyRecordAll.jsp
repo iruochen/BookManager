@@ -59,6 +59,7 @@
                                 <option value="0">已提交</option>
                                 <option value="1">已通过</option>
                                 <option value="2">已拒绝</option>
+                                <option value="3">已采购</option>
                             </select>
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
@@ -89,6 +90,10 @@
 
                     {{#  if(d.status == 2){ }}
                     <span class="layui-badge">已拒绝</span>
+                    {{#  } }}
+
+                    {{#  if(d.status == 3){ }}
+                    <span class="layui-badge layui-bg-orange">已采购</span>
                     {{#  } }}
                 </script>
 
@@ -138,7 +143,7 @@
                         icon: 'layui-icon-tips'
                     }],
                     cols: [[
-                        {type: "checkbox"},
+                        // {type: "checkbox"},
                         {templet: '<div>{{d.book.bookId}}</div>', title: '教材编号', align: "center"},
                         {templet: '<div>{{d.book.bookName}}</div>', title: '教材名称', align: "center"},
                         {templet: '<div>{{d.teacher.teaId}}</div>', title: '教工号', align: "center"},
@@ -216,7 +221,7 @@
                 /**
                  * 获取选中记录的id信息
                  */
-                function getCheackId(data) {
+                function getCheckId(data) {
                     var arr = new Array();
                     for (var i = 0; i < data.length; i++) {
                         arr.push(data[i].id);
@@ -294,7 +299,7 @@
                             layer.msg("请选择要删除的记录信息");
                         } else {
                             //获取记录信息的id集合,拼接的ids
-                            var ids = getCheackId(data);
+                            var ids = getCheckId(data);
                             layer.confirm('确定是否删除', function (index) {
                                 //调用删除功能
                                 deleteInfoByIds(ids, index);

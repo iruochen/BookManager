@@ -176,7 +176,7 @@
                 /**
                  * 获取选中记录的id信息
                  */
-                function getCheackId(data) {
+                function getCheckId(data) {
                     var arr = new Array();
                     for (var i = 0; i < data.length; i++) {
                         arr.push(data[i].id);
@@ -242,7 +242,7 @@
                             layer.msg("请选择要删除的记录信息");
                         } else {
                             //获取记录信息的id集合,拼接的ids
-                            var ids = getCheackId(data);
+                            var ids = getCheckId(data);
                             layer.confirm('确定是否删除', function (index) {
                                 //调用删除功能
                                 deleteInfoByIds(ids, index);

@@ -7,6 +7,12 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+
+    /**
+     * 0：管理员
+     * 1：学生
+     * 2：教师
+     */
     private Integer role;
 
     public Integer getId() {

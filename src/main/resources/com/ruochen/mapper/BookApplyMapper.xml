@@ -86,9 +86,9 @@
     <!--查询所有已通过的申请记录，通过教材ID分组，并计算教材价格总和-->
     <select id="selectBookApplyGroupByBookId" resultMap="bookApplyMapper">
         select book.book_id, book.book_name, book.book_author, book.book_press, book.book_price,
-        book.book_num, sum(book_apply.count) as apply_count
+        book.book_num, sum(book_apply.count) as apply_count, book_apply.status
         from book, book_apply
-        where book_apply.bid = book.id
+        where book_apply.bid = book.id and book_apply.status = 1
         <if test="bookId != null">
             and book.book_id like concat('%', #{bookId}, '%')
         </if>

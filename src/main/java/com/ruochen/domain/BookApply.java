@@ -19,6 +19,14 @@ public class BookApply {
     @JSONField(format = "yyyy-MM-dd")
     private Date time;
     private Integer count;
+
+    /**
+     * -1：已撤销
+     * 0：已提交
+     * 1：已通过
+     * 2：已拒绝
+     * 3：已采购
+     */
     private Integer status;
 
     /**

@@ -104,7 +104,7 @@
                         icon: 'layui-icon-tips'
                     }],
                     cols: [[
-                        {type: "checkbox"},
+                        // {type: "checkbox"},
                         {field: 'bookId', title: '教材编号'},
                         {field: 'bookName', title: '教材名称'},
                         {field: 'bookAuthor', title: '作者'},

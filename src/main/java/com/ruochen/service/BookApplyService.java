@@ -55,5 +55,5 @@ public interface BookApplyService {
      * @param bookApplySearch
      * @return
      */
-    PageInfo<BookApply> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch);
+    PageInfo<BookApply> selectBookNeedPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch);
 }

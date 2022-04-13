@@ -49,4 +49,14 @@ public interface BookApplyMapper {
      * @return
      */
     List<BookApply> selectBookApplyGroupByBookId(BookApplySearch bookApplySearch);
+
+    /**
+     * 根据ID 和状态修改教材申请状态
+     *
+     * @param bid
+     * @param oldStatus
+     * @param status
+     */
+    @Update("update book_apply set status = #{status} where bid = #{bid} and status = #{oldStatus}")
+    void updateBookApplyStatusBybIdAndStatus(@Param("bid") int bid, @Param("oldStatus") Integer oldStatus, @Param("status") Integer status);
 }

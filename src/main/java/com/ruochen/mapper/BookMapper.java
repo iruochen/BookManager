@@ -59,8 +59,28 @@ public interface BookMapper {
 
     /**
      * 根据ID删除教材
+     *
      * @param id
      */
     @Delete("delete from book where id = #{id}")
     void deleteBookById(int id);
+
+    /**
+     * 根据教材ID 查询教材信息
+     *
+     * @param bookId
+     * @return
+     */
+    @Select("select * from book where book_id = #{bookId};")
+    @ResultMap(value = {"bookMap"})
+    Book selectBookByBookId(String bookId);
+
+    /**
+     * 根据ID 更新教材数量
+     *
+     * @param id
+     * @param bookNum
+     */
+    @Update("update book set book_num = #{bookNum} where id = #{id}")
+    void updateBookNumById(@Param("id") Integer id, @Param("bookNum") int bookNum);
 }

@@ -60,7 +60,7 @@ public class BookApplyServiceImpl implements BookApplyService {
     }
 
     @Override
-    public PageInfo<BookApply> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch) {
+    public PageInfo<BookApply> selectBookNeedPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch) {
         PageHelper.startPage(pageNum, pageSize);
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyGroupByBookId(bookApplySearch);
         for (BookApply bookApply : bookApplies) {

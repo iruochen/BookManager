@@ -2,6 +2,7 @@ package com.ruochen;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
+import com.ruochen.mapper.BookMapper;
 import com.ruochen.service.BookService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,9 @@ public class TestBook {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private BookMapper bookMapper;
 
     /**
      * 测试查询所有教材
@@ -85,5 +89,14 @@ public class TestBook {
         ids.add("11");
         ids.add("12");
         bookService.deleteBookByIds(ids);
+    }
+
+    /**
+     * 测试通过教材ID 查询教材
+     */
+    @Test
+    public void testSelectBookByBookId() {
+        Book book = bookMapper.selectBookByBookId("1011");
+        System.out.println(book);
     }
 }
