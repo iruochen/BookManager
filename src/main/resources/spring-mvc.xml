@@ -48,6 +48,8 @@
 
     <!--拦截器-->
     <mvc:interceptors>
+
+        <!--登录控制拦截器-->
         <mvc:interceptor>
             <!-- 拦截所有mvc控制器 -->
             <mvc:mapping path="/**"/>
@@ -63,6 +65,22 @@
             <mvc:exclude-mapping path="/js/**"/>
             <mvc:exclude-mapping path="/lib/**"/>
             <bean class="com.ruochen.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+
+        <!--用户个人信息控制器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/updateBookApplyStatus"/>
+            <!--教师-->
+            <mvc:mapping path="/applyBookById"/>
+            <mvc:mapping path="/selectBookApplyAllByTea"/>
+            <mvc:mapping path="/bookApplyRecordIndex"/>
+            <!--管理员-->
+            <mvc:mapping path="/bookPurchase"/>
+            <mvc:mapping path="/bookApplyRecordAll"/>
+            <mvc:mapping path="/bookPurchaseDemand"/>
+            <!--学生-->
+
+            <bean class="com.ruochen.interceptor.UserInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
