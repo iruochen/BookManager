@@ -19,8 +19,9 @@ public interface BookService {
      * 添加教材
      *
      * @param book
+     * @return
      */
-    void addBook(Book book);
+    Integer addBook(Book book);
 
     /**
      * 根据ID查询教材信息
@@ -34,8 +35,10 @@ public interface BookService {
      * 修改教材信息
      *
      * @param book
+     * @param oldBookId
+     * @return
      */
-    void updateBook(Book book);
+    Integer updateBook(Book book, String oldBookId);
 
     /**
      * 根据ID删除教材

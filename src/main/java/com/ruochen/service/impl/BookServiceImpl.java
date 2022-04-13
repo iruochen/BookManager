@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
 import com.ruochen.mapper.BookMapper;
 import com.ruochen.service.BookService;
+import com.ruochen.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -26,8 +27,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBook(Book book) {
+    public Integer addBook(Book book) {
+        if (null != bookMapper.selectBookByBookId(book.getBookId())) {
+            // 教材编号已存在
+            return Constants.BOOK_EXIST_CODE;
+        }
         bookMapper.addBook(book);
+        return Constants.OK_CODE;
     }
 
     @Override
@@ -36,8 +42,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void updateBook(Book book) {
+    public Integer updateBook(Book book, String oldBookId) {
+        if (!book.getBookId().equals(oldBookId) && null != bookMapper.selectBookByBookId(book.getBookId())) {
+            // 教材编号已存在
+            return Constants.BOOK_EXIST_CODE;
+        }
         bookMapper.updateBook(book);
+        return Constants.OK_CODE;
     }
 
     @Override

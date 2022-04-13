@@ -2,6 +2,7 @@ package com.ruochen.utils;
 
 public class Constants {
     public final static int OK_CODE = 0;
+    public final static int BOOK_EXIST_CODE = -1;
     public final static int STUDENT_EXIST_CODE = -1;
     public final static int ADMIN_EXIST_CODE = -1;
     public final static int TEACHER_EXIST_CODE = -1;

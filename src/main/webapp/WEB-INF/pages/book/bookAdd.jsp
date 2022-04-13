@@ -29,7 +29,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bookId" lay-verify="required" lay-reqtext="教材编号不能为空" placeholder="请输入教材编号"
+                    <input type="text" name="bookId" lay-verify="required|number" lay-reqtext="教材编号不能为空"
+                           placeholder="请输入教材编号"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -70,8 +71,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材数量</label>
                 <div class="layui-input-block">
-                    <input type="number" name="bookNum" autocomplete="off" class="layui-input" value="0"
-                           readonly="readonly">
+                    <input type="number" name="bookNum" lay-verify="required" autocomplete="off" class="layui-input"
+                           placeholder="请输入教材数量">
                 </div>
             </div>
 
@@ -86,7 +87,8 @@
                 </div>
             </div>
             <%--上传图片将路径防放于此--%>
-            <input type="hidden" id="mainImage" name="bookImgUrl" required value="${ImgPreUrl}default_img.png" class="layui-input">
+            <input type="hidden" id="mainImage" name="bookImgUrl" required value="${ImgPreUrl}default_img.png"
+                   class="layui-input">
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">立即提交</button>
@@ -152,6 +154,8 @@
                                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(iframeIndex);
                                 })
+                            } else if (result.code == -1) {
+                                layer.msg("教材编号已存在");
                             } else {
                                 layer.msg("添加失败");
                             }

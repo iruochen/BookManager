@@ -29,6 +29,7 @@
     <body>
         <div class="layui-form layuimini-form">
             <input type="hidden" name="id" value="${book.id}">
+            <input type="hidden" name="oldBookId" value="${book.bookId}">
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材编号</label>
                 <div class="layui-input-block">
@@ -67,7 +68,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">教材数量</label>
                 <div class="layui-input-block">
-                    <input type="number" name="bookNum" value="${book.bookNum}" class="layui-input" readonly="readonly">
+                    <input type="number" name="bookNum" lay-verify="required|number" value="${book.bookNum}"
+                           class="layui-input">
                 </div>
             </div>
 
@@ -152,6 +154,8 @@
                                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(iframeIndex);
                                 })
+                            } else if (result.code == -1) {
+                                layer.msg("教材编号已存在");
                             } else {
                                 layer.msg("修改失败");
                             }

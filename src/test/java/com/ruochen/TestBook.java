@@ -76,7 +76,7 @@ public class TestBook {
         book.setBookPress("出版社");
         book.setBookPrice(11);
         book.setBookImgUrl("url");
-        bookService.updateBook(book);
+        // bookService.updateBook(book);
     }
 
 

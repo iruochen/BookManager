@@ -65,8 +65,8 @@ public class BookController {
     @RequestMapping("addBookSubmit")
     @ResponseBody
     public DataInfo addBookSubmit(Book book) {
-        bookService.addBook(book);
-        return DataInfo.ok();
+        Integer code = bookService.addBook(book);
+        return DataInfo.ok(code);
     }
 
     /**
@@ -91,9 +91,9 @@ public class BookController {
      */
     @RequestMapping("updateBookSubmit")
     @ResponseBody
-    public DataInfo updateBookSubmit(Book book) {
-        bookService.updateBook(book);
-        return DataInfo.ok();
+    public DataInfo updateBookSubmit(Book book, String oldBookId) {
+        Integer code = bookService.updateBook(book, oldBookId);
+        return DataInfo.ok(code);
     }
 
     /**
