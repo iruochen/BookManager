@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>申请记录</title>
+        <title>采购记录</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -33,68 +33,34 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="bookName" id="bookName" autocomplete="off">
                         </div>
-                        教工号：
+                        工号：
                         <div class="layui-inline">
-                            <input class="layui-input" name="teaId" id="teaId" autocomplete="off">
+                            <input class="layui-input" name="adminId" id="adminId" autocomplete="off">
                         </div>
-                        教师：
+                        管理员：
                         <div class="layui-inline">
-                            <input class="layui-input" name="teaName" id="teaName" autocomplete="off">
+                            <input class="layui-input" name="adminName" id="adminName" autocomplete="off">
                         </div>
-                        院系：
-                        <div class="layui-inline">
-                            <select id="deptId" name="deptId" lay-verify="required">
-                                <option value="">请选择</option>
-                            </select>
-                        </div>
-                        申请时间：
+                        采购时间：
                         <div class="layui-inline">
                             <input class="layui-input" name="time" id="time" autocomplete="off">
-                        </div>
-                        <br/>
-                        申请状态：
-                        <div class="layui-inline">
-                            <select id="status" name="status" lay-verify="required">
-                                <option value="">请选择</option>
-                                <option value="0">已提交</option>
-                                <option value="1">已通过</option>
-                                <option value="2">已拒绝</option>
-                                <option value="3">已采购</option>
-                            </select>
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
                     </div>
                 </div>
 
-                <%--
                 <script type="text/html" id="toolbarDemo">
                     <div class="layui-btn-container">
                         <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除
                         </button>
                     </div>
                 </script>
-                --%>
 
                 <!--表单，查询出的数据在这里显示-->
                 <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
                 <script type="text/html" id="currentTableBar">
-                    {{#  if(d.status == 0){ }}
-                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="access">通过</a>
-                    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="reject">拒绝</a>
-                    {{#  } }}
-
-                    {{#  if(d.status == 1){ }}
-                    <span class="layui-badge layui-bg-green">已通过</span>
-                    {{#  } }}
-
-                    {{#  if(d.status == 2){ }}
-                    <span class="layui-badge">已拒绝</span>
-                    {{#  } }}
-
-                    {{#  if(d.status == 3){ }}
-                    <span class="layui-badge layui-bg-orange">已采购</span>
-                    {{#  } }}
+                    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
                 </script>
 
             </div>
@@ -113,24 +79,9 @@
                     trigger: 'click'
                 });
 
-                // 动态获取院系类型的数据，即下拉菜单，跳出院系类型
-                $.get("selectDeptAll", {}, function (data) {
-                    var list = data;
-                    var select = document.getElementById("deptId");
-                    if (list != null || list.size() > 0) {
-                        for (var obj in list) {
-                            var option = document.createElement("option");
-                            option.setAttribute("value", list[obj].id);
-                            option.innerText = list[obj].deptName;
-                            select.appendChild(option);
-                        }
-                    }
-                    form.render('select');
-                }, "json")
-
                 table.render({
                     elem: '#currentTableId',
-                    url: '${pageContext.request.contextPath}/selectBookApplyAll',  // 查询数据
+                    url: '${pageContext.request.contextPath}/selectBookPurchaseAll',  // 查询数据
                     limits: [10, 15, 20, 25, 50, 100],
                     limit: 10,  <!--默认显示10条-->
                     page: true,
@@ -143,7 +94,7 @@
                         icon: 'layui-icon-tips'
                     }],
                     cols: [[
-                        // {type: "checkbox"},
+                        {type: "checkbox"},
                         {
                             field: 'bookId',
                             templet: '<div>{{d.book.bookId}}</div>',
@@ -157,30 +108,31 @@
                             align: 'center'
                         },
                         {
-                            field: 'teaId',
-                            templet: '<div>{{d.teacher.teaId}}</div>',
-                            title: '教工号',
+                            field: 'bookName',
+                            templet: '<div>{{d.book.bookPress}}</div>',
+                            title: '出版社',
                             align: 'center'
                         },
                         {
-                            field: 'teaName',
-                            templet: '<div>{{d.teacher.teaName}}</div>',
-                            title: '申请人',
+                            field: 'adminId',
+                            templet: '<div>{{d.admin.adminId}}</div>',
+                            title: '工号',
+                            align: 'center'
+                        },
+                        {
+                            field: 'adminName',
+                            templet: '<div>{{d.admin.adminName}}</div>',
+                            title: '采购人',
                             align: 'center'
                         },
                         {
                             field: 'time',
                             templet: '<div>{{layui.util.toDateString(d.time, "yyyy年MM月dd日")}}</div>',
-                            title: '申请时间',
+                            title: '采购时间',
                             align: "center"
                         },
-                        {
-                            field: 'deptName',
-                            templet: '<div>{{d.teacher.department.deptName}}</div>',
-                            title: '院系',
-                            align: 'center'
-                        },
-                        {field: 'count', title: '申请数量', align: "center"},
+                        {field: 'count', title: '采购数量', align: "center"},
+                        {field: 'price', title: '采购总值', align: "center"},
                         {title: '操作', toolbar: '#currentTableBar', align: "center"}
                     ]],
                     request: {
@@ -193,11 +145,9 @@
                     reload: function () {
                         var bookId = $('#bookId').val();
                         var bookName = $('#bookName').val();
-                        var teaId = $('#teaId').val();
-                        var teaName = $('#teaName').val();
-                        var deptId = $('#deptId').val();
+                        var adminId = $('#adminId').val();
+                        var adminName = $('#adminName').val();
                         var time = $('#time').val();
-                        var status = $('#status').val();
                         // 执行重载
                         table.reload('testReload', {
                             page: {
@@ -206,11 +156,9 @@
                             , where: {
                                 bookId: bookId,
                                 bookName: bookName,
-                                teaId: teaId,
-                                teaName: teaName,
-                                deptId: deptId,
+                                adminId: adminId,
+                                adminName: adminName,
                                 time: time,
-                                status: status
                             }
                         }, 'data');
                     }
@@ -226,14 +174,10 @@
                  */
                 table.on('tool(currentTableFilter)', function (obj) {
                     var data = obj.data;
-                    if (obj.event === 'access') {  // 监听提交操作
-                        layer.confirm('确定是否通过', function (index) {
-                            updateBookApplyStatusByIds(data.id, 1, index);
-                            layer.close(index);
-                        })
-                    } else if (obj.event === 'reject') {  // 监听撤销操作
-                        layer.confirm('确定是否拒绝', function (index) {
-                            updateBookApplyStatusByIds(data.id, 2, index);
+                    if (obj.event === 'delete') {  // 监听删除操作
+                        layer.confirm('确定是否删除', function (index) {
+                            //调用删除功能
+                            deleteInfoByIds(data.id, index);
                             layer.close(index);
                         });
                     }
@@ -254,33 +198,20 @@
                     }
                     // 拼接id,变成一个字符串
                     return arr.join(",");
-                };
-
+                }
 
                 /**
-                 * 更新记录状态功能
+                 * 提交删除功能
                  */
-                function updateBookApplyStatusByIds(ids, status, index) {
+                function deleteInfoByIds(ids, index) {
                     //向后台发送请求
                     $.ajax({
-                        url: "updateBookApplyStatus",
+                        url: "deleteBookPurchase",
                         type: "POST",
-                        data: {
-                            ids: ids,
-                            status: status
-                        },
+                        data: {ids: ids},
                         success: function (result) {
-                            if (result.code == 1) {
-                                layer.msg('通过成功', {
-                                    icon: 6,
-                                    time: 500
-                                }, function () {
-                                    parent.window.location.reload();
-                                    var iframeIndex = parent.layer.getFrameIndex(window.name);
-                                    parent.layer.close(iframeIndex);
-                                });
-                            } else if (result.code == 2) {
-                                layer.msg('拒绝成功', {
+                            if (result.code == 0) {//如果成功
+                                layer.msg('删除成功', {
                                     icon: 6,
                                     time: 500
                                 }, function () {
@@ -289,9 +220,14 @@
                                     parent.layer.close(iframeIndex);
                                 });
                             } else {
-                                layer.msg("操作失败");
+                                layer.msg("删除失败");
                             }
                         }
+                    }).fail(function () {
+                        layer.msg("删除失败", {
+                            icon: 6,
+                            time: 500
+                        });
                     })
                 }
 
@@ -299,20 +235,7 @@
                  * toolbar栏监听事件
                  */
                 table.on('toolbar(currentTableFilter)', function (obj) {
-                    if (obj.event === 'add') {  // 监听添加操作
-                        var index = layer.open({
-                            title: '添加学生',
-                            type: 2,
-                            shade: 0.2,
-                            maxmin: true,
-                            shadeClose: true,
-                            area: ['100%', '100%'],
-                            content: '${pageContext.request.contextPath}/studentAdd',
-                        });
-                        $(window).on("resize", function () {
-                            layer.full(index);
-                        });
-                    } else if (obj.event === 'delete') {
+                    if (obj.event === 'delete') {
                         /*
                           1、提示内容，必须删除大于0条
                           2、获取要删除记录的id信息

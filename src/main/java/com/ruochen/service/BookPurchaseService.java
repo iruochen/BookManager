@@ -1,8 +1,11 @@
 package com.ruochen.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.BookPurchase;
+import com.ruochen.domain.BookPurchaseSearch;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface BookPurchaseService {
     /**
@@ -13,4 +16,21 @@ public interface BookPurchaseService {
      * @param request
      */
     void bookPurchase(String bookId, BookPurchase bookPurchase, HttpServletRequest request);
+
+    /**
+     * 查询所有教材采购记录
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param bookPurchaseSearch
+     * @return
+     */
+    PageInfo<BookPurchase> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookPurchaseSearch bookPurchaseSearch);
+
+    /**
+     * 根据ID 删除采购记录
+     *
+     * @param ids
+     */
+    void deleteBookPurchaseByIds(List<String> ids);
 }

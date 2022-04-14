@@ -1,9 +1,8 @@
 package com.ruochen.service.impl;
 
-import com.ruochen.domain.Admin;
-import com.ruochen.domain.Book;
-import com.ruochen.domain.BookPurchase;
-import com.ruochen.domain.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.ruochen.domain.*;
 import com.ruochen.mapper.AdminMapper;
 import com.ruochen.mapper.BookApplyMapper;
 import com.ruochen.mapper.BookMapper;
@@ -17,6 +16,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BookPurchaseServiceImpl implements BookPurchaseService {
@@ -51,5 +51,19 @@ public class BookPurchaseServiceImpl implements BookPurchaseService {
         bookMapper.updateBookNumById(book.getId(), book.getBookNum() + bookPurchase.getCount());
         // 记录写入教材采购表
         bookPurchaseMapper.addBookPurchase(bookPurchase);
+    }
+
+    @Override
+    public PageInfo<BookPurchase> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookPurchaseSearch bookPurchaseSearch) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BookPurchase> bookPurchases = bookPurchaseMapper.selectBookPurchaseAll(bookPurchaseSearch);
+        return new PageInfo<>(bookPurchases);
+    }
+
+    @Override
+    public void deleteBookPurchaseByIds(List<String> ids) {
+        for (String id : ids) {
+            bookPurchaseMapper.deleteBookPurchaseById(Integer.parseInt(id));
+        }
     }
 }

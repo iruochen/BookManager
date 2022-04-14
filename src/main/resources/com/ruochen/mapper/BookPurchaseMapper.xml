@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruochen.mapper.BookPurchaseMapper">
+
+    <resultMap id="bookPurchaseMapper" type="bookPurchase">
+        <id column="id" property="id"/>
+        <result column="aid" property="aid"/>
+        <result column="bid" property="bid"/>
+        <result column="time" property="time"/>
+        <result column="count" property="count"/>
+        <result column="price" property="price"/>
+        <association property="admin" javaType="admin">
+            <id column="aid" property="id"/>
+            <result column="user_id" property="userId"/>
+            <result column="admin_id" property="adminId"/>
+            <result column="admin_name" property="adminName"/>
+            <result column="sex" property="sex"/>
+        </association>
+        <association property="book" javaType="book">
+            <id column="bid" property="id"/>
+            <result column="book_id" property="bookId"/>
+            <result column="book_name" property="bookName"/>
+            <result column="book_author" property="bookAuthor"/>
+            <result column="book_press" property="bookPress"/>
+            <result column="book_price" property="bookPrice"/>
+            <result column="book_num" property="bookNum"/>
+            <result column="book_img_url" property="bookImgUrl"/>
+        </association>
+    </resultMap>
+
+    <!--查询所有管理员教材采购记录-->
+    <select id="selectBookPurchaseAll" resultMap="bookPurchaseMapper">
+        select book_purchase.*, book.book_id, book.book_name, book.book_press, admin.admin_id, admin.admin_name,
+        admin.sex
+        from book_purchase, book, admin
+        where book_purchase.bid = book.id and book_purchase.aid = admin.id
+        <if test="bookId != null">
+            and book.book_id like concat('%', #{bookId}, '%')
+        </if>
+        <if test="bookName != null">
+            and book.book_name like concat('%', #{bookName}, '%')
+        </if>
+        <if test="bookPress != null">
+            and book.book_press like concat('%', #{bookPress}, '%')
+        </if>
+        <if test="adminId != null">
+            and admin.admin_id like concat('%', #{adminId}, '%')
+        </if>
+        <if test="adminName != null">
+            and admin.admin_name like concat('%', #{adminName}, '%')
+        </if>
+        <if test="time != null">
+            and book_purchase.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')
+        </if>
+    </select>
+</mapper>

@@ -35,7 +35,7 @@
         },
         {
           "title": "采购记录",
-          "href": "",
+          "href": "bookPurchaseIndex",
           "icon": "fa fa-list-alt",
           "target": "_self"
         },
