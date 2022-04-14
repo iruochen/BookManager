@@ -45,7 +45,9 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="time" id="time" autocomplete="off">
                         </div>
-                        <button class="layui-btn" data-type="reload">搜索</button>
+                        <div class="layui-inline">
+                            <button class="layui-btn" data-type="reload">搜索</button>
+                        </div>
                     </div>
                 </div>
 

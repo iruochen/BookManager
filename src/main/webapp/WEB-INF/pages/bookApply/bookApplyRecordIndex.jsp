@@ -47,7 +47,9 @@
                                 <option value="2">已拒绝</option>
                             </select>
                         </div>
-                        <button class="layui-btn" data-type="reload">搜索</button>
+                        <div class="layui-inline">
+                            <button class="layui-btn" data-type="reload">搜索</button>
+                        </div>
                     </div>
                 </div>
 

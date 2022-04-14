@@ -40,7 +40,10 @@
                                 <option value="">请选择</option>
                             </select>
                         </div>
-                        <button class="layui-btn" data-type="reload">搜索</button>
+
+                        <div class="layui-inline">
+                            <button class="layui-btn" data-type="reload">搜索</button>
+                        </div>
                     </div>
                 </div>
 
