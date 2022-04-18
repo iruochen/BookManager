@@ -45,6 +45,6 @@ public class BaseController {
      */
     @RequestMapping("error")
     public String error() {
-        return "404-bck";
+        return "404";
     }
 }

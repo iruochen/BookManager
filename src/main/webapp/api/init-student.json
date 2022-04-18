@@ -17,7 +17,7 @@
       "child": [
         {
           "title": "教材领取",
-          "href": "",
+          "href": "receiveIndex",
           "icon": "fa fa-book",
           "target": "_self"
         },

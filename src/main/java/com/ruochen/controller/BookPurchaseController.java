@@ -36,7 +36,7 @@ public class BookPurchaseController {
      */
     @GetMapping("bookPurchaseDemand")
     public String bookPurchaseDemand() {
-        return "purchase/bookPurchaseDemand";
+        return "bookPurchase/bookPurchaseDemand";
     }
 
     /**
@@ -73,7 +73,7 @@ public class BookPurchaseController {
      */
     @GetMapping("bookPurchaseIndex")
     public String bookPurchaseIndex() {
-        return "purchase/bookPurchaseRecordAll";
+        return "bookPurchase/bookPurchaseRecordAll";
     }
 
     /**

@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>教材申请</title>
+        <title>教材领取</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -56,7 +56,7 @@
                 <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
                 <script type="text/html" id="currentTableBar">
-                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="apply">申请</a>
+                    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="receive">领取</a>
                 </script>
 
             </div>
@@ -157,15 +157,15 @@
                  */
                 table.on('tool(currentTableFilter)', function (obj) {
                     var data = obj.data;
-                    if (obj.event === 'apply') {  // 监听申请操作
+                    if (obj.event === 'receive') {  // 监听申请操作
                         var index = layer.open({
-                            title: '申请教材',
+                            title: '领取教材',
                             type: 2,
                             shade: 0.2,
                             maxmin: true,
                             shadeClose: true,
                             area: ['100%', '100%'],
-                            content: '${pageContext.request.contextPath}/applyBookById?id=' + data.id,
+                            content: '${pageContext.request.contextPath}/receiveBookById?id=' + data.id,
                         });
                         $(window).on("resize", function () {
                             layer.full(index);

@@ -46,11 +46,11 @@
                         </div>
                     </div>
                     <div class="layui-form-item layuimini-form">
-                        <label class="layui-form-label required">旧密码</label>
+                        <label class="layui-form-label required">新密码</label>
                         <div class="layui-input-inline">
                             <input type="password" name="password" lay-reqtext="密码不能为空"
                                    lay-verify="required|pwd" class="layui-input"
-                                   placeholder="请输入旧密码">
+                                   placeholder="请输入新密码">
                         </div>
                         <div>
                             <span class="bind-password icon icon-4"></span>

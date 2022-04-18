@@ -83,4 +83,13 @@ public interface BookMapper {
      */
     @Update("update book set book_num = #{bookNum} where id = #{id}")
     void updateBookNumById(@Param("id") Integer id, @Param("bookNum") int bookNum);
+
+    /**
+     * 根据ID 获取教材数量
+     *
+     * @param bId
+     * @return
+     */
+    @Select("select book_num from book where id = #{bId}")
+    Integer selectBookNumById(Integer bId);
 }

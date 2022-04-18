@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>申请教材</title>
+        <title>领取教材</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -85,15 +85,15 @@
                    class="layui-input">
 
             <div class="layui-form-item">
-                <label class="layui-form-label required">申请数量</label>
+                <label class="layui-form-label required">领取数量</label>
                 <div class="layui-input-block">
                     <input type="number" name="count" class="layui-input" lay-verify="required|number"
-                           placeholder="请输入申请数量">
+                           placeholder="请输入领取数量">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label required">申请时间</label>
+                <label class="layui-form-label required">领取时间</label>
                 <div class="layui-input-block">
                     <input type="text" name="time" id="date" lay-verify="date" autocomplete="off"
                            class="layui-input">
@@ -102,7 +102,7 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认申请</button>
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认领取</button>
                 </div>
             </div>
         </div>
@@ -125,12 +125,12 @@
                     var datas = data.field;//form单中的数据信息
                     // 向后台发送数据提交添加
                     $.ajax({
-                        url: "applyBookSubmit",
+                        url: "receiveBookSubmit",
                         type: "POST",
                         data: datas,
                         success: function (result) {
                             if (result.code == 0) {//如果成功
-                                layer.msg('申请成功', {
+                                layer.msg('领取成功', {
                                     icon: 6,
                                     time: 500
                                 }, function () {
@@ -138,8 +138,10 @@
                                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(iframeIndex);
                                 })
+                            } else if (result.code == -1) {
+                                layer.msg("教材库存数量不足");
                             } else {
-                                layer.msg("申请失败");
+                                layer.msg("领取失败");
                             }
                         }
                     })

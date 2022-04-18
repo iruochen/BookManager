@@ -99,4 +99,14 @@ public class TestBook {
         Book book = bookMapper.selectBookByBookId("1011");
         System.out.println(book);
     }
+
+    /**
+     * 测试根据ID 获取教材数量
+     */
+    @Test
+    public void testSelectBookNumById() {
+        Integer bookNum = bookMapper.selectBookNumById(2);
+        System.out.println(bookNum);
+    }
+
 }
