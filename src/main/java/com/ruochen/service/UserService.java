@@ -31,4 +31,12 @@ public interface UserService {
      * @return
      */
     Integer updatePassword(User user, String oldPassword);
+
+    /**
+     * 根据role查询用户总数
+     *
+     * @param role
+     * @return
+     */
+    Integer selectAllByRole(int role);
 }

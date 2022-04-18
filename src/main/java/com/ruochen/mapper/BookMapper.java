@@ -92,4 +92,12 @@ public interface BookMapper {
      */
     @Select("select book_num from book where id = #{bId}")
     Integer selectBookNumById(Integer bId);
+
+    /**
+     * 查询教材总数
+     *
+     * @return
+     */
+    @Select("select count(*) from book")
+    Integer selectCount();
 }

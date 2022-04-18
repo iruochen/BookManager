@@ -63,4 +63,12 @@ public interface UserMapper {
     @Update("update user set password = #{password} where username = #{username}")
     void updatePassword(@Param("username") String username, @Param("password") String password);
 
+    /**
+     * 根据role查询用户总数
+     *
+     * @param role
+     * @return
+     */
+    @Select("select count(*) from user where role = #{role}")
+    Integer selectAllByRole(int role);
 }

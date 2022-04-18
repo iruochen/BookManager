@@ -63,4 +63,9 @@ public class UserServiceImpl implements UserService {
             return Constants.OK_CODE;
         }
     }
+
+    @Override
+    public Integer selectAllByRole(int role) {
+        return userMapper.selectAllByRole(role);
+    }
 }

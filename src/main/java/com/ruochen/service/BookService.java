@@ -46,4 +46,11 @@ public interface BookService {
      * @param ids
      */
     void deleteBookByIds(List<String> ids);
+
+    /**
+     * 查询教材总数
+     *
+     * @return
+     */
+    Integer selectCount();
 }

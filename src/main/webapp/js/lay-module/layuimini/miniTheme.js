@@ -430,7 +430,7 @@ layui.define(["jquery", "layer"], function (exports) {
                     '<ul>\n' + bgColorHtml + '</ul>\n' +
                     '</div>\n' +
                     '<div class="more-menu-list">\n' +
-                    '<a class="more-menu-item" href="mailto:wangrui@ruochen.email" target="_blank"><i class="layui-icon layui-icon-at"></i>联系作者</a>\n' +
+                    '<a class="more-menu-item" href="mailto:wangrui@ruochen.email"><i class="layui-icon layui-icon-at"></i>联系作者</a>\n' +
                     '</div>' +
                     '</div>';
                 layer.open({

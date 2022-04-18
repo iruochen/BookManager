@@ -57,4 +57,9 @@ public class BookServiceImpl implements BookService {
             bookMapper.deleteBookById(Integer.parseInt(id));
         }
     }
+
+    @Override
+    public Integer selectCount() {
+        return bookMapper.selectCount();
+    }
 }

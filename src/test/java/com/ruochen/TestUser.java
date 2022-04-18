@@ -39,4 +39,13 @@ public class TestUser {
         User u = userMapper.selectUserByUser(user);
         System.out.println(u);
     }
+
+    /**
+     * 测试根据role查询用户总数
+     */
+    @Test
+    public void testSelectAllByRole() {
+        Integer count = userService.selectAllByRole(0);
+        System.out.println(count);
+    }
 }
