@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruochen.mapper.BookReceiveMapper">
+
+    <resultMap id="bookReceiveMapper" type="bookReceive">
+        <id column="id" property="id"/>
+        <result column="bid" property="bId"/>
+        <result column="sid" property="sId"/>
+        <result column="time" property="time"/>
+        <result column="count" property="count"/>
+        <association property="student" javaType="student">
+            <id column="sid" property="id"/>
+            <result column="user_id" property="userId"/>
+            <result column="stu_id" property="stuId"/>
+            <result column="stu_name" property="stuName"/>
+            <result column="stu_sex" property="stuSex"/>
+            <result column="major" property="stuMajor"/>
+            <result column="class" property="stuClass"/>
+            <result column="dept_id" property="deptId"/>
+            <association property="department" javaType="department">
+                <id column="dept_id" property="id"/>
+                <result column="dept_name" property="deptName"/>
+            </association>
+        </association>
+        <association property="book" javaType="book">
+            <id column="bid" property="id"/>
+            <result column="book_id" property="bookId"/>
+            <result column="book_name" property="bookName"/>
+            <result column="book_author" property="bookAuthor"/>
+            <result column="book_press" property="bookPress"/>
+            <result column="book_price" property="bookPrice"/>
+            <result column="book_num" property="bookNum"/>
+            <result column="book_img_url" property="bookImgUrl"/>
+        </association>
+    </resultMap>
+
+    <!--查询当前学生的教材领取记录-->
+    <select id="selectBookReceiveByStu" resultMap="bookReceiveMapper">
+        select book_receive.*, book.*, student.*
+        from book_receive, book, student
+        where book_receive.bid = book.id and book_receive.sid = student.id and student.id = #{currentStudentId}
+        <if test="bookId != null">
+            and book.book_id like concat('%', #{bookId}, '%')
+        </if>
+        <if test="bookName != null">
+            and book.book_name like concat('%', #{bookName}, '%')
+        </if>
+        <if test="time != null">
+            and book_receive.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')
+        </if>
+    </select>
+
+    <!--查询所有学生领取记录-->
+    <select id="selectBookReceiveAll" resultMap="bookReceiveMapper">
+        select book_receive.*, book.*, student.*, department.*
+        from book_receive, book, student, department
+        where book_receive.bid = book.id and book_receive.sid = student.id and student.dept_id = department.id
+        <if test="bookId != null">
+            and book.book_id like concat('%', #{bookId}, '%')
+        </if>
+        <if test="bookName != null">
+            and book.book_name like concat('%', #{bookName}, '%')
+        </if>
+        <if test="stuId != null">
+            and student.stu_id like concat('%', #{stuId}, '%')
+        </if>
+        <if test="stuName != null">
+            and student.stu_name like concat('%', #{stuName}, '%')
+        </if>
+        <if test="deptId != null">
+            and student.dept_id like concat('%', #{deptId}, '%')
+        </if>
+        <if test="time != null">
+            and book_receive.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')
+        </if>
+    </select>
+</mapper>

@@ -23,7 +23,7 @@
         },
         {
           "title": "领取记录",
-          "href": "",
+          "href": "bookReceiveRecordIndex",
           "icon": "fa fa-list-alt",
           "target": "_self"
         }

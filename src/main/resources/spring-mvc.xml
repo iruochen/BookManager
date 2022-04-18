@@ -74,11 +74,16 @@
             <mvc:mapping path="/applyBookById"/>
             <mvc:mapping path="/selectBookApplyAllByTea"/>
             <mvc:mapping path="/bookApplyRecordIndex"/>
+            <mvc:mapping path="/applyBookSubmit"/>
             <!--管理员-->
             <mvc:mapping path="/bookPurchase"/>
             <mvc:mapping path="/bookApplyRecordAll"/>
             <mvc:mapping path="/bookPurchaseDemand"/>
             <!--学生-->
+            <mvc:mapping path="/receiveBookById"/>
+            <mvc:mapping path="/selectBookReceiveAllByStu"/>
+            <mvc:mapping path="/bookReceiveRecordIndex"/>
+            <mvc:mapping path="/receiveBookSubmit"/>
 
             <bean class="com.ruochen.interceptor.UserInterceptor"/>
         </mvc:interceptor>

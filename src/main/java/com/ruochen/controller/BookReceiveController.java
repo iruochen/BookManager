@@ -1,7 +1,7 @@
 package com.ruochen.controller;
 
-import com.ruochen.domain.Book;
-import com.ruochen.domain.BookReceive;
+import com.github.pagehelper.PageInfo;
+import com.ruochen.domain.*;
 import com.ruochen.service.BookReceiveService;
 import com.ruochen.service.BookService;
 import com.ruochen.utils.DataInfo;
@@ -10,9 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class BookReceiveController {
@@ -58,5 +62,44 @@ public class BookReceiveController {
     public DataInfo receiveBookSubmit(Book book, BookReceive bookReceive, HttpServletRequest request) {
         Integer code = bookReceiveService.addBookReceive(book, bookReceive, request);
         return DataInfo.ok(code);
+    }
+
+    /**
+     * 教材领取记录页面跳转
+     *
+     * @return
+     */
+    @RequestMapping("bookReceiveRecordIndex")
+    public String bookReceiveRecordIndex() {
+        return "bookReceive/bookReceiveRecordIndex";
+    }
+
+    /**
+     * 查询登录学生的教材领取记录
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param bookReceiveSearch
+     * @return
+     */
+    @RequestMapping("selectBookReceiveAllByStu")
+    @ResponseBody
+    public DataInfo selectBookReceiveAllByStu(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookReceiveSearch bookReceiveSearch, HttpServletRequest request) {
+        PageInfo<BookReceive> pageInfo = bookReceiveService.selectBookReceiveByStu(pageNum, pageSize, bookReceiveSearch, request);
+        return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
+    }
+
+    /**
+     * 删除教材领取记录
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping("deleteBookReceive")
+    @ResponseBody
+    public DataInfo deleteBookReceive(String ids) {
+        List<String> list = Arrays.asList(ids.split(","));
+        bookReceiveService.deleteBookReceiveByIds(list);
+        return DataInfo.ok();
     }
 }
