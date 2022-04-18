@@ -40,6 +40,12 @@
           "target": "_self"
         },
         {
+          "title": "领取记录",
+          "href": "bookReceiveRecordAll",
+          "icon": "fa fa-list-alt",
+          "target": "_self"
+        },
+        {
           "title": "教师管理",
           "href": "teacherIndex",
           "icon": "fa fa-users",

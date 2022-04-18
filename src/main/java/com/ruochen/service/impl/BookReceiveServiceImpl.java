@@ -65,4 +65,11 @@ public class BookReceiveServiceImpl implements BookReceiveService {
             bookReceiveMapper.deleteBookReceiveById(Integer.parseInt(id));
         }
     }
+
+    @Override
+    public PageInfo<BookReceive> selectBookApplyAll(Integer pageNum, Integer pageSize, BookReceiveSearch bookReceiveSearch) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BookReceive> bookReceives = bookReceiveMapper.selectBookReceiveAll(bookReceiveSearch);
+        return new PageInfo<>(bookReceives);
+    }
 }

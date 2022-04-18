@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.List;
 
@@ -101,5 +100,30 @@ public class BookReceiveController {
         List<String> list = Arrays.asList(ids.split(","));
         bookReceiveService.deleteBookReceiveByIds(list);
         return DataInfo.ok();
+    }
+
+    /**
+     * 教材全部领取记录
+     *
+     * @return
+     */
+    @GetMapping("bookReceiveRecordAll")
+    public String bookReceiveRecordAllIndex() {
+        return "bookReceive/bookReceiveRecordAll";
+    }
+
+    /**
+     * 查询所有教材领取记录
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param bookReceiveSearch
+     * @return
+     */
+    @RequestMapping("selectBookReceiveAll")
+    @ResponseBody
+    public DataInfo selectBookReceiveAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookReceiveSearch bookReceiveSearch) {
+        PageInfo<BookReceive> pageInfo = bookReceiveService.selectBookApplyAll(pageNum, pageSize, bookReceiveSearch);
+        return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 }

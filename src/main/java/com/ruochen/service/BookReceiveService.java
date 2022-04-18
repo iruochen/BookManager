@@ -2,6 +2,7 @@ package com.ruochen.service;
 
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
+import com.ruochen.domain.BookApply;
 import com.ruochen.domain.BookReceive;
 import com.ruochen.domain.BookReceiveSearch;
 
@@ -37,4 +38,14 @@ public interface BookReceiveService {
      * @param ids
      */
     void deleteBookReceiveByIds(List<String> ids);
+
+    /**
+     * 查询所有学生教材领取记录
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param bookReceiveSearch
+     * @return
+     */
+    PageInfo<BookReceive> selectBookApplyAll(Integer pageNum, Integer pageSize, BookReceiveSearch bookReceiveSearch);
 }
