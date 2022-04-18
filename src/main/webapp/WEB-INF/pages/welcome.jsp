@@ -141,7 +141,7 @@
                 <div class="layui-row layui-col-space10">
                     <div class="layui-col-md12">
                         <blockquote class="layui-elem-quote main_btn">
-                            <p>本系统基于 SSM+Layuinimi 实现</p>
+                            <p>本系统基于 SSM + LAYUI MINI 实现</p>
                             <p>找到我：
                                 <a href="Mailto:wangrui@ruochen.email"> <img
                                         src="https://img.shields.io/badge/mail-%230077B5.svg?style=for-the-badge&logo=mail&logoColor=white"
