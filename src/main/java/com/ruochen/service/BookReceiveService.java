@@ -1,10 +1,7 @@
 package com.ruochen.service;
 
 import com.github.pagehelper.PageInfo;
-import com.ruochen.domain.Book;
-import com.ruochen.domain.BookApply;
-import com.ruochen.domain.BookReceive;
-import com.ruochen.domain.BookReceiveSearch;
+import com.ruochen.domain.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -48,4 +45,12 @@ public interface BookReceiveService {
      * @return
      */
     PageInfo<BookReceive> selectBookApplyAll(Integer pageNum, Integer pageSize, BookReceiveSearch bookReceiveSearch);
+
+
+    /**
+     * 统计近7天领取数据
+     *
+     * @return
+     */
+    List<Statistics> selectCountLastSevenDays();
 }

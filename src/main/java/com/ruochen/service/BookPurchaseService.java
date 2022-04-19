@@ -3,6 +3,7 @@ package com.ruochen.service;
 import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.BookPurchase;
 import com.ruochen.domain.BookPurchaseSearch;
+import com.ruochen.domain.Statistics;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -33,4 +34,12 @@ public interface BookPurchaseService {
      * @param ids
      */
     void deleteBookPurchaseByIds(List<String> ids);
+
+
+    /**
+     * 统计近7天采购数据
+     *
+     * @return
+     */
+    List<Statistics> selectCountLastSevenDays();
 }

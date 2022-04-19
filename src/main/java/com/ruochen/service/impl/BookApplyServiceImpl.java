@@ -2,10 +2,7 @@ package com.ruochen.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ruochen.domain.Book;
-import com.ruochen.domain.BookApply;
-import com.ruochen.domain.BookApplySearch;
-import com.ruochen.domain.User;
+import com.ruochen.domain.*;
 import com.ruochen.mapper.BookApplyMapper;
 import com.ruochen.service.BookApplyService;
 import com.ruochen.service.TeacherService;
@@ -13,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -77,5 +77,23 @@ public class BookApplyServiceImpl implements BookApplyService {
             bookApply.setPriceCount(needCount * bookPrice);
         }
         return new PageInfo<>(bookApplies);
+    }
+
+    @Override
+    public List<Statistics> selectCountLastSevenDays() {
+        List<Statistics> statistics = bookApplyMapper.selectCountLastSevenDays();
+        for (Statistics statistic : statistics) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");    //格式化规则
+            Date date = statistic.getDate();         //获得你要处理的时间 Date型
+            String strDate = sdf.format(date); //格式化成yyyy-MM-dd格式的时间字符串
+            try {
+                Date newDate = sdf.parse(strDate);
+                java.sql.Date resultDate = new java.sql.Date(newDate.getTime());
+                statistic.setDate(resultDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return statistics;
     }
 }

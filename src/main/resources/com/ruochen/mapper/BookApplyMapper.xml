@@ -101,4 +101,32 @@
         group by book.book_id
         having (apply_count - book_num) > 0
     </select>
+
+    <!--统计近7天申请数据 -->
+    <select id="selectCountLastSevenDays" resultType="com.ruochen.domain.Statistics">
+        select a.date, ifnull(b.nums, 0) as count
+        from (
+                 SELECT curdate() as date
+                 union all
+                 SELECT date_sub(curdate(), interval 1 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 2 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 3 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 4 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 5 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 6 day) as date
+             ) a
+                 left join (
+            SELECT DATE_FORMAT(time, '%Y-%m-%d') as time,
+                   COUNT(*)                      as nums
+            FROM book_apply
+            where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(time)
+            GROUP BY DATE_FORMAT(time, '%Y-%m-%d')
+        ) b on a.date = b.time
+        order by a.date
+    </select>
 </mapper>

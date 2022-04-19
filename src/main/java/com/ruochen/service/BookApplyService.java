@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Book;
 import com.ruochen.domain.BookApply;
 import com.ruochen.domain.BookApplySearch;
+import com.ruochen.domain.Statistics;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -56,4 +57,12 @@ public interface BookApplyService {
      * @return
      */
     PageInfo<BookApply> selectBookNeedPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch);
+
+
+    /**
+     * 统计近7天申请数据
+     *
+     * @return
+     */
+    List<Statistics> selectCountLastSevenDays();
 }

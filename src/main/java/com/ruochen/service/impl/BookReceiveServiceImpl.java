@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -71,5 +74,23 @@ public class BookReceiveServiceImpl implements BookReceiveService {
         PageHelper.startPage(pageNum, pageSize);
         List<BookReceive> bookReceives = bookReceiveMapper.selectBookReceiveAll(bookReceiveSearch);
         return new PageInfo<>(bookReceives);
+    }
+
+    @Override
+    public List<Statistics> selectCountLastSevenDays() {
+        List<Statistics> statistics = bookReceiveMapper.selectCountLastSevenDays();
+        for (Statistics statistic : statistics) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");    //格式化规则
+            Date date = statistic.getDate();         //获得你要处理的时间 Date型
+            String strDate = sdf.format(date); //格式化成yyyy-MM-dd格式的时间字符串
+            try {
+                Date newDate = sdf.parse(strDate);
+                java.sql.Date resultDate = new java.sql.Date(newDate.getTime());
+                statistic.setDate(resultDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return statistics;
     }
 }

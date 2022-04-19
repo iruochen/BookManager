@@ -2,6 +2,7 @@ package com.ruochen.mapper;
 
 import com.ruochen.domain.BookApply;
 import com.ruochen.domain.BookApplySearch;
+import com.ruochen.domain.Statistics;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
@@ -59,4 +60,11 @@ public interface BookApplyMapper {
      */
     @Update("update book_apply set status = #{status} where bid = #{bid} and status = #{oldStatus}")
     void updateBookApplyStatusBybIdAndStatus(@Param("bid") int bid, @Param("oldStatus") Integer oldStatus, @Param("status") Integer status);
+
+    /**
+     * 统计近7天申请数据
+     *
+     * @return
+     */
+    List<Statistics> selectCountLastSevenDays();
 }

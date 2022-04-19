@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruochen.mapper.BookPurchaseMapper">
-
     <resultMap id="bookPurchaseMapper" type="bookPurchase">
         <id column="id" property="id"/>
         <result column="aid" property="aid"/>
@@ -52,5 +51,33 @@
         <if test="time != null">
             and book_purchase.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')
         </if>
+    </select>
+
+    <!--统计近7天采购数据-->
+    <select id="selectCountLastSevenDays" resultType="statistics">
+        select a.date, ifnull(b.nums, 0) as count
+        from (
+                 SELECT curdate() as date
+                 union all
+                 SELECT date_sub(curdate(), interval 1 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 2 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 3 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 4 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 5 day) as date
+                 union all
+                 SELECT date_sub(curdate(), interval 6 day) as date
+             ) a
+                 left join (
+            SELECT DATE_FORMAT(time, '%Y-%m-%d') as time,
+                   COUNT(*)                      as nums
+            FROM book_purchase
+            where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(time)
+            GROUP BY DATE_FORMAT(time, '%Y-%m-%d')
+        ) b on a.date = b.time
+        order by a.date
     </select>
 </mapper>

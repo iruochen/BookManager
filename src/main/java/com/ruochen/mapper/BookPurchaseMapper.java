@@ -2,6 +2,7 @@ package com.ruochen.mapper;
 
 import com.ruochen.domain.BookPurchase;
 import com.ruochen.domain.BookPurchaseSearch;
+import com.ruochen.domain.Statistics;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 
@@ -31,4 +32,11 @@ public interface BookPurchaseMapper {
      */
     @Delete("delete from book_purchase where id = #{id}")
     void deleteBookPurchaseById(int id);
+
+    /**
+     * 统计近7天采购数据
+     *
+     * @return
+     */
+    List<Statistics> selectCountLastSevenDays();
 }

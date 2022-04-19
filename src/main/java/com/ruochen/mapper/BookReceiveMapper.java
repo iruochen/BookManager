@@ -2,6 +2,7 @@ package com.ruochen.mapper;
 
 import com.ruochen.domain.BookReceive;
 import com.ruochen.domain.BookReceiveSearch;
+import com.ruochen.domain.Statistics;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 
@@ -40,4 +41,11 @@ public interface BookReceiveMapper {
      */
     @Delete("delete from book_receive where id = #{id}")
     void deleteBookReceiveById(int id);
+
+    /**
+     * 统计近7天领取数据
+     *
+     * @return
+     */
+    List<Statistics> selectCountLastSevenDays();
 }
