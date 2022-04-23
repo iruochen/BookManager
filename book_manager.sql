@@ -1,201 +1,186 @@
-/*==============================================================*/
-/* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2022/3/26 14:29:58                           */
-/*==============================================================*/
+/*
+ Navicat Premium Data Transfer
 
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 50733
+ Source Host           : localhost:3306
+ Source Schema         : book_manager
 
-drop table if exists admin;
+ Target Server Type    : MySQL
+ Target Server Version : 50733
+ File Encoding         : 65001
 
-drop table if exists book;
+ Date: 23/04/2022 13:19:51
+*/
 
-drop table if exists book_apply;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
-drop table if exists book_purchase;
+-- ----------------------------
+-- Table structure for admin
+-- ----------------------------
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `admin_id` varchar(9) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `admin_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `sex` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `AK_Key_2`(`admin_id`) USING BTREE,
+  INDEX `FK_user_admin`(`user_id`) USING BTREE,
+  CONSTRAINT `FK_user_admin` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?滩墓???员?' ROW_FORMAT = Dynamic;
 
-drop table if exists book_receive;
+-- ----------------------------
+-- Table structure for book
+-- ----------------------------
+DROP TABLE IF EXISTS `book`;
+CREATE TABLE `book`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `book_id` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `book_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `book_author` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `book_press` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `book_price` float NOT NULL,
+  `book_num` int(11) NOT NULL DEFAULT 0,
+  `book_img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `AK_Key_2`(`book_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?滩谋' ROW_FORMAT = Dynamic;
 
-drop table if exists department;
+-- ----------------------------
+-- Table structure for book_apply
+-- ----------------------------
+DROP TABLE IF EXISTS `book_apply`;
+CREATE TABLE `book_apply`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bid` int(11) NULL DEFAULT NULL,
+  `tid` int(11) NULL DEFAULT NULL,
+  `time` date NOT NULL,
+  `count` int(11) NOT NULL,
+  `status` int(11) NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FK_apply_tea`(`tid`) USING BTREE,
+  INDEX `FK_appply_book`(`bid`) USING BTREE,
+  CONSTRAINT `FK_apply_tea` FOREIGN KEY (`tid`) REFERENCES `teacher` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_appply_book` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?滩??????' ROW_FORMAT = Dynamic;
 
-drop table if exists student;
+-- ----------------------------
+-- Table structure for book_purchase
+-- ----------------------------
+DROP TABLE IF EXISTS `book_purchase`;
+CREATE TABLE `book_purchase`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bid` int(11) NULL DEFAULT NULL,
+  `aid` int(11) NULL DEFAULT NULL,
+  `time` date NOT NULL,
+  `count` int(11) NOT NULL,
+  `price` double NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FK_admin_purchase`(`aid`) USING BTREE,
+  INDEX `FK_purchase_book`(`bid`) USING BTREE,
+  CONSTRAINT `FK_admin_purchase` FOREIGN KEY (`aid`) REFERENCES `admin` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_purchase_book` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?滩牟晒??' ROW_FORMAT = Dynamic;
 
-drop table if exists teacher;
+-- ----------------------------
+-- Table structure for book_receive
+-- ----------------------------
+DROP TABLE IF EXISTS `book_receive`;
+CREATE TABLE `book_receive`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bid` int(11) NULL DEFAULT NULL,
+  `sid` int(11) NULL DEFAULT NULL,
+  `time` date NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FK_receive_book`(`bid`) USING BTREE,
+  INDEX `FK_receive_stu`(`sid`) USING BTREE,
+  CONSTRAINT `FK_receive_book` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_receive_stu` FOREIGN KEY (`sid`) REFERENCES `student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?滩???取?' ROW_FORMAT = Dynamic;
 
-drop table if exists user;
+-- ----------------------------
+-- Table structure for comments
+-- ----------------------------
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tid` int(11) NOT NULL,
+  `bid` int(11) NOT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `tid`(`tid`) USING BTREE,
+  INDEX `bid`(`bid`) USING BTREE,
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`tid`) REFERENCES `teacher` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
-/*==============================================================*/
-/* Table: admin                                                 */
-/*==============================================================*/
-create table admin
-(
-   id                   int not null auto_increment,
-   user_id              int not null,
-   admin_id             varchar(9) not null,
-   admin_name           varchar(20) not null,
-   sex                  varchar(5) not null,
-   primary key (id),
-   unique key AK_Key_2 (admin_id)
-);
+-- ----------------------------
+-- Table structure for department
+-- ----------------------------
+DROP TABLE IF EXISTS `department`;
+CREATE TABLE `department`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dept_name` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `AK_Key_2`(`dept_name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '院系?' ROW_FORMAT = Dynamic;
 
-alter table admin comment '教材管理员表';
+-- ----------------------------
+-- Table structure for student
+-- ----------------------------
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `stu_id` varchar(9) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `stu_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `stu_sex` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `dept_id` int(11) NOT NULL,
+  `major` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `class` varchar(7) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `AK_Key_2`(`stu_id`) USING BTREE,
+  INDEX `FK_stu_dept`(`dept_id`) USING BTREE,
+  INDEX `FK_user_stu`(`user_id`) USING BTREE,
+  CONSTRAINT `FK_stu_dept` FOREIGN KEY (`dept_id`) REFERENCES `department` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_user_stu` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '学???' ROW_FORMAT = Dynamic;
 
-/*==============================================================*/
-/* Table: book                                                  */
-/*==============================================================*/
-create table book
-(
-   id                   int not null auto_increment,
-   book_id              varchar(25) not null,
-   book_name            varchar(50) not null,
-   book_author          varchar(20),
-   book_press           varchar(25),
-   book_price           float not null,
-   book_num             int not null default 0,
-   book_img_url         varchar(255),
-   primary key (id),
-   unique key AK_Key_2 (book_id)
-);
+-- ----------------------------
+-- Table structure for teacher
+-- ----------------------------
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE `teacher`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `tea_id` varchar(9) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tea_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tea_sex` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `dept_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `AK_Key_2`(`tea_id`) USING BTREE,
+  INDEX `FK_tea_dept`(`dept_id`) USING BTREE,
+  INDEX `FK_user_tea`(`user_id`) USING BTREE,
+  CONSTRAINT `FK_tea_dept` FOREIGN KEY (`dept_id`) REFERENCES `department` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_user_tea` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '??师?' ROW_FORMAT = Dynamic;
 
-alter table book comment '教材表';
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `role` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `AK_Key_2`(`username`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?没??' ROW_FORMAT = Dynamic;
 
-/*==============================================================*/
-/* Table: book_apply                                            */
-/*==============================================================*/
-create table book_apply
-(
-   id                   int not null auto_increment,
-   book_id              int not null,
-   tea_id               int not null,
-   time                 date not null,
-   count                int not null,
-   primary key (id)
-);
-
-alter table book_apply comment '教材申请表';
-
-/*==============================================================*/
-/* Table: book_purchase                                         */
-/*==============================================================*/
-create table book_purchase
-(
-   id                   int not null auto_increment,
-   book_id              int not null,
-   admin_id             int not null,
-   time                 date not null,
-   count                int not null,
-   primary key (id)
-);
-
-alter table book_purchase comment '教材采购表';
-
-/*==============================================================*/
-/* Table: book_receive                                          */
-/*==============================================================*/
-create table book_receive
-(
-   id                   int not null auto_increment,
-   book_id              int not null,
-   stu_id               int not null,
-   time                 date not null,
-   count                int not null,
-   primary key (id)
-);
-
-alter table book_receive comment '教材领取表';
-
-/*==============================================================*/
-/* Table: department                                            */
-/*==============================================================*/
-create table department
-(
-   id                   int not null auto_increment,
-   dept_name            varchar(25) not null,
-   primary key (id),
-   unique key AK_Key_2 (dept_name)
-);
-
-alter table department comment '院系表';
-
-/*==============================================================*/
-/* Table: student                                               */
-/*==============================================================*/
-create table student
-(
-   id                   int not null auto_increment,
-   user_id              int not null,
-   stu_id               varchar(9) not null,
-   stu_name             varchar(20) not null,
-   stu_sex              varchar(5) not null,
-   dept_id              int not null,
-   major                varchar(25) not null,
-   class                varchar(7) not null,
-   primary key (id),
-   unique key AK_Key_2 (stu_id)
-);
-
-alter table student comment '学生表';
-
-/*==============================================================*/
-/* Table: teacher                                               */
-/*==============================================================*/
-create table teacher
-(
-   id                   int not null auto_increment,
-   user_id              int not null,
-   tea_id               varchar(9) not null,
-   tea_name             varchar(20) not null,
-   tea_sex              varchar(5) not null,
-   dept_id              int not null,
-   primary key (id),
-   unique key AK_Key_2 (tea_id)
-);
-
-alter table teacher comment '教师表';
-
-/*==============================================================*/
-/* Table: user                                                  */
-/*==============================================================*/
-create table user
-(
-   id                   int not null auto_increment,
-   username             varchar(25) not null,
-   password             varchar(25) not null,
-   role                 int not null,
-   primary key (id),
-   unique key AK_Key_2 (username)
-);
-
-alter table user comment '用户表';
-
-alter table admin add constraint FK_user_admin foreign key (user_id)
-      references user (id) on delete restrict on update restrict;
-
-alter table book_apply add constraint FK_apply_tea foreign key (tea_id)
-      references teacher (id) on delete restrict on update restrict;
-
-alter table book_apply add constraint FK_appply_book foreign key (book_id)
-      references book (id) on delete restrict on update restrict;
-
-alter table book_purchase add constraint FK_admin_purchase foreign key (admin_id)
-      references admin (id) on delete restrict on update restrict;
-
-alter table book_purchase add constraint FK_purchase_book foreign key (book_id)
-      references book (id) on delete restrict on update restrict;
-
-alter table book_receive add constraint FK_receive_book foreign key (book_id)
-      references book (id) on delete restrict on update restrict;
-
-alter table book_receive add constraint FK_receive_stu foreign key (stu_id)
-      references student (id) on delete restrict on update restrict;
-
-alter table student add constraint FK_stu_dept foreign key (dept_id)
-      references department (id) on delete restrict on update restrict;
-
-alter table student add constraint FK_user_stu foreign key (user_id)
-      references user (id) on delete restrict on update restrict;
-
-alter table teacher add constraint FK_tea_dept foreign key (dept_id)
-      references department (id) on delete restrict on update restrict;
-
-alter table teacher add constraint FK_user_tea foreign key (user_id)
-      references user (id) on delete restrict on update restrict;
-
+SET FOREIGN_KEY_CHECKS = 1;
