@@ -67,6 +67,9 @@
         <if test="stuName != null">
             and student.stu_name like concat('%', #{stuName}, '%')
         </if>
+        <if test="stuClass != null">
+            and student.class like concat('%', #{stuClass}, '%')
+        </if>
         <if test="deptId != null">
             and student.dept_id like concat('%', #{deptId}, '%')
         </if>

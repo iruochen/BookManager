@@ -12,6 +12,7 @@ public class BookReceiveSearch {
     private Integer currentStudentId;
     private String stuId;
     private String stuName;
+    private String stuClass;
     private Integer deptId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -51,6 +52,14 @@ public class BookReceiveSearch {
         this.stuName = stuName;
     }
 
+    public String getStuClass() {
+        return stuClass;
+    }
+
+    public void setStuClass(String stuClass) {
+        this.stuClass = stuClass;
+    }
+
     public Integer getDeptId() {
         return deptId;
     }
@@ -83,6 +92,7 @@ public class BookReceiveSearch {
                 ", currentStudentId=" + currentStudentId +
                 ", stuId='" + stuId + '\'' +
                 ", stuName='" + stuName + '\'' +
+                ", stuClass='" + stuClass + '\'' +
                 ", deptId=" + deptId +
                 ", time=" + time +
                 '}';

@@ -41,12 +41,17 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="stuName" id="stuName" autocomplete="off">
                         </div>
+                        班级：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="stuClass" id="stuClass" autocomplete="off">
+                        </div>
                         院系：
                         <div class="layui-inline">
                             <select id="deptId" name="deptId" lay-verify="required">
                                 <option value="">请选择</option>
                             </select>
                         </div>
+                        <br/>
                         领取时间：
                         <div class="layui-inline">
                             <input class="layui-input" name="time" id="time" autocomplete="off">
@@ -132,6 +137,12 @@
                             align: 'center'
                         },
                         {
+                            field: 'stuName',
+                            templet: '<div>{{d.student.stuClass}}</div>',
+                            title: '领取班级',
+                            align: 'center'
+                        },
+                        {
                             field: 'time',
                             templet: '<div>{{layui.util.toDateString(d.time, "yyyy年MM月dd日")}}</div>',
                             title: '申请时间',
@@ -158,6 +169,7 @@
                         var bookName = $('#bookName').val();
                         var stuId = $('#stuId').val();
                         var stuName = $('#stuName').val();
+                        var stuClass = $('#stuClass').val();
                         var deptId = $('#deptId').val();
                         var time = $('#time').val();
                         // 执行重载
@@ -170,6 +182,7 @@
                                 bookName: bookName,
                                 stuId: stuId,
                                 stuName: stuName,
+                                stuClass: stuClass,
                                 deptId: deptId,
                                 time: time,
                             }

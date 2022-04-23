@@ -114,6 +114,12 @@
                             align: 'center'
                         },
                         {
+                            field: 'stuClass',
+                            templet: '<div>{{d.student.stuClass}}</div>',
+                            title: '领取班级',
+                            align: 'center'
+                        },
+                        {
                             field: 'time',
                             templet: '<div>{{layui.util.toDateString(d.time, "yyyy年MM月dd日")}}</div>',
                             title: '领取时间',
