@@ -2,8 +2,10 @@ package com.ruochen.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ruochen.domain.Admin;
 import com.ruochen.domain.Student;
 import com.ruochen.domain.User;
+import com.ruochen.mapper.AdminMapper;
 import com.ruochen.mapper.StudentMapper;
 import com.ruochen.mapper.UserMapper;
 import com.ruochen.service.StudentService;
@@ -11,6 +13,7 @@ import com.ruochen.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -19,11 +22,14 @@ public class StudentServiceImpl implements StudentService {
     private StudentMapper studentMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private AdminMapper adminMapper;
 
     @Override
-    public PageInfo<Student> selectStudentAll(Integer pageNum, Integer pageSize, Student student) {
+    public PageInfo<Student> selectStudentAll(Integer pageNum, Integer pageSize, Student student, HttpServletRequest request) {
+        Integer adminDeptId = (Integer) request.getSession().getAttribute("adminDeptId");
         PageHelper.startPage(pageNum, pageSize);
-        List<Student> students = studentMapper.selectStudentAll(student);
+        List<Student> students = studentMapper.selectStudentAll(student, adminDeptId);
         return new PageInfo<>(students);
     }
 

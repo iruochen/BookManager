@@ -60,7 +60,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">院系</label>
                 <div class="layui-input-block">
-                    <select name="deptId" id="deptId" lay-verify="required">
+                    <select name="deptId" id="deptId" lay-verify="required" disabled="disabled">
                         <option value="${teacher.deptId}">请选择</option>
                     </select>
                 </div>

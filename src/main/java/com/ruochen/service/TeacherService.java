@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Teacher;
 import com.ruochen.domain.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface TeacherService {
@@ -13,9 +14,10 @@ public interface TeacherService {
      * @param pageNum  页数
      * @param pageSize 每页条数
      * @param teacher  约束条件
+     * @param request
      * @return pageInfo
      */
-    PageInfo<Teacher> selectTeacherAll(Integer pageNum, Integer pageSize, Teacher teacher);
+    PageInfo<Teacher> selectTeacherAll(Integer pageNum, Integer pageSize, Teacher teacher, HttpServletRequest request);
 
     /**
      * 添加教师

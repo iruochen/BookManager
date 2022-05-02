@@ -30,7 +30,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">学号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stuId" lay-verify="required|number|stuid" lay-reqtext="学号不能为空" placeholder="请输入学号"
+                    <input type="text" name="stuId" lay-verify="required|number|stuid" lay-reqtext="学号不能为空"
+                           placeholder="请输入学号"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -53,8 +54,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">院系</label>
                 <div class="layui-input-block">
-                    <select name="deptId" id="deptId" lay-verify="required">
-                        <option value="">请选择</option>
+                    <select name="deptId" id="deptId" lay-verify="required" disabled="disabled">
+                        <option value="${adminDeptId}">请选择</option>
                     </select>
                 </div>
             </div>
@@ -70,7 +71,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">班级</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stuClass" lay-verify="required|number|stuclass" lay-reqtext="班级不能为空" placeholder="请输入班级"
+                    <input type="text" name="stuClass" lay-verify="required|number|stuclass" lay-reqtext="班级不能为空"
+                           placeholder="请输入班级"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -78,7 +80,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">用户名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" lay-verify="required|username" lay-reqtext="用户名不能为空" placeholder="请输入用户名"
+                    <input type="text" name="username" lay-verify="required|username" lay-reqtext="用户名不能为空"
+                           placeholder="请输入用户名"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -86,7 +89,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label required">密码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="password" lay-verify="required|pwd" lay-reqtext="密码不能为空" placeholder="请输入密码"
+                    <input type="text" name="password" lay-verify="required|pwd" lay-reqtext="密码不能为空"
+                           placeholder="请输入密码"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -127,6 +131,8 @@
 
                 // 动态获取院系的数据
                 $.get("selectDeptAll", {}, function (data) {
+                    //获取院系类型的值
+                    var deptId = $('#deptId')[0].value;
                     var list = data;
                     var select = document.getElementById("deptId");
                     if (list != null || list.size() > 0) {
@@ -135,6 +141,11 @@
                             option.setAttribute("value", list[c].id);
                             option.innerText = list[c].deptName;
                             select.appendChild(option);
+                            //如果类型和循环到的类型iD一致，选中
+                            if (list[c].id == deptId) {
+                                option.setAttribute("selected", "selected");
+                                layui.form.render('select');
+                            }
                         }
                     }
                     form.render('select');

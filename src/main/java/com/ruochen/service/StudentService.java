@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.ruochen.domain.Student;
 import com.ruochen.domain.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface StudentService {
@@ -13,9 +14,10 @@ public interface StudentService {
      * @param pageNum  页数
      * @param pageSize 每页条数
      * @param student  约束条件
+     * @param request
      * @return
      */
-    PageInfo<Student> selectStudentAll(Integer pageNum, Integer pageSize, Student student);
+    PageInfo<Student> selectStudentAll(Integer pageNum, Integer pageSize, Student student, HttpServletRequest request);
 
     /**
      * 添加学生信息

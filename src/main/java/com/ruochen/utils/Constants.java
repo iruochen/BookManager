@@ -8,6 +8,7 @@ public class Constants {
     public final static int ADMIN_EXIST_CODE = -1;
     public final static int TEACHER_EXIST_CODE = -1;
     public final static int USER_EXIST_CODE = -2;
+    public final static int ADMIN_ROLE_CODE = 0;
     public final static int CAPTCHA_ERROR = -2;
     public final static int LOGIN_ERROR = -1;
     public final static int REGISTER_ERROR = -1;

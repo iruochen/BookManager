@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,8 +43,8 @@ public class TeacherInfoController {
      */
     @RequestMapping("selectTeacherAll")
     @ResponseBody
-    public DataInfo teacherAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, Teacher teacher) {
-        PageInfo<Teacher> pageInfo = teacherService.selectTeacherAll(pageNum, pageSize, teacher);
+    public DataInfo teacherAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, Teacher teacher, HttpServletRequest request) {
+        PageInfo<Teacher> pageInfo = teacherService.selectTeacherAll(pageNum, pageSize, teacher, request);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 
@@ -53,7 +54,9 @@ public class TeacherInfoController {
      * @return
      */
     @GetMapping("teacherAdd")
-    public String teacherAdd() {
+    public String teacherAdd(Model model, HttpServletRequest request) {
+        Integer adminDeptId = (Integer) request.getSession().getAttribute("adminDeptId");
+        model.addAttribute("adminDeptId", adminDeptId);
         return "teacher/teacherAdd";
     }
 

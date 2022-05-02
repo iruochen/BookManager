@@ -10,9 +10,10 @@ public interface StudentMapper {
      * 查询所有学生信息
      *
      * @param student
+     * @param adminDeptId
      * @return
      */
-    List<Student> selectStudentAll(Student student);
+    List<Student> selectStudentAll(@Param("student") Student student, @Param("adminDeptId") Integer adminDeptId);
 
     /**
      * 添加学生信息

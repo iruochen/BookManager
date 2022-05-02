@@ -1,6 +1,8 @@
 package com.ruochen.service.impl;
 
+import com.ruochen.domain.Admin;
 import com.ruochen.domain.User;
+import com.ruochen.mapper.AdminMapper;
 import com.ruochen.mapper.UserMapper;
 import com.ruochen.service.UserService;
 import com.ruochen.utils.Constants;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpSession;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private AdminMapper adminMapper;
 
     @Override
     public Integer login(User user, String captcha, HttpServletRequest request) {
@@ -30,6 +34,10 @@ public class UserServiceImpl implements UserService {
             return Constants.LOGIN_ERROR;
         }
         session.setAttribute("user", u);
+        if (u.getRole() == Constants.ADMIN_ROLE_CODE) {
+            Admin admin = adminMapper.selectAdminByUserId(u.getId());
+            session.setAttribute("adminDeptId", admin.getDeptId());
+        }
         // 登录成功
         return Constants.OK_CODE;
     }

@@ -31,10 +31,12 @@ public class TestTeacher {
         Teacher teacher = new Teacher();
         // teacher.setTeaName("教");
         // teacher.setDeptId(2);
+        /*
         PageInfo<Teacher> pageInfo = teacherService.selectTeacherAll(1, 10, teacher);
         for (Teacher tea : pageInfo.getList()) {
             System.out.println(tea);
         }
+        */
     }
 
     /**

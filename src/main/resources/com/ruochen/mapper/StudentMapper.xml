@@ -27,15 +27,15 @@
     <select id="selectStudentAll" resultMap="studentMap">
         select student.*, department.*, user.*
         from student, department, user
-        where student.dept_id = department.id and student.user_id = user.id
-        <if test="stuId!=null">
-            and student.stu_id like concat('%', #{stuId} ,'%')
+        where student.dept_id = department.id and student.user_id = user.id and student.dept_id = #{adminDeptId}
+        <if test="student.stuId!=null">
+            and student.stu_id like concat('%', #{student.stuId} ,'%')
         </if>
-        <if test="stuName!=null">
-            and student.stu_name like concat('%', #{stuName}, '%')
+        <if test="student.stuName!=null">
+            and student.stu_name like concat('%', #{student.stuName}, '%')
         </if>
-        <if test="deptId!=null">
-            and student.dept_id = #{deptId}
+        <if test="student.deptId!=null">
+            and student.dept_id = #{student.deptId}
         </if>
     </select>
 

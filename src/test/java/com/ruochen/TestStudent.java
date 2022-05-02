@@ -31,8 +31,14 @@ public class TestStudent {
         Student student = new Student();
         // student.setStuName("学");
         // student.setStuId("6");
+        /*
         PageInfo<Student> pageInfo = studentService.selectStudentAll(1, 10, student);
         for (Student stu : pageInfo.getList()) {
+            System.out.println(stu);
+        }
+        */
+        List<Student> students = studentMapper.selectStudentAll(student, 1);
+        for (Student stu: students) {
             System.out.println(stu);
         }
     }

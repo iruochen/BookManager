@@ -11,6 +11,7 @@ import com.ruochen.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -21,9 +22,10 @@ public class TeacherServiceImpl implements TeacherService {
     private UserMapper userMapper;
 
     @Override
-    public PageInfo<Teacher> selectTeacherAll(Integer pageNum, Integer pageSize, Teacher teacher) {
+    public PageInfo<Teacher> selectTeacherAll(Integer pageNum, Integer pageSize, Teacher teacher, HttpServletRequest request) {
+        Integer adminDeptId = (Integer) request.getSession().getAttribute("adminDeptId");
         PageHelper.startPage(pageNum, pageSize);
-        List<Teacher> teachers = teacherMapper.selectTeacherAll(teacher);
+        List<Teacher> teachers = teacherMapper.selectTeacherAll(teacher, adminDeptId);
         return new PageInfo<>(teachers);
     }
 

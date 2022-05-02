@@ -1,10 +1,7 @@
 package com.ruochen.mapper;
 
 import com.ruochen.domain.Teacher;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -13,9 +10,10 @@ public interface TeacherMapper {
      * 查询所有教师信息
      *
      * @param teacher
+     * @param adminDeptId
      * @return
      */
-    List<Teacher> selectTeacherAll(Teacher teacher);
+    List<Teacher> selectTeacherAll(@Param("teacher") Teacher teacher, @Param("adminDeptId") Integer adminDeptId);
 
     /**
      * 添加教师
@@ -68,6 +66,7 @@ public interface TeacherMapper {
 
     /**
      * 根据用户ID查询教师
+     *
      * @param userId
      * @return
      */

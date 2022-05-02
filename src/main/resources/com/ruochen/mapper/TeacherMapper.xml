@@ -25,15 +25,15 @@
     <select id="selectTeacherAll" resultMap="teacherMap">
         select teacher.*, department.*, user.*
         from teacher, department, user
-        where teacher.dept_id = department.id and teacher.user_id = user.id
-        <if test="teaId!=null">
-            and teacher.tea_id like concat('%', #{teaId} ,'%')
+        where teacher.dept_id = department.id and teacher.user_id = user.id and teacher.dept_id = #{adminDeptId}
+        <if test="teacher.teaId!=null">
+            and teacher.tea_id like concat('%', #{teacher.teaId} ,'%')
         </if>
-        <if test="teaName!=null">
-            and teacher.tea_name like concat('%', #{teaName}, '%')
+        <if test="teacher.teaName!=null">
+            and teacher.tea_name like concat('%', #{teacher.teaName}, '%')
         </if>
-        <if test="deptId!=null">
-            and teacher.dept_id = #{deptId}
+        <if test="teacher.deptId!=null">
+            and teacher.dept_id = #{teacher.deptId}
         </if>
     </select>
 
