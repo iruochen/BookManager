@@ -34,6 +34,12 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="adminName" id="adminName" autocomplete="off">
                         </div>
+                        院系：
+                        <div class="layui-inline">
+                            <select id="deptId" name="deptId" lay-verify="required">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
                         <div class="layui-inline">
                             <button class="layui-btn" data-type="reload">搜索</button>
                         </div>
@@ -66,6 +72,21 @@
                     form = layui.form,
                     table = layui.table;
 
+                // 动态获取院系类型的数据，即下拉菜单，跳出院系类型
+                $.get("selectDeptAll", {}, function (data) {
+                    var list = data;
+                    var select = document.getElementById("deptId");
+                    if (list != null || list.size() > 0) {
+                        for (var obj in list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", list[obj].id);
+                            option.innerText = list[obj].deptName;
+                            select.appendChild(option);
+                        }
+                    }
+                    form.render('select');
+                }, "json")
+
                 table.render({
                     elem: '#currentTableId',
                     url: '${pageContext.request.contextPath}/selectAdminAll',//查询数据
@@ -85,6 +106,12 @@
                         {field: 'adminId', title: '工号', align: "center"},
                         {field: 'adminName', title: '姓名', align: "center"},
                         {field: 'sex', title: '性别', align: "center"},
+                        {
+                            field: 'deptName',
+                            templet: '<div>{{d.department.deptName}}</div>',
+                            title: '院系',
+                            align: 'center'
+                        },
                         {
                             field: 'username',
                             templet: '<div>{{d.user.username}}</div>',
@@ -109,6 +136,7 @@
                     reload: function () {
                         var adminId = $('#adminId').val();
                         var adminName = $('#adminName').val();
+                        var deptId = $('#deptId').val();
                         //执行重载
                         table.reload('testReload', {
                             page: {
@@ -117,6 +145,7 @@
                             , where: {
                                 adminId: adminId,
                                 adminName: adminName,
+                                deptId: deptId
                             }
                         }, 'data');
                     }

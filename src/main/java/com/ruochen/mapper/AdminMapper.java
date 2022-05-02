@@ -22,7 +22,7 @@ public interface AdminMapper {
      *
      * @param admin
      */
-    @Insert("insert into admin (id, user_id, admin_id, admin_name, sex) values (null, #{userId}, #{adminId}, #{adminName}, #{sex});")
+    @Insert("insert into admin (id, user_id, admin_id, admin_name, sex, dept_id) values (null, #{userId}, #{adminId}, #{adminName}, #{sex}, #{deptId});")
     void addAdmin(Admin admin);
 
     /**
@@ -54,7 +54,7 @@ public interface AdminMapper {
      *
      * @param admin
      */
-    @Update("update admin set admin_id = #{adminId}, admin_name = #{adminName}, sex = #{sex} where id = #{id};")
+    @Update("update admin set admin_id = #{adminId}, admin_name = #{adminName}, sex = #{sex}, dept_id = #{deptId} where id = #{id};")
     void updateAdmin(Admin admin);
 
     /**

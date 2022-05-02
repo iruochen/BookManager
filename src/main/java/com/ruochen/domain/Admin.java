@@ -8,7 +8,12 @@ public class Admin {
     private String adminId;
     private String adminName;
     private String sex;
+    private Integer deptId;
     private Integer userId;
+    /**
+     * 所属院系
+     */
+    private Department department;
     /**
      * 对应用户
      */
@@ -54,6 +59,22 @@ public class Admin {
         this.sex = sex;
     }
 
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     public User getUser() {
         return user;
     }
@@ -68,8 +89,10 @@ public class Admin {
                 "id=" + id +
                 ", adminId='" + adminId + '\'' +
                 ", adminName='" + adminName + '\'' +
-                ", userId=" + userId +
                 ", sex='" + sex + '\'' +
+                ", deptId=" + deptId +
+                ", userId=" + userId +
+                ", department=" + department +
                 ", user=" + user +
                 '}';
     }

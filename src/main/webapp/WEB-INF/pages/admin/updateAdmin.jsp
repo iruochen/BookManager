@@ -58,6 +58,15 @@
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label required">院系</label>
+                <div class="layui-input-block">
+                    <select name="deptId" id="deptId" lay-verify="required">
+                        <option value="${admin.deptId}">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label required">用户名</label>
                 <div class="layui-input-block">
                     <input type="text" name="username" lay-verify="required|username" value="${admin.user.username}"
@@ -102,6 +111,28 @@
                         '工号输入错误，请重新输入'
                     ]
                 })
+
+                // 动态获取院系的数据
+                $.get("selectDeptAll", {}, function (data) {
+                    //获取院系类型的值
+                    var deptId = $('#deptId')[0].value;
+                    var list = data;
+                    var select = document.getElementById("deptId");
+                    if (list != null || list.size() > 0) {
+                        for (var c in list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", list[c].id);
+                            option.innerText = list[c].deptName;
+                            select.appendChild(option);
+                            //如果类型和循环到的类型iD一致，选中
+                            if (list[c].id == deptId) {
+                                option.setAttribute("selected", "selected");
+                                layui.form.render('select');
+                            }
+                        }
+                    }
+                    form.render('select');
+                }, "json")
 
                 // 监听提交
                 form.on('submit(saveBtn)', function (data) {

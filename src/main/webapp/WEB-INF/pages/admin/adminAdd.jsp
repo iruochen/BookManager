@@ -52,6 +52,15 @@
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label required">院系</label>
+                <div class="layui-input-block">
+                    <select name="deptId" id="deptId" lay-verify="required">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label required">用户名</label>
                 <div class="layui-input-block">
                     <input type="text" name="username" lay-verify="required|username" lay-reqtext="用户名不能为空"
@@ -98,6 +107,21 @@
                         '工号输入错误，请重新输入'
                     ]
                 })
+
+                // 动态获取院系的数据
+                $.get("selectDeptAll", {}, function (data) {
+                    var list = data;
+                    var select = document.getElementById("deptId");
+                    if (list != null || list.size() > 0) {
+                        for (var c in list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", list[c].id);
+                            option.innerText = list[c].deptName;
+                            select.appendChild(option);
+                        }
+                    }
+                    form.render('select');
+                }, "json")
 
                 // 监听提交
                 form.on('submit(saveBtn)', function (data) {

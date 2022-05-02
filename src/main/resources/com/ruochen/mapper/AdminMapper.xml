@@ -7,7 +7,12 @@
         <result column="admin_id" property="adminId"/>
         <result column="admin_name" property="adminName"/>
         <result column="sex" property="sex"/>
+        <result column="dept_id" property="deptId"/>
         <result column="user_id" property="userId"/>
+        <association property="department" javaType="department">
+            <id column="dept_id" property="id"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
         <association property="user" javaType="user">
             <id column="user_id" property="id"/>
             <result column="username" property="username"/>
@@ -18,41 +23,50 @@
 
     <!--查询所有管理员信息-->
     <select id="selectAdminAllExcludeCurrent" resultMap="adminMap">
-        select admin.*, user.*
-        from admin, user
-        where admin.user_id = user.id and admin.id &lt;&gt; #{id}
+        select admin.*, department.*, user.*
+        from admin, department, user
+        where admin.user_id = user.id and admin.dept_id = department.id and admin.id &lt;&gt; #{id}
         <if test="adminId!=null">
             and admin.admin_id like concat('%', #{adminId} ,'%')
         </if>
         <if test="adminName!=null">
             and admin.admin_name like concat('%', #{adminName}, '%')
         </if>
+        <if test="deptId!=null">
+            and admin.dept_id = #{deptId}
+        </if>
     </select>
 
     <!--根据ID 查询管理员信息-->
     <select id="selectAdminById" resultMap="adminMap">
-        select admin.*, user.*
+        select admin.*, department.*, user.*
         from admin,
+             department,
              user
         where admin.id = #{id}
           and admin.user_id = user.id
+          and admin.dept_id = department.id
     </select>
 
     <!--根据工号查询管理员信息-->
     <select id="selectAdminByAdminId" resultMap="adminMap">
-        select admin.*, user.*
+        select admin.*, department.*, user.*
         from admin,
+             department,
              user
         where admin.admin_id = #{adminId}
           and admin.user_id = user.id
+          and admin.dept_id = department.id
     </select>
 
     <!--根据用户ID查询管理员信息-->
     <select id="selectAdminByUserId" resultMap="adminMap">
-        select admin.*, user.*
+        select admin.*, department.*, user.*
         from admin,
+             department,
              user
         where admin.user_id = #{userId}
           and admin.user_id = user.id
+          and admin.dept_id = department.id
     </select>
 </mapper>
