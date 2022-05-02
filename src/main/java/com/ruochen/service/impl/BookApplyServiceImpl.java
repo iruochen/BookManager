@@ -53,9 +53,10 @@ public class BookApplyServiceImpl implements BookApplyService {
     }
 
     @Override
-    public PageInfo<BookApply> selectBookApplyAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch) {
+    public PageInfo<BookApply> selectBookApplyAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request) {
+        Integer adminDeptId = (Integer) request.getSession().getAttribute("adminDeptId");
         PageHelper.startPage(pageNum, pageSize);
-        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyAll(bookApplySearch);
+        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyAll(bookApplySearch, adminDeptId);
         return new PageInfo<>(bookApplies);
     }
 

@@ -110,8 +110,8 @@ public class BookApplyController {
      */
     @RequestMapping("selectBookApplyAll")
     @ResponseBody
-    public DataInfo selectBookApplyAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookApplySearch bookApplySearch) {
-        PageInfo<BookApply> pageInfo = bookApplyService.selectBookApplyAll(pageNum, pageSize, bookApplySearch);
+    public DataInfo selectBookApplyAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request) {
+        PageInfo<BookApply> pageInfo = bookApplyService.selectBookApplyAll(pageNum, pageSize, bookApplySearch, request);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 

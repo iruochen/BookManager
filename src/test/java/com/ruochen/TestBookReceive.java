@@ -24,9 +24,11 @@ public class TestBookReceive {
     @Test
     public void testSelectBookReceiveAll() {
         BookReceiveSearch bookReceiveSearch = new BookReceiveSearch();
+        /*
         List<BookReceive> bookReceives = bookReceiveMapper.selectBookReceiveAll(bookReceiveSearch);
         for (BookReceive bookReceive : bookReceives) {
             System.out.println(bookReceive);
         }
+        */
     }
 }

@@ -33,7 +33,7 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="bookName" id="bookName" autocomplete="off">
                         </div>
-                        教工号：
+                        工号：
                         <div class="layui-inline">
                             <input class="layui-input" name="teaId" id="teaId" autocomplete="off">
                         </div>
@@ -41,17 +41,19 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="teaName" id="teaName" autocomplete="off">
                         </div>
+                        <%--
                         院系：
                         <div class="layui-inline">
                             <select id="deptId" name="deptId" lay-verify="required">
                                 <option value="">请选择</option>
                             </select>
                         </div>
-                        申请时间：
+                        --%>
+                        时间：
                         <div class="layui-inline">
                             <input class="layui-input" name="time" id="time" autocomplete="off">
                         </div>
-                        <br/>
+                        <%--<br/>--%>
                         申请状态：
                         <div class="layui-inline">
                             <select id="status" name="status" lay-verify="required">
@@ -197,7 +199,7 @@
                         var bookName = $('#bookName').val();
                         var teaId = $('#teaId').val();
                         var teaName = $('#teaName').val();
-                        var deptId = $('#deptId').val();
+                        // var deptId = $('#deptId').val();
                         var time = $('#time').val();
                         var status = $('#status').val();
                         // 执行重载
@@ -210,7 +212,7 @@
                                 bookName: bookName,
                                 teaId: teaId,
                                 teaName: teaName,
-                                deptId: deptId,
+                                // deptId: deptId,
                                 time: time,
                                 status: status
                             }

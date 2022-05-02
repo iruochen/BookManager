@@ -39,9 +39,10 @@ public interface BookApplyMapper {
      * 查询所有教材申请记录
      *
      * @param bookApplySearch
+     * @param adminDeptId
      * @return
      */
-    List<BookApply> selectBookApplyAll(BookApplySearch bookApplySearch);
+    List<BookApply> selectBookApplyAll(@Param("bookApplySearch") BookApplySearch bookApplySearch, @Param("adminDeptId") Integer adminDeptId);
 
     /**
      * 查询所有已通过的申请记录，通过教材ID分组，并计算教材价格总和

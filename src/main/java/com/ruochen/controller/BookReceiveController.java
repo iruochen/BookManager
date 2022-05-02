@@ -118,12 +118,13 @@ public class BookReceiveController {
      * @param pageNum
      * @param pageSize
      * @param bookReceiveSearch
+     * @param request
      * @return
      */
     @RequestMapping("selectBookReceiveAll")
     @ResponseBody
-    public DataInfo selectBookReceiveAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookReceiveSearch bookReceiveSearch) {
-        PageInfo<BookReceive> pageInfo = bookReceiveService.selectBookApplyAll(pageNum, pageSize, bookReceiveSearch);
+    public DataInfo selectBookReceiveAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookReceiveSearch bookReceiveSearch, HttpServletRequest request) {
+        PageInfo<BookReceive> pageInfo = bookReceiveService.selectBookApplyAll(pageNum, pageSize, bookReceiveSearch, request);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 }

@@ -5,6 +5,7 @@ import com.ruochen.domain.BookReceiveSearch;
 import com.ruochen.domain.Statistics;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -30,9 +31,10 @@ public interface BookReceiveMapper {
      * 查询所有学生的教材领取记录
      *
      * @param bookReceiveSearch
+     * @param adminDeptId
      * @return
      */
-    List<BookReceive> selectBookReceiveAll(BookReceiveSearch bookReceiveSearch);
+    List<BookReceive> selectBookReceiveAll(@Param("bookReceiveSearch") BookReceiveSearch bookReceiveSearch, @Param("adminDeptId") Integer adminDeptId);
 
     /**
      * 根据ID 删除教材领取记录

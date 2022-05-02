@@ -58,28 +58,28 @@
     <select id="selectBookApplyAll" resultMap="bookApplyMapper">
         select book_apply.*, book.*, teacher.*, department.*
         from book_apply, book, teacher, department
-        where book_apply.bid = book.id and book_apply.tid = teacher.id and teacher.dept_id = department.id
+        where book_apply.bid = book.id and book_apply.tid = teacher.id and teacher.dept_id = department.id and teacher.dept_id = #{adminDeptId}
         and book_apply.status &lt;&gt; -1
-        <if test="bookId != null">
-            and book.book_id like concat('%', #{bookId}, '%')
+        <if test="bookApplySearch.bookId != null">
+            and book.book_id like concat('%', #{bookApplySearch.bookId}, '%')
         </if>
-        <if test="bookName != null">
-            and book.book_name like concat('%', #{bookName}, '%')
+        <if test="bookApplySearch.bookName != null">
+            and book.book_name like concat('%', #{bookApplySearch.bookName}, '%')
         </if>
-        <if test="teaId != null">
-            and teacher.tea_id like concat('%', #{teaId}, '%')
+        <if test="bookApplySearch.teaId != null">
+            and teacher.tea_id like concat('%', #{bookApplySearch.teaId}, '%')
         </if>
-        <if test="teaName != null">
-            and teacher.tea_name like concat('%', #{teaName}, '%')
+        <if test="bookApplySearch.teaName != null">
+            and teacher.tea_name like concat('%', #{bookApplySearch.teaName}, '%')
         </if>
-        <if test="deptId != null">
-            and teacher.dept_id like concat('%', #{deptId}, '%')
+        <if test="bookApplySearch.deptId != null">
+            and teacher.dept_id like concat('%', #{bookApplySearch.deptId}, '%')
         </if>
-        <if test="time != null">
-            and book_apply.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')
+        <if test="bookApplySearch.time != null">
+            and book_apply.time like concat('%', date_format(#{bookApplySearch.time}, '%Y-%m-%d'), '%')
         </if>
-        <if test="status != null">
-            and book_apply.status like concat('%', #{status}, '%')
+        <if test="bookApplySearch.status != null">
+            and book_apply.status like concat('%', #{bookApplySearch.status}, '%')
         </if>
     </select>
 

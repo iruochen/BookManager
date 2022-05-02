@@ -70,9 +70,10 @@ public class BookReceiveServiceImpl implements BookReceiveService {
     }
 
     @Override
-    public PageInfo<BookReceive> selectBookApplyAll(Integer pageNum, Integer pageSize, BookReceiveSearch bookReceiveSearch) {
+    public PageInfo<BookReceive> selectBookApplyAll(Integer pageNum, Integer pageSize, BookReceiveSearch bookReceiveSearch, HttpServletRequest request) {
+        Integer adminDeptId = (Integer) request.getSession().getAttribute("adminDeptId");
         PageHelper.startPage(pageNum, pageSize);
-        List<BookReceive> bookReceives = bookReceiveMapper.selectBookReceiveAll(bookReceiveSearch);
+        List<BookReceive> bookReceives = bookReceiveMapper.selectBookReceiveAll(bookReceiveSearch, adminDeptId);
         return new PageInfo<>(bookReceives);
     }
 

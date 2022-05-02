@@ -45,6 +45,7 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="stuClass" id="stuClass" autocomplete="off">
                         </div>
+                        <%--
                         院系：
                         <div class="layui-inline">
                             <select id="deptId" name="deptId" lay-verify="required">
@@ -52,7 +53,8 @@
                             </select>
                         </div>
                         <br/>
-                        领取时间：
+                        --%>
+                        时间：
                         <div class="layui-inline">
                             <input class="layui-input" name="time" id="time" autocomplete="off">
                         </div>
@@ -170,7 +172,7 @@
                         var stuId = $('#stuId').val();
                         var stuName = $('#stuName').val();
                         var stuClass = $('#stuClass').val();
-                        var deptId = $('#deptId').val();
+                        // var deptId = $('#deptId').val();
                         var time = $('#time').val();
                         // 执行重载
                         table.reload('testReload', {
@@ -183,7 +185,7 @@
                                 stuId: stuId,
                                 stuName: stuName,
                                 stuClass: stuClass,
-                                deptId: deptId,
+                                // deptId: deptId,
                                 time: time,
                             }
                         }, 'data');

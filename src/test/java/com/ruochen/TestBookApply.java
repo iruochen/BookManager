@@ -44,8 +44,14 @@ public class TestBookApply {
     @Test
     public void testSelectBookApplyAll() {
         BookApplySearch bookApplySearch = new BookApplySearch();
+        /*
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyAll(bookApplySearch);
         System.out.println(bookApplies);
+        */
+        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyAll(bookApplySearch, 3);
+        for (BookApply bookApply : bookApplies) {
+            System.out.println(bookApply);
+        }
     }
 
     /**

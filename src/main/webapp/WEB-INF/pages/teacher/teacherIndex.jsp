@@ -34,12 +34,14 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="teaName" id="teaName" autocomplete="off">
                         </div>
+                        <%--
                         院系：
                         <div class="layui-inline">
                             <select id="deptId" name="deptId" lay-verify="required">
                                 <option value="">请选择</option>
                             </select>
                         </div>
+                        --%>
 
                         <div class="layui-inline">
                             <button class="layui-btn" data-type="reload">搜索</button>
@@ -137,7 +139,7 @@
                     reload: function () {
                         var teaId = $('#teaId').val();
                         var teaName = $('#teaName').val();
-                        var deptId = $('#deptId').val();
+                        // var deptId = $('#deptId').val();
                         //执行重载
                         table.reload('testReload', {
                             page: {
@@ -145,8 +147,8 @@
                             }
                             , where: {
                                 teaId: teaId,
-                                teaName: teaName,
-                                deptId: deptId
+                                teaName: teaName
+                                // deptId: deptId
                             }
                         }, 'data');
                     }

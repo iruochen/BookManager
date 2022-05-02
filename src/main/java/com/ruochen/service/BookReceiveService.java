@@ -42,9 +42,10 @@ public interface BookReceiveService {
      * @param pageNum
      * @param pageSize
      * @param bookReceiveSearch
+     * @param request
      * @return
      */
-    PageInfo<BookReceive> selectBookApplyAll(Integer pageNum, Integer pageSize, BookReceiveSearch bookReceiveSearch);
+    PageInfo<BookReceive> selectBookApplyAll(Integer pageNum, Integer pageSize, BookReceiveSearch bookReceiveSearch, HttpServletRequest request);
 
 
     /**
