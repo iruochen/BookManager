@@ -49,8 +49,8 @@ public class BookPurchaseController {
      */
     @RequestMapping("selectBookNeedPurchaseAll")
     @ResponseBody
-    public DataInfo selectBookNeedPurchaseAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookApplySearch bookApplySearch) {
-        PageInfo<BookApply> pageInfo = bookApplyService.selectBookNeedPurchaseAll(pageNum, pageSize, bookApplySearch);
+    public DataInfo selectBookNeedPurchaseAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request) {
+        PageInfo<BookApply> pageInfo = bookApplyService.selectBookNeedPurchaseAll(pageNum, pageSize, bookApplySearch, request);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 

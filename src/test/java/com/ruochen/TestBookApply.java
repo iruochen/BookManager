@@ -63,10 +63,12 @@ public class TestBookApply {
     @Test
     public void testSelectBookApplyGroupByBookId() {
         BookApplySearch bookApplySearch = new BookApplySearch();
+        /*
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyGroupByBookId(bookApplySearch);
         for (BookApply bookApply : bookApplies) {
             System.out.println(bookApply);
         }
+        */
     }
 
     /**

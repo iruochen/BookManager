@@ -61,9 +61,10 @@ public class BookApplyServiceImpl implements BookApplyService {
     }
 
     @Override
-    public PageInfo<BookApply> selectBookNeedPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch) {
+    public PageInfo<BookApply> selectBookNeedPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request) {
+        Integer adminDeptId = (Integer) request.getSession().getAttribute("adminDeptId");
         PageHelper.startPage(pageNum, pageSize);
-        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyGroupByBookId(bookApplySearch);
+        List<BookApply> bookApplies = bookApplyMapper.selectBookApplyGroupByBookId(bookApplySearch, adminDeptId);
         for (BookApply bookApply : bookApplies) {
             // 教材价格
             double bookPrice = bookApply.getBook().getBookPrice();

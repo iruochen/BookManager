@@ -55,9 +55,10 @@ public interface BookApplyService {
      * @param pageNum
      * @param pageSize
      * @param bookApplySearch
+     * @param request
      * @return
      */
-    PageInfo<BookApply> selectBookNeedPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch);
+    PageInfo<BookApply> selectBookNeedPurchaseAll(Integer pageNum, Integer pageSize, BookApplySearch bookApplySearch, HttpServletRequest request);
 
 
     /**

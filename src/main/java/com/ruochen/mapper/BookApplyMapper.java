@@ -50,9 +50,10 @@ public interface BookApplyMapper {
      * 查询所有已通过的申请记录，通过教材ID分组，并计算教材价格总和
      *
      * @param bookApplySearch
+     * @param adminDeptId
      * @return
      */
-    List<BookApply> selectBookApplyGroupByBookId(BookApplySearch bookApplySearch);
+    List<BookApply> selectBookApplyGroupByBookId(@Param("bookApplySearch") BookApplySearch bookApplySearch, @Param("adminDeptId") Integer adminDeptId);
 
     /**
      * 根据ID 和状态修改教材申请状态
