@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 23/04/2022 13:19:51
+ Date: 03/05/2022 12:19:14
 */
 
 SET NAMES utf8mb4;
@@ -27,11 +27,12 @@ CREATE TABLE `admin`  (
   `admin_id` varchar(9) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `admin_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `sex` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `dept_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `AK_Key_2`(`admin_id`) USING BTREE,
   INDEX `FK_user_admin`(`user_id`) USING BTREE,
   CONSTRAINT `FK_user_admin` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?̲Ĺ???Ա?' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?̲Ĺ???Ա?' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for book
@@ -59,6 +60,7 @@ CREATE TABLE `book_apply`  (
   `bid` int(11) NULL DEFAULT NULL,
   `tid` int(11) NULL DEFAULT NULL,
   `time` date NOT NULL,
+  `score` int(11) NULL DEFAULT NULL,
   `count` int(11) NOT NULL,
   `status` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
@@ -66,7 +68,7 @@ CREATE TABLE `book_apply`  (
   INDEX `FK_appply_book`(`bid`) USING BTREE,
   CONSTRAINT `FK_apply_tea` FOREIGN KEY (`tid`) REFERENCES `teacher` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_appply_book` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?̲??????' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?̲??????' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for book_purchase
@@ -84,7 +86,7 @@ CREATE TABLE `book_purchase`  (
   INDEX `FK_purchase_book`(`bid`) USING BTREE,
   CONSTRAINT `FK_admin_purchase` FOREIGN KEY (`aid`) REFERENCES `admin` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_purchase_book` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?̲Ĳɹ??' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?̲Ĳɹ??' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for book_receive
@@ -102,22 +104,6 @@ CREATE TABLE `book_receive`  (
   CONSTRAINT `FK_receive_book` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_receive_stu` FOREIGN KEY (`sid`) REFERENCES `student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?̲???ȡ?' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for comments
--- ----------------------------
-DROP TABLE IF EXISTS `comments`;
-CREATE TABLE `comments`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tid` int(11) NOT NULL,
-  `bid` int(11) NOT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `tid`(`tid`) USING BTREE,
-  INDEX `bid`(`bid`) USING BTREE,
-  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`tid`) REFERENCES `teacher` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for department
@@ -181,6 +167,6 @@ CREATE TABLE `user`  (
   `role` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `AK_Key_2`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?û??' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '?û??' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
