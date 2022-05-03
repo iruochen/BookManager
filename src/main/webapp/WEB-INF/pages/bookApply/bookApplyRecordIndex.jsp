@@ -199,14 +199,16 @@
                                 },
                                 choose: function (value) {
                                     var str = this.elem.selector;
-                                    var id = str.charAt(str.length - 1);
+                                    var id = str.split("score")[1];
                                     // 发送 ajax 请求
                                     $.ajax({
                                         async: false,
                                         type: "GET",
                                         url: 'addScore?applyId=' + id + '&score=' + value,
-                                        success: function () {
-                                            console.log("success");
+                                        success: function (result) {
+                                            if (result.code == 0) {
+                                                console.log("success");
+                                            }
                                         }
                                     })
                                     rate.render({

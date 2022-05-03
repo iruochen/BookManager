@@ -59,7 +59,8 @@
     <select id="selectBookApplyAll" resultMap="bookApplyMapper">
         select book_apply.*, book.*, teacher.*, department.*
         from book_apply, book, teacher, department
-        where book_apply.bid = book.id and book_apply.tid = teacher.id and teacher.dept_id = department.id and teacher.dept_id = #{adminDeptId}
+        where book_apply.bid = book.id and book_apply.tid = teacher.id and teacher.dept_id = department.id and
+        teacher.dept_id = #{adminDeptId}
         and book_apply.status &lt;&gt; -1
         <if test="bookApplySearch.bookId != null">
             and book.book_id like concat('%', #{bookApplySearch.bookId}, '%')
@@ -102,6 +103,27 @@
         group by book.book_id
         having (apply_count - book_num) > 0
     </select>
+
+    <!--查询所有已通过的申请记录，通过教材ID分组，并计算教材价格总和-->
+    <!--
+    <select id="selectBookApplyGroupByBookId" resultMap="bookApplyMapper">
+        select book.book_id, book.book_name, book.book_author, book.book_press, book.book_price,
+        book.book_num, sum(book_apply.count) as apply_count, book_apply.status
+        from book, book_apply
+        where book_apply.bid = book.id and book_apply.status = 1
+        <if test="bookId != null">
+            and book.book_id like concat('%', #{bookId}, '%')
+        </if>
+        <if test="bookName != null">
+            and book.book_name like concat('%', #{bookName}, '%')
+        </if>
+        <if test="bookPress != null">
+            and book.book_press like concat('%', #{bookPress}, '%')
+        </if>
+        group by book.book_id
+        having (apply_count - book_num) > 0
+    </select>
+    -->
 
     <!--统计近7天申请数据 -->
     <select id="selectCountLastSevenDays" resultType="com.ruochen.domain.Statistics">
