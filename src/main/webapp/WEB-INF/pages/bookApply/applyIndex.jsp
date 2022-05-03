@@ -71,6 +71,7 @@
             layui.use(['form', 'table'], function () {
                 var $ = layui.jquery,
                     form = layui.form,
+                    rate = layui.rate,
                     table = layui.table;
 
                 function hoverOpenImg() {
@@ -114,6 +115,15 @@
                         {field: 'bookPrice', title: '价格'},
                         {field: 'bookNum', title: '数量'},
                         {field: 'bookImgUrl', title: '图片', templet: '#imgtmp'},
+                        {
+                            field: 'score',
+                            title: '评分',
+                            align: "center",
+                            width: 200,
+                            templet: function (d) {
+                                return '<div id="score' + d.id + '" style="margin-top: -10px"></div>';
+                            }
+                        },
                         {title: '操作', toolbar: '#currentTableBar', align: "center"}
                     ]],
                     request: {
@@ -121,6 +131,28 @@
                         limitName: "size"
                     },
                     done: function (res, curr, count) {
+                        var data = res.data;
+                        console.log(data);
+                        for (var item in data) {
+                            rate.render({
+                                elem: '#score' + data[item].id,
+                                text: true,
+                                // 三目运算符解决有评分时不能进行评分
+                                readonly: true,
+                                value: data[item].score,
+                                setText: function (value) { //自定义文本的回调
+                                    var arrs = {
+                                        '0': '',
+                                        '1': '极差'
+                                        , '2': '差'
+                                        , '3': '中等'
+                                        , '4': '好'
+                                        , '5': '极好'
+                                    };
+                                    this.span.text(arrs[value]);
+                                },
+                            })
+                        }
                         hoverOpenImg();//显示大图
                         $('table tr').on('click', function () {
                             $('table tr').css('background', '');

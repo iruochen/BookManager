@@ -3,6 +3,7 @@ package com.ruochen.mapper;
 import com.ruochen.domain.BookApply;
 import com.ruochen.domain.BookApplySearch;
 import com.ruochen.domain.Statistics;
+import com.ruochen.dto.BookScore;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -96,4 +97,12 @@ public interface BookApplyMapper {
      */
     @Update("update book_apply set score = #{score} where id = #{id}")
     void addScore(@Param("id") Integer id, @Param("score") Integer score);
+
+    /**
+     * 查询教材评分均值
+     *
+     * @return
+     */
+    @Select("select bid,ceil(avg(score)) as score from book_apply group by bid;")
+    List<BookScore> selectBookScoreAvg();
 }

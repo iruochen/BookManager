@@ -179,9 +179,8 @@
                     },
                     done: function (res) {
                         var data = res.data;
-                        console.log(data);
                         for (var item in data) {
-                            var pf = rate.render({
+                            rate.render({
                                 elem: '#score' + data[item].id,
                                 text: true,
                                 // 三目运算符解决有评分时不能进行评分
@@ -229,9 +228,6 @@
                                     })
                                 }
                             });
-                            if (data[item].score != null) {
-                                pf.readonly = true;
-                            }
                         }
                     }
                 });

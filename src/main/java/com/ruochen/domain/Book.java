@@ -12,6 +12,10 @@ public class Book {
     private double bookPrice;
     private int bookNum;
     private String bookImgUrl;
+    /**
+     * 教材评分，非数据库字段
+     */
+    private Integer score;
 
     public Integer getId() {
         return id;
@@ -77,6 +81,14 @@ public class Book {
         this.bookImgUrl = bookImgUrl;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -88,6 +100,7 @@ public class Book {
                 ", bookPrice=" + bookPrice +
                 ", bookNum=" + bookNum +
                 ", bookImgUrl='" + bookImgUrl + '\'' +
+                ", score=" + score +
                 '}';
     }
 }

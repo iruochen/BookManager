@@ -2,6 +2,7 @@ package com.ruochen;
 
 import com.ruochen.domain.BookApply;
 import com.ruochen.domain.BookApplySearch;
+import com.ruochen.dto.BookScore;
 import com.ruochen.mapper.BookApplyMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,6 +66,17 @@ public class TestBookApply {
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyGroupByBookId(bookApplySearch);
         for (BookApply bookApply : bookApplies) {
             System.out.println(bookApply);
+        }
+    }
+
+    /**
+     * 测试获取教材评分均值
+     */
+    @Test
+    public void testSelectBookScoreAvg() {
+        List<BookScore> bookScores = bookApplyMapper.selectBookScoreAvg();
+        for (BookScore bookScore : bookScores) {
+            System.out.println(bookScore);
         }
     }
 }
