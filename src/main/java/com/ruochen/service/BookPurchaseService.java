@@ -24,9 +24,10 @@ public interface BookPurchaseService {
      * @param pageNum
      * @param pageSize
      * @param bookPurchaseSearch
+     * @param request
      * @return
      */
-    PageInfo<BookPurchase> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookPurchaseSearch bookPurchaseSearch);
+    PageInfo<BookPurchase> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookPurchaseSearch bookPurchaseSearch, HttpServletRequest request);
 
     /**
      * 根据ID 删除采购记录

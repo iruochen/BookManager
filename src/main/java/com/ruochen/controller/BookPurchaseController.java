@@ -45,6 +45,7 @@ public class BookPurchaseController {
      * @param pageNum
      * @param pageSize
      * @param bookApplySearch
+     * @param request
      * @return
      */
     @RequestMapping("selectBookNeedPurchaseAll")
@@ -82,12 +83,13 @@ public class BookPurchaseController {
      * @param pageNum
      * @param pageSize
      * @param bookPurchaseSearch
+     * @param request
      * @return
      */
     @RequestMapping("selectBookPurchaseAll")
     @ResponseBody
-    public DataInfo selectBookPurchaseAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookPurchaseSearch bookPurchaseSearch) {
-        PageInfo<BookPurchase> pageInfo = bookPurchaseService.selectBookPurchaseAll(pageNum, pageSize, bookPurchaseSearch);
+    public DataInfo selectBookPurchaseAll(@RequestParam("page") Integer pageNum, @RequestParam("size") Integer pageSize, BookPurchaseSearch bookPurchaseSearch, HttpServletRequest request) {
+        PageInfo<BookPurchase> pageInfo = bookPurchaseService.selectBookPurchaseAll(pageNum, pageSize, bookPurchaseSearch, request);
         return DataInfo.ok("成功", pageInfo.getTotal(), pageInfo.getList());
     }
 

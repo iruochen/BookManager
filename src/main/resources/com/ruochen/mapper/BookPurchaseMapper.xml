@@ -32,24 +32,24 @@
         select book_purchase.*, book.book_id, book.book_name, book.book_press, admin.admin_id, admin.admin_name,
         admin.sex
         from book_purchase, book, admin
-        where book_purchase.bid = book.id and book_purchase.aid = admin.id
-        <if test="bookId != null">
-            and book.book_id like concat('%', #{bookId}, '%')
+        where book_purchase.bid = book.id and book_purchase.aid = admin.id and admin.dept_id = #{adminDeptId}
+        <if test="bookPurchaseSearch.bookId != null">
+            and book.book_id like concat('%', #{bookPurchaseSearch.bookId}, '%')
         </if>
-        <if test="bookName != null">
-            and book.book_name like concat('%', #{bookName}, '%')
+        <if test="bookPurchaseSearch.bookName != null">
+            and book.book_name like concat('%', #{bookPurchaseSearch.bookName}, '%')
         </if>
-        <if test="bookPress != null">
-            and book.book_press like concat('%', #{bookPress}, '%')
+        <if test="bookPurchaseSearch.bookPress != null">
+            and book.book_press like concat('%', #{bookPurchaseSearch.bookPress}, '%')
         </if>
-        <if test="adminId != null">
-            and admin.admin_id like concat('%', #{adminId}, '%')
+        <if test="bookPurchaseSearch.adminId != null">
+            and admin.admin_id like concat('%', #{bookPurchaseSearch.adminId}, '%')
         </if>
-        <if test="adminName != null">
-            and admin.admin_name like concat('%', #{adminName}, '%')
+        <if test="bookPurchaseSearch.adminName != null">
+            and admin.admin_name like concat('%', #{bookPurchaseSearch.adminName}, '%')
         </if>
-        <if test="time != null">
-            and book_purchase.time like concat('%', date_format(#{time}, '%Y-%m-%d'), '%')
+        <if test="bookPurchaseSearch.time != null">
+            and book_purchase.time like concat('%', date_format(#{bookPurchaseSearch.time}, '%Y-%m-%d'), '%')
         </if>
     </select>
 

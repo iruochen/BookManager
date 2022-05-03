@@ -5,6 +5,7 @@ import com.ruochen.domain.BookPurchaseSearch;
 import com.ruochen.domain.Statistics;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,9 +22,10 @@ public interface BookPurchaseMapper {
      * 查询所有教材采购记录
      *
      * @param bookPurchaseSearch
+     * @param adminDeptId
      * @return
      */
-    List<BookPurchase> selectBookPurchaseAll(BookPurchaseSearch bookPurchaseSearch);
+    List<BookPurchase> selectBookPurchaseAll(@Param("bookPurchaseSearch") BookPurchaseSearch bookPurchaseSearch, @Param("adminDeptId") Integer adminDeptId);
 
     /**
      * 根据ID 删除采购记录

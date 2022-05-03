@@ -33,6 +33,7 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="bookName" id="bookName" autocomplete="off">
                         </div>
+                        <%--
                         工号：
                         <div class="layui-inline">
                             <input class="layui-input" name="adminId" id="adminId" autocomplete="off">
@@ -41,6 +42,7 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="adminName" id="adminName" autocomplete="off">
                         </div>
+                        --%>
                         采购时间：
                         <div class="layui-inline">
                             <input class="layui-input" name="time" id="time" autocomplete="off">
@@ -147,8 +149,10 @@
                     reload: function () {
                         var bookId = $('#bookId').val();
                         var bookName = $('#bookName').val();
+                        /*
                         var adminId = $('#adminId').val();
                         var adminName = $('#adminName').val();
+                        */
                         var time = $('#time').val();
                         // 执行重载
                         table.reload('testReload', {
@@ -157,8 +161,10 @@
                             }
                             , where: {
                                 bookId: bookId,
+                                /*
                                 bookName: bookName,
                                 adminId: adminId,
+                                */
                                 adminName: adminName,
                                 time: time,
                             }

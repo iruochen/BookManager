@@ -24,9 +24,11 @@ public class TestBookPurchase {
     @Test
     public void testBookPurchaseAll() {
         BookPurchaseSearch bookPurchaseSearch = new BookPurchaseSearch();
+        /*
         List<BookPurchase> bookPurchases = bookPurchaseMapper.selectBookPurchaseAll(bookPurchaseSearch);
         for (BookPurchase bookPurchase : bookPurchases) {
             System.out.println(bookPurchase);
         }
+        */
     }
 }

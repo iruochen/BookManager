@@ -53,9 +53,10 @@ public class BookPurchaseServiceImpl implements BookPurchaseService {
     }
 
     @Override
-    public PageInfo<BookPurchase> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookPurchaseSearch bookPurchaseSearch) {
+    public PageInfo<BookPurchase> selectBookPurchaseAll(Integer pageNum, Integer pageSize, BookPurchaseSearch bookPurchaseSearch, HttpServletRequest request) {
+        Integer adminDeptId = (Integer) request.getSession().getAttribute("adminDeptId");
         PageHelper.startPage(pageNum, pageSize);
-        List<BookPurchase> bookPurchases = bookPurchaseMapper.selectBookPurchaseAll(bookPurchaseSearch);
+        List<BookPurchase> bookPurchases = bookPurchaseMapper.selectBookPurchaseAll(bookPurchaseSearch, adminDeptId);
         return new PageInfo<>(bookPurchases);
     }
 
