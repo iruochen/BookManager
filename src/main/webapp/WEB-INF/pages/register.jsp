@@ -337,7 +337,7 @@
                                    lay-verify="required"
                                    placeholder="请再次输入密码"
                                    maxlength="20">
-                            <span class="bind-password icon icon-4"></span>
+                            <span class="bind-password-pwd icon icon-4"></span>
                         </div>
                         <div class="item">
                             <label class="layui-icon"></label>
@@ -414,6 +414,17 @@
                     } else {
                         $(this).addClass('icon-5');
                         $("input[name='password']").attr('type', 'text');
+                    }
+                });
+
+                // 确认密码点击隐藏/显示
+                $('.bind-password-pwd').on('click', function () {
+                    if ($(this).hasClass('icon-5')) {
+                        $(this).removeClass('icon-5');
+                        $("input[name='pwdConfirm']").attr('type', 'password');
+                    } else {
+                        $(this).addClass('icon-5');
+                        $("input[name='pwdConfirm']").attr('type', 'text');
                     }
                 });
 
