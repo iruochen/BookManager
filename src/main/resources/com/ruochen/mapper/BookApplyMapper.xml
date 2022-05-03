@@ -7,6 +7,7 @@
         <result column="bid" property="bId"/>
         <result column="tid" property="tId"/>
         <result column="time" property="time"/>
+        <result column="score" property="score"/>
         <result column="count" property="count"/>
         <result column="status" property="status"/>
         <result column="price_count" property="priceCount"/>

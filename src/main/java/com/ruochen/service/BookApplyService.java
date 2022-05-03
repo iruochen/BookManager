@@ -66,4 +66,12 @@ public interface BookApplyService {
      * @return
      */
     List<Statistics> selectCountLastSevenDays();
+
+    /**
+     * 添加评分记录
+     *
+     * @param applyId
+     * @param score
+     */
+    void addScore(Integer applyId, Integer score);
 }

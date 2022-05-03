@@ -106,6 +106,7 @@
                 var $ = layui.jquery,
                     form = layui.form,
                     table = layui.table,
+                    rate = layui.rate,
                     laydate = layui.laydate;
 
                 //日期
@@ -162,12 +163,77 @@
                         },
                         {field: 'count', title: '申请数量', align: "center"},
                         {field: 'status', title: '申请状态', templet: '#statusTmp', align: "center"},
-                        {title: '操作', toolbar: '#currentTableBar', align: "center"}
+                        {title: '操作', toolbar: '#currentTableBar', align: "center"},
+                        {
+                            field: 'score',
+                            title: '评分',
+                            align: "center",
+                            templet: function (d) {
+                                return '<div id="score' + d.id + '" style="margin-top: -10px"></div>';
+                            }
+                        },
                     ]],
                     request: {
                         pageName: "page",
                         limitName: "size"
                     },
+                    done: function (res) {
+                        var data = res.data;
+                        console.log(data);
+                        for (var item in data) {
+                            var pf = rate.render({
+                                elem: '#score' + data[item].id,
+                                text: true,
+                                // 三目运算符解决有评分时不能进行评分
+                                readonly: (data[item].score == null) ? false : true,
+                                value: data[item].score,
+                                setText: function (value) { //自定义文本的回调
+                                    var arrs = {
+                                        '0': '',
+                                        '1': '极差'
+                                        , '2': '差'
+                                        , '3': '中等'
+                                        , '4': '好'
+                                        , '5': '极好'
+                                    };
+                                    this.span.text(arrs[value]);
+                                },
+                                choose: function (value) {
+                                    var str = this.elem.selector;
+                                    var id = str.charAt(str.length - 1);
+                                    // 发送 ajax 请求
+                                    $.ajax({
+                                        async: false,
+                                        type: "GET",
+                                        url: 'addScore?applyId=' + id + '&score=' + value,
+                                        success: function () {
+                                            console.log("success");
+                                        }
+                                    })
+                                    rate.render({
+                                        elem: str,
+                                        text: true,
+                                        value: value,
+                                        readonly: true,
+                                        setText: function (value) { //自定义文本的回调
+                                            var arrs = {
+                                                '0': '',
+                                                '1': '极差'
+                                                , '2': '差'
+                                                , '3': '中等'
+                                                , '4': '好'
+                                                , '5': '极好'
+                                            };
+                                            this.span.text(arrs[value]);
+                                        },
+                                    })
+                                }
+                            });
+                            if (data[item].score != null) {
+                                pf.readonly = true;
+                            }
+                        }
+                    }
                 });
 
                 var $ = layui.$, active = {
@@ -213,6 +279,8 @@
                             updateBookApplyStatusByIds(data.id, -1, index);
                             layer.close(index);
                         });
+                    } else if (obj.event === 'comment') {  // 评价
+
                     }
                 });
 

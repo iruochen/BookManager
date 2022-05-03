@@ -24,9 +24,11 @@ public class TestBookApply {
     @Test
     public void testSelectBookApplyAllByTea() {
         BookApplySearch bookApplySearch = new BookApplySearch();
-        bookApplySearch.setCurrentTeacherId(11);
+        bookApplySearch.setCurrentTeacherId(16);
         List<BookApply> bookApplies = bookApplyMapper.selectBookApplyByTea(bookApplySearch);
-        System.out.println(bookApplies);
+        for (BookApply bookApply : bookApplies) {
+            System.out.println(bookApply);
+        }
     }
 
 

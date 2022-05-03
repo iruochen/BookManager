@@ -129,4 +129,18 @@ public class BookApplyController {
         bookApplyService.updateBookApplyStatusByIds(list, status);
         return DataInfo.ok(status);
     }
+
+
+    /**
+     * 添加评分记录
+     *
+     * @param applyId
+     * @param score
+     * @return
+     */
+    @GetMapping("addScore")
+    public DataInfo addScore(Integer applyId, Integer score) {
+        bookApplyService.addScore(applyId, score);
+        return DataInfo.ok();
+    }
 }

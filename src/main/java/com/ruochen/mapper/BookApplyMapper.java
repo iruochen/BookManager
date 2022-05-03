@@ -5,6 +5,7 @@ import com.ruochen.domain.BookApplySearch;
 import com.ruochen.domain.Statistics;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -68,4 +69,31 @@ public interface BookApplyMapper {
      * @return
      */
     List<Statistics> selectCountLastSevenDays();
+
+    /**
+     * 根据ID 查询 bid
+     *
+     * @param id
+     * @return
+     */
+    @Select("select bid from book_apply where id = #{id}")
+    Integer selectBIdById(Integer id);
+
+    /**
+     * 根据ID 查询 tid
+     *
+     * @param id
+     * @return
+     */
+    @Select("select tid from book_apply where id = #{id}")
+    Integer selectTIdById(Integer id);
+
+    /**
+     * 添加评分记录
+     *
+     * @param id
+     * @param score
+     */
+    @Update("update book_apply set score = #{score} where id = #{id}")
+    void addScore(@Param("id") Integer id, @Param("score") Integer score);
 }

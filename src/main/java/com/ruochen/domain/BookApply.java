@@ -18,6 +18,7 @@ public class BookApply {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     private Date time;
+    private Integer score;
     private Integer count;
 
     /**
@@ -83,6 +84,14 @@ public class BookApply {
         this.time = time;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public Integer getCount() {
         return count;
     }
@@ -146,6 +155,7 @@ public class BookApply {
                 ", bId=" + bId +
                 ", tId=" + tId +
                 ", time=" + time +
+                ", score=" + score +
                 ", count=" + count +
                 ", status=" + status +
                 ", book=" + book +

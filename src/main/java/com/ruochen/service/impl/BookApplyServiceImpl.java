@@ -97,4 +97,9 @@ public class BookApplyServiceImpl implements BookApplyService {
         }
         return statistics;
     }
+
+    @Override
+    public void addScore(Integer applyId, Integer score) {
+        bookApplyMapper.addScore(applyId, score);
+    }
 }
